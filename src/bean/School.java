@@ -2,8 +2,8 @@ package bean;
 
 import java.io.Serializable;
 public class School implements Serializable {
-    private String cd;
-    private String name;
+    private String cd;      // 学校コード
+    private String name;    // 学校名
 
     // ゲッター
     public String getCd() {
