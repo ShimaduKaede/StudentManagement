@@ -2,6 +2,7 @@
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 <div id="sidebar">
+  <!-- この前にログイン前の表記を追加すること -->
   <nav class="crumb">
     <ul>
       <li><a href="">メニュー</a></li>
