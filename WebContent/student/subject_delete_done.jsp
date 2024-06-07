@@ -1,12 +1,11 @@
-<!-- 学生登録完了P19 -->
+<!-- 科目削除完了P40 -->
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../header.jsp" %>
 <%@include file="sidebar.jsp" %>
 
-<h2>学生情報登録</h2>
-<p>登録が完了しました</p>
-<a href="">戻る</a>
+<h2>科目削除完了</h2>
+<p>削除が完了しました</p>
 <a href="">学生一覧</a>
 
 
