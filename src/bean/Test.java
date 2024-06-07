@@ -48,14 +48,26 @@ public class Test implements Serializable {
 		return school;
 	}
 	// 学校情報(学校コード、学校名)を設置（セット）メソッド
-	public void setSchool(school student_no) {
-		this.student_no=student_no;
+	public void setSchool(School school) {
+		this.school=school;
 	}
 
-	// SchoolYear(?) 何かを取得(ゲット)メソッド
-	// 仕様が不明のため、ひとまずentYearを返す
-	public int getSchoolYear() {
-		return entYear;
+	// 回数を取得(ゲット)メソッド
+	public int getTestNo() {
+		return testNo;
+	}
+	// 回数を設置(セット)メソッド
+	public void setTestNo(int testNo) {
+		this.testNo=testNo;
+	}
+
+    // 得点を取得(ゲット)メソッド
+	public int getPoint() {
+		return point;
+	}
+	// 得点を設置(セット)メソッド
+	public void setPoint(int point) {
+		this.point=point;
 	}
 
 }
