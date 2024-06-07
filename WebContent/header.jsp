@@ -5,6 +5,7 @@
 >
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Servlet/JSP Samples</title>
   </head>
   <body>
