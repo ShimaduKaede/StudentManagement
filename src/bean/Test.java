@@ -1,50 +1,28 @@
 package bean;
 
 import java.io.Serializable;
+import bean.School;
+import bean.Student;
+import bean.Subject;
 
-// Serializableインタフェースを実装してBeanを作成する
-// SchoolBeanの設定を取得するため、StudentBeanに追加
-public class Test extends School implements Serializable {
+public class Test implements Serializable {
 
-public class Test {
+    private Student student;    // 学生(学生番号,氏名,入学年度,クラス番号,在籍中フラグ,学校(学校コード,学校名))
+    private String classNum;    // クラス番号
+    private Subject subject;    // 科目(学校コード,科目コード,科目名)
+    private School school;      // 学校(学校コード,学校名)
+    private int testNo;         // 回数
+    private int point;          // 得点
+
+
     
-}
-
-
-
-
-	private String studentNo;       // 学生番号
-	private String studentName;     // 氏名
-	private int entYear;            // 入学年度
-    private String classNum;        // クラス番号
-    private boolean isAttend;       // 在籍中フラグ
-    private School school;          // 学校(学校コード,学校名)
-
-	// 学生番号を取得(ゲット)メソッド
-	public Stirng getStudentNo() {
-		return studentNo;
+	// 学生情報を取得(ゲット)メソッド
+	public Stirng getStudent() {
+		return student;
 	}
-	// 学生番号を設置（セット）メソッド
-	public void setStudentNo(String studentNo) {
-		this.studentNo=studentNo;
-	}
-
-	// 学生氏名を取得(ゲット)メソッド
-	public String getStudentName() {
-		return studentName;
-	}
-	// 学生氏名を設置(セット)メソッド
-	public void setStudentName(String studentName) {
-		this.studentName=studentName;
-	}
-
-	// 入学年度を取得(ゲット)メソッド
-	public int getEntYear() {
-		return entYear;
-	}
-	// 入学年度を設置(セット)メソッド
-	public void setEntYear(int entYear) {
-		this.entYear=entYear;
+	// 学生情報を設置（セット）メソッド
+	public void setStudent(Student student) {
+		this.student=student;
 	}
 
 	// クラス番号を取得(ゲット)メソッド
@@ -56,20 +34,20 @@ public class Test {
 		this.classNum=classNum;
 	}
 
-	// 在籍中を取得(ゲット)メソッド
-	public boolean getIsAttend() {
-		return isAttend;
+	// 科目情報を取得(ゲット)メソッド
+	public Subject getSubject() {
+		return subject;
 	}
-	// 在籍中を設置（セット）メソッド
-	public void setIsAttend(boolean isAttend) {
-		this.isAttend=isAttend;
+	// 科目情報を設置（セット）メソッド
+	public void setSubject(Subject subject) {
+		this.subject=subject;
 	}
 
-	// 学校(学校コード、学校名)を取得(ゲット)メソッド
+	// 学校情報(学校コード、学校名)を取得(ゲット)メソッド
 	public School getSchool() {
 		return school;
 	}
-	// 学校(学校コード、学校名)を設置（セット）メソッド
+	// 学校情報(学校コード、学校名)を設置（セット）メソッド
 	public void setSchool(school student_no) {
 		this.student_no=student_no;
 	}
