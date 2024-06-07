@@ -26,7 +26,7 @@ public class Subject implements Serializable {
         this.subjectName = subjectName;
 
     }
-    public void Setsubject_School(School subjectSchool) {
+    public void setsubject_School(School subjectSchool) {
         this.subjectSchool = subjectSchool;
     }
 }
