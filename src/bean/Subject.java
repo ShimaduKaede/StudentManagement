@@ -4,7 +4,7 @@ import java.io.Serializable;
 public class Subject implements Serializable {
     private String subjectCd;      // 科目コード
     private String subjectName;    // 科目名
-    private School school;          // 学校情報
+    private School subjectSchool;          // 学校情報
 
 
     // ゲッター
@@ -15,7 +15,7 @@ public class Subject implements Serializable {
         return subjectName;
     }
     public School getSubjectSchool() {
-        return school;
+        return subjectSchool;
     }
 
     // セッター
@@ -26,7 +26,7 @@ public class Subject implements Serializable {
         this.subjectName = subjectName;
 
     }
-    public void Setsubject_School(School school) {
-        this.school = school;
+    public void Setsubject_School(School subjectSchool) {
+        this.subjectSchool = subjectSchool;
     }
 }
