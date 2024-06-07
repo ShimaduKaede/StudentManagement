@@ -2,22 +2,22 @@ package bean;
 
 import java.io.Serializable;
 public class School implements Serializable {
-    private String school_cd;      // 学校コード
-    private String school_name;    // 学校名
+    private String schoolCd;      // 学校コード
+    private String schoolName;    // 学校名
 
     // ゲッター
-    public String getStudentCd() {
-        return school_cd;
+    public String getSchoolCd() {
+        return schoolCd;
     }
-    public String getStudentName() {
-        return school_name;
+    public String getSchoolName() {
+        return schoolName;
     }
 
     // セッター
-    public void setStudentCd(String school_cd) {
-        this.school_cd = school_cd;
+    public void setSchoolCd(String schoolCd) {
+        this.schoolCd = schoolCd;
     }
-    public void setStudentName(String school_name) {
-        this.school_name = school_name;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 }
