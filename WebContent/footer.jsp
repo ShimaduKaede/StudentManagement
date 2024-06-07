@@ -8,6 +8,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     const messageElement = document.getElementById('footer');
     messageElement.innerHTML = protectMessage;
     </script> -->
-    <p>©2023 TIC</p>
-    <p>大原学園</p>
+
+    <footer>
+        <p>©2023 TIC</p>
+        <p>大原学園</p>
+    </footer>
 </html>
