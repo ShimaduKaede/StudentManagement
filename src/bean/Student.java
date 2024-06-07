@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 // Serializableインタフェースを実装してBeanを作成する
 // SchoolBeanの設定を取得するため、StudentBeanに追加
-public class Studentexp extends School implements Serializable {
+public class Student extends School implements Serializable {
 
 	private String studentNo;       // 学生番号
 	private String studentName;     // 氏名
