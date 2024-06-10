@@ -11,24 +11,28 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     <select name="f1" id="f1">
       <% for () %>
       <option value="<%=>"><%=></option>
+      <% } %>
     </select>
 
     <label for="f2">クラス</label>
     <select name="f2" id="f2">
       <% for () %>
       <option value="<%=>"><%=></option>
+      <% } %>
     </select>
 
     <label for="f3">科目</label>
     <select name="f3" id="f3">
       <% for () %>
       <option value="<%=>"><%=></option>
+      <% } %>
     </select>
 
     <label for="f4">回数</label>
     <select name="f4" id="f4">
       <% for () %>
       <option value="<%=>"><%=></option>
+      <% } %>
     </select>
     <button type="submit">検索</button>
   </form>
