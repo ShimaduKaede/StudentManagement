@@ -7,32 +7,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
+import bean.Student;
 public class ClassNumDAO {
 
-	// 学生を全件取得するstudentAllメソッド
-	public List<Student> studentAll() throws Exception {
-		List<Student> studentList=new ArrayList<>();
+		Connection con=getConnection();
+		PreparedStatement st=con.prepareStatement(
+			"SELECT * FROM student,course WHERE student.student_id=? and student.course_id=course.course_id");
+		st.setInt(1, student_id);
+		ResultSet rs=st.executeQuery();
+
+		return classNum;
+	}
+
+	// セッションのユーザーデータ(学校コード)から
+	// 所属している学校のクラスデータ(学校コード,クラス番号)を取得するメソッド
+	public List<String> filter(String schoolCd) throws Exception {
+		List<String> classNumList=new ArrayList<>();
 
 		Connection con=getConnection();
 
-		// コース情報も必要なのでcourseテーブルからも取得する
 		PreparedStatement st=con.prepareStatement(
-			"SELECT * FROM student,course WHERE student.course_id=course.course_id");
+			"SELECT * FROM CLASS_NUM WHERE SCHOOL_CD = schoolCd");
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
-			//学生ビーンをインスタンス化して情報をセット
-			Student student=new Student();
-			student.setStudent_id(rs.getInt("student_id"));
-			student.setStudent_name(rs.getString("student_name"));
-			student.setCourse_id(rs.getInt("course_id"));
-			// コースビーンをインスタンス化して情報をセット
-			Course course=new Course();
-			course.setCourse_id(rs.getInt("course_id"));
-			course.setCourse_name(rs.getString("course_name"));
-			// コースビーンを学生ビーンにセット
-			student.setCourse(course);
-			studentList.add(student);
+			classNumList.add(rs.getString("school_cd"));
+			classNumList.add(rs.getString("class_num"));
 		}
 
 		st.close();
@@ -41,75 +41,7 @@ public class ClassNumDAO {
 		return studentList;
 	}
 
-	// 指定の学生を検索するsearchStudentメソッド
-	public Student searchStudent(int student_id) throws Exception {
-		Student student = null;
-		Connection con=getConnection();
 
-		PreparedStatement st=con.prepareStatement(
-			"SELECT * FROM student,course WHERE student.student_id=? and student.course_id=course.course_id");
-		st.setInt(1, student_id);
-		ResultSet rs=st.executeQuery();
 
-		if (rs.next()) {
-			student=new Student();
-			student.setStudent_id(rs.getInt("student_id"));
-			student.setStudent_name(rs.getString("student_name"));
-			student.setCourse_id(rs.getInt("course_id"));
-			Course course=new Course();
-			course.setCourse_id(rs.getInt("course_id"));
-			course.setCourse_name(rs.getString("course_name"));
-			student.setCourse(course);
-		}
-		return student;
-	}
 
-	// 学生を追加するinsertStudentメソッド
-	public int insertStudent(Student student) throws Exception {
-		Connection con=getConnection();
-
-		PreparedStatement st=con.prepareStatement(
-			"INSERT INTO student VALUES(null,?,?)");
-		st.setString(1, student.getStudent_name());
-		st.setInt(2, student.getCourse_id());
-		// insertしたレコード件数が返ってくる
-		int line = st.executeUpdate();
-
-		st.close();
-		con.close();
-
-		return line;
-	}
-
-	// 学生を削除するdeleteStudentメソッド
-	public int deleteStudent(int student_id) throws Exception {
-		Connection con=getConnection();
-
-		PreparedStatement st=con.prepareStatement(
-			"DELETE FROM student WHERE student_id=?");
-		st.setInt(1, student_id);
-		int line = st.executeUpdate();
-
-		st.close();
-		con.close();
-
-		return line;
-	}
-
-	// 学生を更新するupdateStudentメソッド
-	// public int updateStudent(int studentid, String student_name, int course_id)
-	public int updateStudent(Student student) throws Exception {
-		Connection con=getConnection();
-
-		PreparedStatement st=con.prepareStatement(
-			"UPDATE student SET student_name=?,course_id=? WHERE student_id=?");
-		st.setString(1, student.getStudent_name());
-		st.setInt(2, student.getCourse_id());
-		st.setInt(3, student.getStudent_id());
-		int line = st.executeUpdate();
-
-		st.close();
-		con.close();
-		return line;
-	}
 }
