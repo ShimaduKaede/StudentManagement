@@ -8,7 +8,7 @@ public class Teacher implements Serializable {
     private String teacherId;          // 教員ID   
     private String teacherPassword;    // パスワード
     private String teacherName;        // 氏名
-    private School school;             // 学校情報
+    private School school;             // 学校コード
 
     // ゲッター
     public String getTeacherId() {
