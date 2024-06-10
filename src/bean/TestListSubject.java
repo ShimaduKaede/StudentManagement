@@ -3,38 +3,43 @@ package bean;
 import java.io.Serializable;
 public class TestListSubject implements Serializeble {
     
-    private int entYear;
-    private String studentNo;
-    private String studentName;
-    private String classNum;
-    private Map<integer,integer> testlistPoints;
+    private int testListSubjectEntYear;                     // 入学年度
+    private String testListSubjectStudentNo;                // 学生番号
+    private String testListSubjectStudentName;              // 学生名
+    private String testListSubjectClassNum;                 // クラス番号
+    private Map<integer,integer> testListSubjectPoints;     // 得点
 
     TestListSubject() {
     }
     // ゲッター
-    public int getEntYear() {
-        return entYear;
+    public int getTestListSubjectEntYear() {
+        return testListSubjectEntYear;
     }
-    public String getStudentNo() {
-        return studentNo;
+    public String getTestListSubjectStudentNo() {
+        return testListSubjectStudentNo;
     }
-    public String getStudentName() {
-        return studentName;
+    public String getTestListSubjectStudentName() {
+        return testListSubjectStudentName;
     }
-    public String getClassNum() {
-        return classNum;
+    public String getTestListSubjectClassNum() {
+        return testListSubjectClassNum;
     }
-    public Map<Integer, Integer> getPoints() {
-        return points;
+    public Map<Integer, Integer> getTestListSubjectPoints() {
+        return testListSubjectPoints;
     }
 
     // セッター
-    public int setIntYear(int entYear) {
-        this.entYear = entYear;
+    public int setIntYear(int testListSubjectEntYear) {
+        this.testListSubjectEntYear = testListSubjectEntYear;
     }
-    public String setStudentNo(string studentNo) {
-        this.studentNo = studentNo;
+    public String setStudentNo(string testListSubjectStudentNo) {
+        this.testListSubjectStudentNo = testListSubjectStudentNo;
     }
-    public String
+    public String setStudentName(String testListSubjectStudentName) {
+        this.testListSubjectStudentName = testListSubjectStudentName;
+    }
+    public String setClassNum(String testListSubjectClassNum) {
+        this.testListSubjectClassNum = testListSubjectClassNum;
+    }
 
 }
