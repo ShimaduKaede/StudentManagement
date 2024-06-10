@@ -10,15 +10,6 @@ import bean.School;
 import bean.Student;
 public class ClassNumDAO {
 
-		Connection con=getConnection();
-		PreparedStatement st=con.prepareStatement(
-			"SELECT * FROM student,course WHERE student.student_id=? and student.course_id=course.course_id");
-		st.setInt(1, student_id);
-		ResultSet rs=st.executeQuery();
-
-		return classNum;
-	}
-
 	// セッションのユーザーデータ(学校コード)から
 	// 所属している学校のクラスデータ(学校コード,クラス番号)を取得するメソッド
 	public List<String> filter(String schoolCd) throws Exception {
@@ -38,7 +29,7 @@ public class ClassNumDAO {
 		st.close();
 		con.close();
 
-		return studentList;
+		return classNumList;
 	}
 
 
