@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Subject implements Serializable {
     private String subjectCd;      // 科目コードを表すフィールド
     private String subjectName;    // 科目名を表すフィールド
-    private School subjectSchool;  // 学校情報を表すフィールド
+    private School school;  // 学校情報を表すフィールド
 
     // デフォルトコンストラクタ（省略可能）
 
@@ -23,8 +23,8 @@ public class Subject implements Serializable {
     }
 
     // `subjectSchool` フィールドの値を返す。
-    public School getSubjectSchool() {
-        return subjectSchool;
+    public School getSchool() {
+        return school;
     }
 
     // セッターメソッド
@@ -39,7 +39,7 @@ public class Subject implements Serializable {
     }
 
     // `subjectSchool` フィールドに値を設定。
-    public void setSubjectSchool(School subjectSchool) {
-        this.subjectSchool = subjectSchool;
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
