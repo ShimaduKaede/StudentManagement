@@ -9,7 +9,7 @@ import java.util.List;
 import bean.School;
 public class ClassNumDAO {
 
-	// セッションのユーザーデータ(学校コード)から
+	// セッションのユーザーデータ(学校情報)から
 	// 所属している学校のクラスデータ(学校コード,クラス番号)を取得するメソッド
 	public List<String> filter(School school) throws Exception {
 		List<String> classNumList=new ArrayList<>();	// 戻り値で使用する空Listを作成
