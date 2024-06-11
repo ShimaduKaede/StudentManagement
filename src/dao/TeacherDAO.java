@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import bean.School;
 import bean.Teacher;
 
-public class TeacherDao extends DAO {
+public class TeacherDAO extends DAO {
 
     public Teacher get(String id) throws Exception {
         Teacher teacher = null;
@@ -33,7 +33,7 @@ public class TeacherDao extends DAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error retrieving teacher", e);
+            throw new Exception("教師の取得エラー", e);
         }
         return teacher;
     }
@@ -62,8 +62,10 @@ public class TeacherDao extends DAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Error logging in teacher", e);
+            throw new Exception("教師のログインエラー", e);
         }
         return teacher;
     }
 }
+
+
