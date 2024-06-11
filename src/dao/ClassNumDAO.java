@@ -22,7 +22,7 @@ public class ClassNumDAO {
 
 		while (rs.next()) {
 			classNumList.add(rs.getString("SCHOOL_CD"));
-			classNumList.add(rs.getString("CALSS_NUM"));
+			classNumList.add(rs.getString("CLASS_NUM"));
 		}
 
 		st.close();
