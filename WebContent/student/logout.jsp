@@ -1,9 +1,16 @@
 <!-- ログアウト -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
-<%@include file="sidebar.jsp" %>
-<h2>ログアウト</h2>
-<p>ログアウトしました</p>
-<a href="">ログイン</a>
-
+<div id="main">
+  <%@include file="sidebar.jsp" %>
+  <div id="contents">
+    <div id="logout">
+      <h2>ログアウト</h2>
+      <p>ログアウトしました</p>
+      <br />
+      <br />
+      <a href="">ログイン</a>
+    </div>
+  </div>
+</div>
 <%@include file="../footer.jsp" %>

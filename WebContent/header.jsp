@@ -5,13 +5,17 @@
 >
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Servlet/JSP Samples</title>
   </head>
   <body>
     <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
     uri="http://java.sun.com/jsp/jstl/core" %>
-    <h1>得点管理システム</h1>
-    <span>(名前)様</span>
-    <a href="">ログアウト</a>
+    <div id="header">
+      <h1>得点管理システム</h1>
+      <div id="logout-name">
+        <span>(名前)様</span>
+        <a href="">ログアウト</a>
+      </div>
+    </div>
 

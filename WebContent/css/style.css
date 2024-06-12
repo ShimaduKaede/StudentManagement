@@ -57,7 +57,7 @@ h6 {
 
 body {
     font-family: 'Zen Maru Gothic', sans-serif;
-    background-color: #fff6f6;
+    background-color: #ffffff;
     color: #333;
     /* padding-left: 30px; */
 }
@@ -65,4 +65,175 @@ body {
 a {
     color: #2ab2b0;
     text-decoration: none;
+}
+
+
+/* =================header================= */
+
+#header {
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: rgb(202, 218, 243);
+    display: flex;
+}
+
+#header h1 {
+    width: 60%;
+    height: auto;
+    margin-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#logout-name{
+    margin-top: 40px;
+    margin-left: 70px;
+}
+#logout-name span{
+    margin-right:10px ;
+}
+
+
+
+/* =================sidebar================= */
+
+.crumb{
+    height: 100%;
+    width: 70%;
+    margin-left: 70px;
+    margin-top: 20px;
+    margin-bottom:20px;
+    list-style: none;
+
+}
+
+.crumb li{
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#test_list{
+    margin-left: 15px;
+}
+
+#sidebar{
+	width:25%;
+    margin-right: 10px;
+    padding-right: 30px;
+    border-right: 2px solid rgb(0, 0, 0);
+}
+
+/* =================header================= */
+
+
+footer{
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: rgb(236, 235, 235);
+    text-align: center;
+}
+
+
+/* =================main================= */
+
+
+#main {
+    width: 100%;
+    display: flex;
+
+}
+
+
+/* =================contents================= */
+
+
+#contents{
+    margin-top: 20px;
+    width: 55%;
+}
+
+/* =================login================= */
+
+#login{
+    text-align: center;
+}
+
+h2{
+    background-color: #e5e5e5;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#chk_d_ps{
+    width: auto;
+}
+
+button{
+	margin-top:10px;
+    margin-bottom: 20px;
+    padding:5px;
+    padding-right:10px;
+    padding-left:10px;
+    width:120px;
+    height:40px;
+    background-color: blue;
+    color: white;
+    border-style: none;
+    border-radius: 3px;
+}
+
+
+/* =================logout================= */
+
+
+#logout p{
+    width: 100%;
+    background-color: #5a8b32;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+
+}
+
+
+/* =================menu================= */
+
+#menu {
+    display:  flex;
+    margin-left: 30px;
+}
+#student{
+    background-color: #da9898;
+    padding: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #a0a0a0;
+}
+#test{
+    margin-left: 20px;
+    background-color: #a0e6ab;
+    padding: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #a0a0a0;
+}
+#subject{
+    margin-left: 20px;
+    background-color: #a8a3e7;
+    padding: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px #a0a0a0;
 }
