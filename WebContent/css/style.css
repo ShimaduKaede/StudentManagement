@@ -312,3 +312,35 @@ button{
 #search_sum{
     margin: 10px;
 }
+
+#search_result table{
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+#search_result table tr th{
+    width: 20%;
+    text-align: left;
+    border-bottom: solid 1px rgb(108, 108, 108);
+}
+
+
+#search_result table tr td{
+    border-bottom: solid 1px rgb(108, 108, 108);
+}
+
+
+/* =================student_create================= */
+
+#student_create select{
+    width: 100%;
+}
+
+#student_create input{
+    width: 100%;
+}
+
+#student_create label p{
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
