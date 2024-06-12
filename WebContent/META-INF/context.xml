@@ -4,11 +4,11 @@
 
 <Context reloadable="true">
 	<Resource
-		name="jdbc/test"
+		name="jdbc/db_main"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/test"
+		url="jdbc:h2:tcp://localhost/~/db_main"
 		username="sa"
 		password=""
 	/>
