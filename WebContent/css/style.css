@@ -237,3 +237,78 @@ button{
     border-radius: 5px;
     box-shadow: 3px 3px 6px #a0a0a0;
 }
+
+
+
+/* =================menu================= */
+
+
+#searchselect{
+    display: flex;
+}
+
+#search {
+    display: flex;
+    padding: 10px;
+    border: solid 1px #333;
+    border-radius: 3px;
+}
+
+#search input{
+    display: inline-block;
+    width: 20px;
+    height: auto;
+    margin-bottom: 0px ;
+}
+#search label {
+	margin:20px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#search button{
+    background-color: #7e7e7e;
+    color: white;
+}
+
+
+#entyearselect{
+	width:30%;
+    margin-right: 5%;
+}
+
+#entyearselect label{
+    margin-left: 0px;
+}
+
+#entyearselect select{
+    width: 100%;
+}
+
+#classselect{
+	width:30%;
+    margin-right: 5%;
+}
+
+#classselect label{
+    margin-left: 0px;
+}
+
+#classselect select{
+    width: 100%;
+}
+
+#student_list a{
+    width: 100%;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+
+#student_list a p{
+    margin-bottom: 10px;
+}
+
+#search_sum{
+    margin: 10px;
+}
