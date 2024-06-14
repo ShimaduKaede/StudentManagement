@@ -3,6 +3,7 @@ package subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.School;
 import bean.Subject;
 import dao.SubjectDAO;
 import tool.Action;
@@ -14,9 +15,13 @@ public class SubjectCreateAction extends Action {
         String subjectCd = request.getParameter("SubjectCd");
         String subjectName = request.getParameter("SubjectName");
 
-        // Subjectビーンに設定
+        // Schoolオブジェクトを作成して設定
+        School school = new School();
+        school.setSchoolCd(schoolCd);
+
+        // Subjectオブジェクトを作成して設定
         Subject subject = new Subject();
-        subject.setSchoolCd(schoolCd);
+        subject.setSchool(school);
         subject.setSubjectCd(subjectCd);
         subject.setSubjectName(subjectName);
 
