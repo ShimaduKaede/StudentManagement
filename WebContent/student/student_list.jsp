@@ -1,8 +1,12 @@
 <!-- 学生管理一覧 -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+
+<!--学生登録するためGETメソッドを使ってStudentCreateActionにデータを送信します -->
+<form method="GET" action="StudentCreate.action">
+
 <div id="main">
-  <%@include file="sidebar.jsp" %>
+  <%@include file="sidebar.jsp" %
   <div id="contents">
     <div id="student_list">
       <h2>学生管理</h2>
@@ -14,7 +18,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             <label for="f1">入学年度</label><br />
             <select name="f1" id="f1">
               <option value="">--------</option>
-              <option value="2014">2014年度</option>
+             <option value="2014">2014年度</option>
               <option value="2015">2015年度</option>
               <option value="2016">2016年度</option>
               <option value="2017">2017年度</option>
@@ -78,5 +82,5 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     </div>
   </div>
 </div>
-
+</form>
 <%@include file="../footer.jsp" %>
