@@ -1,3 +1,4 @@
+// 仕様がまだ少しあいまいなので、適当に作成
 package tool;
 
 import java.io.IOException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;  // Sessionを使用するためインポート
 
 import bean.Teacher;
+import bean.ClassNum;
 import bean.School;
+import bean.Student;
+import bean.Subject;
 
 public class Utl extends HttpServlet {
     HttpSession session=request.getSession();   // Sessionの開始
@@ -44,21 +48,22 @@ public class Utl extends HttpServlet {
         Student s=new Student();
         s.setEntYear(getEntYear());
     }
-    ////------------------ ここまで ---------------
-    public void setClassNum(
+
+    public void setSubjects(
 		HttpServletRequest request, HttpServletResponse response
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
-        ClassNum c=new ClassNum();
-        c.setSchoolCd(getSchoolId());
-        c.setClassNum(getClassNum());
+        Subject s=new Subject();
+        s.setSubjectCd(getSubjectCd());
+        s.setSubjectName(getSubjectName());
+        s.setSchool(school);
     }
-    public void setClassNum(
+
+    public void setNumSet(
 		HttpServletRequest request, HttpServletResponse response
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
         ClassNum c=new ClassNum();
-        c.setSchoolCd(getSchoolId());
         c.setClassNum(getClassNum());
     }
 
