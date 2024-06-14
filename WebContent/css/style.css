@@ -67,6 +67,13 @@ a {
     text-decoration: none;
 }
 
+button {
+    transition: 0.3s;
+}
+
+button:hover{
+    opacity: 0.6;
+}
 
 /* =================header================= */
 
@@ -343,4 +350,38 @@ button{
 #student_create label p{
     margin-top: 15px;
     margin-bottom: 5px;
+}
+#student_create button{
+	margin-top:20px;
+    background-color: gray;
+}
+
+#student_create form{
+    margin-top: 20px;
+}
+
+#student_create p {
+    margin: 10px;
+}
+
+#check_box {
+    margin-top: 15px;
+}
+
+#check_box input {
+    width: 20px;
+}
+
+#change button {
+    background-color: rgb(119, 147, 212);
+}
+
+/* =================done================= */
+
+#done {
+    margin-top: 100px;
+}
+
+#done a {
+    margin-right: 50px;
 }

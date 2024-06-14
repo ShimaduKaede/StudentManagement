@@ -33,9 +33,9 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <option value="2034">2034年度</option>
         </select>
         <label for="no"><p>学生番号</p></label>
-        <input type="number" name="no" id="no" />
+        <input required type="number" name="no" id="no" />
         <label for="name"><p>氏名</p></label>
-        <input type="text" name="name" id="name" />
+        <input required type="text" name="name" id="name" />
         <label for="class_num"><p>クラス</p></label>
         <select name="class_num" id="class_num">
           <option value="">--------</option>
