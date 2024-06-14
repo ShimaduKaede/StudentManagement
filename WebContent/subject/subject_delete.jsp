@@ -18,10 +18,13 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           name="subjectCode"
           value="<c:out value='${subjectCode}'/>"
         />
-        <button type="submit" class="btn btn-danger">削除</button>
+        <div id="delete_button">
+          <button type="submit" class="btn btn-danger">削除</button>
+        </div>
       </form>
-
-      <a href="SubjectList.action" class="btn btn-secondary">戻る</a>
+      <div id="done">
+        <a href="SubjectList.action" class="btn btn-secondary">戻る</a>
+      </div>
     </div>
   </div>
 </div>

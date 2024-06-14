@@ -385,3 +385,13 @@ button{
 #done a {
     margin-right: 50px;
 }
+
+/* =================delete================= */
+#delete_button button{
+    background-color: rgb(141, 2, 2);
+    margin-top: 15px;
+}
+
+#delete p {
+    margin-top: 20px;
+}
