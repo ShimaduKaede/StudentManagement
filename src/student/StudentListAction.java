@@ -1,13 +1,17 @@
 package student;
 
+import javax.servlet.htttp.HttpSession;
+
 import tool.Action;
 import tool.Utl;
 public class StudentListAction extends Action {
 	public String execute(
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
-
+		// Sessionの開始
+		HttpSession session=request.getSession();
         // sessionデータを取得
+		session.getAttribute("")
         // セッションからユーザーデータを取得
 
 		// getParameterメソッドででえーたを受け取る
