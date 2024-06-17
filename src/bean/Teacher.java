@@ -25,14 +25,14 @@ public class Teacher implements Serializable {
     }
 
     // セッター
-    public void setTeacherId(String TeacherId) {
-        this.TeacherId;
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
     public void setTeacherPassword(String teacherPassword) {
-        this.teacherPassword;
+        this.teacherPassword = teacherPassword;
     }
     public void setTeacherName(String teacherName) {
-        this.teacherName;
+        this.teacherName = teacherName;
     }
     public void setSchool(School school) {
         this.school = school;
