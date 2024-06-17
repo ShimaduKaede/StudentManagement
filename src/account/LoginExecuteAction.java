@@ -39,11 +39,11 @@ public class LoginExecuteAction extends Action {
             // ログイン失敗時の処理
             // 例: エラーメッセージをセットしてログインページにリダイレクト
             request.setAttribute("errorMessage", "IDまたは、パスワードが確認できませんでした。");
-            return "/student/login/login.jsp";
+            return "/account/login.jsp";
         }catch(Exception e){
          // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
-           return "subject_error.jsp";
+           return "student/error.jsp";
  
     }
     }

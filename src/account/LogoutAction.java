@@ -21,11 +21,11 @@ public class LogoutAction extends Action {
  
  
             session.removeAttribute("user");
-            return "/student/login/logout.jsp";
+            return "/account/logout.jsp";
         }catch(Exception e){
          // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
-           return "subject_error.jsp";
+           return "student/error.jsp";
  
     }
  
