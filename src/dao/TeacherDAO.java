@@ -10,7 +10,7 @@ import bean.Teacher;
 
 public class TeacherDAO extends DAO {
 
-    public Teacher get(String id) throws Exception {
+    public Teacher get(String teacherId) throws Exception {
         Teacher teacher = null;
         try (Connection con = getConnection()) {
             String query = "SELECT t.teacherId, t.teacherPassword, t.teacherName, s.schoolCd, s.schoolName " +
@@ -18,7 +18,7 @@ public class TeacherDAO extends DAO {
                            "JOIN Schools s ON t.schoolCd = s.schoolCd " +
                            "WHERE t.teacherId = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, id);
+            ps.setString(1, teacherId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 teacher = new Teacher();
@@ -38,7 +38,7 @@ public class TeacherDAO extends DAO {
         return teacher;
     }
 
-    public Teacher login(String id, String password) throws Exception {
+    public Teacher login(String teacherId, String teacherPassword) throws Exception {
         Teacher teacher = null;
         try (Connection con = getConnection()) {
             String query = "SELECT t.teacherId, t.teacherPassword, t.teacherName, s.schoolCd, s.schoolName " +
@@ -46,8 +46,8 @@ public class TeacherDAO extends DAO {
                            "JOIN Schools s ON t.schoolCd = s.schoolCd " +
                            "WHERE t.teacherId = ? AND t.teacherPassword = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, id);
-            ps.setString(2, password);
+            ps.setString(1, teacherId);
+            ps.setString(2, teacherPassword);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 teacher = new Teacher();
