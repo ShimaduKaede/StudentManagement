@@ -24,12 +24,12 @@ public class LoginAction extends HttpServlet {
              // }
  
             // login.jspへフォワードするだけ
-            request.getRequestDispatcher("/student/login/login.jsp")
+            request.getRequestDispatcher("/account/login.jsp")
                 .forward(request, response);
         }catch(Exception e){
          // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
-           request.getRequestDispatcher("/student/subject_error.jsp")
+           request.getRequestDispatcher("/student/error.jsp")
             .forward(request, response);
  
     }
