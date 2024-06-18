@@ -18,8 +18,8 @@ public class LoginExecuteAction extends Action {
  
             HttpSession session = request.getSession();
  
-            String teacherId = request.getParameter("id");
-            String teacherPassword = request.getParameter("password");
+            String teacherId = request.getParameter("teacherId");
+            String teacherPassword = request.getParameter("teacherPassword");
  
             TeacherDAO dao = new TeacherDAO();
             List<Teacher> customer = dao.login(teacherId, teacherPassword); // ログインIDとパスワードを使って検証する
