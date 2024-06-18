@@ -16,11 +16,6 @@ public class LoginExecuteAction extends Action {
     ) throws Exception {
         try{
  
-            // 意図的に例外を発生させる処理（普段はつかわない）
-             //if (true) {
-             //       throw new RuntimeException("テスト用の予期せぬエラー");
-             // }
- 
             HttpSession session = request.getSession();
  
             String teacherId = request.getParameter("id");
@@ -29,17 +24,14 @@ public class LoginExecuteAction extends Action {
             TeacherDAO dao = new TeacherDAO();
             List<Teacher> customer = dao.login(teacherId, teacherPassword); // ログインIDとパスワードを使って検証する
  
-            if (customer != null && customer.size() > 0) {
-                Teacher user = customer.get(0);
-                session.setAttribute("user", user);
+            if (customer != null) {
+                Teacher teacher = customer.get(0);
+                session.setAttribute("teacher", teacher);
  
                 return "/student/menu.jsp"; // ログイン成功時のリダイレクト先
             }
  
-            // ログイン失敗時の処理
-            // 例: エラーメッセージをセットしてログインページにリダイレクト
-            request.setAttribute("errorMessage", "IDまたは、パスワードが確認できませんでした。");
-            return "/account/login.jsp";
+            
         }catch(Exception e){
          // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
