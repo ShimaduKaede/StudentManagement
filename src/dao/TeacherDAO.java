@@ -13,10 +13,7 @@ public class TeacherDAO extends DAO {
     public Teacher get(String teacherId) throws Exception {
         Teacher teacher = null;
         try (Connection con = getConnection()) {
-            String query = "SELECT t.teacherId, t.teacherPassword, t.teacherName, s.schoolCd, s.schoolName " +
-                           "FROM Teachers t " +
-                           "JOIN Schools s ON t.schoolCd = s.schoolCd " +
-                           "WHERE t.teacherId = ?";
+            String query = "SELECT * FROM teacher WHERE id=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, teacherId);
             ResultSet rs = ps.executeQuery();
@@ -41,10 +38,7 @@ public class TeacherDAO extends DAO {
     public Teacher login(String teacherId, String teacherPassword) throws Exception {
         Teacher teacher = null;
         try (Connection con = getConnection()) {
-            String query = "SELECT t.teacherId, t.teacherPassword, t.teacherName, s.schoolCd, s.schoolName " +
-                           "FROM Teachers t " +
-                           "JOIN Schools s ON t.schoolCd = s.schoolCd " +
-                           "WHERE t.teacherId = ? AND t.teacherPassword = ?";
+            String query = "SELECT * FROM teacher WHERE id=? AND password=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, teacherId);
             ps.setString(2, teacherPassword);
