@@ -8,7 +8,8 @@ import bean.Subject;
 import dao.SubjectDAO;
 import tool.Action;
 
-public class SubjectCreateAction extends Action {
+public class SubjectCreateExecuteAction extends Action {
+    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // ユーザーからの入力値を受け取る
         String schoolCd = request.getParameter("SchoolCd");
@@ -42,5 +43,6 @@ public class SubjectCreateAction extends Action {
         return "subject_create_done.jsp";
     }
 }
+
 
 
