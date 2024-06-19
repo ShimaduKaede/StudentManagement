@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
-public class ClassNumDAO {
+public class ClassNumDAO extends DAO{
 
 	// セッションのユーザーデータ(学校情報)から
 	// 所属している学校のクラスデータ(学校コード,クラス番号)を取得するメソッド
@@ -17,7 +17,8 @@ public class ClassNumDAO {
 
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
-			"SELECT SCHOOL_CD,CLASS_NUM FROM CLASS_NUM WHERE SCHOOL_CD = schoolCd");
+			"SELECT SCHOOL_CD,CLASS_NUM FROM CLASS_NUM WHERE SCHOOL_CD = ?");
+		st.setString(1, schoolCd);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {

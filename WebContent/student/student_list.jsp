@@ -8,7 +8,11 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     <div id="student_list">
       <h2>学生管理</h2>
       <a href="StudentCreate.action"><p>新規登録</p></a>
+<<<<<<< HEAD
       <form action="StudentCreateExecute.action">
+=======
+      <form action="">
+>>>>>>> 9fa7833e3df7744dce55de38504f2f0c37f1d7a4
         <div id="search">
           <div id="entyearselect">
             <!-- 入学年度 -->
