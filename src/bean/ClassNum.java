@@ -4,7 +4,7 @@ package bean;
 import java.io.Serializable;
 
 public class ClassNum implements Serializable {
-    private String schoolCd;    // 学校コード   
+    private String schoolCd;    // 学校コード
     private String classNum;    // クラス番号
 
     // 学校コードを取得(ゲット)する
@@ -13,7 +13,7 @@ public class ClassNum implements Serializable {
     }
     // 学校コードを設定(セット)する
     public void setSchoolCd(String schoolCd) {
-        this.schoolCd;
+        this.schoolCd = schoolCd;
     }
     // クラス番号を取得(ゲット)する
     public String getClassNum() {
@@ -21,6 +21,6 @@ public class ClassNum implements Serializable {
     }
     // クラス番号を設定(セット)する
     public void setClassNum(String classNum) {
-        this.classNum;
+        this.classNum = classNum;
     }
 }

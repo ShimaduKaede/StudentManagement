@@ -8,7 +8,7 @@
   <div id="contents">
     <div id="student_list">
       <h2>学生管理</h2>
-      <a href=""><p>新規登録</p></a>
+      <a href="StudentCreate.action"><p>新規登録</p></a>
       <form action="">
         <div id="search">
           <div id="entyearselect">
