@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 
   <div id="contents">
     <div id="login">
-      <form action="">
+      <form action="LoginExecute.action">
         <h2>ログイン</h2>
         <p>ID</p>
         <input
