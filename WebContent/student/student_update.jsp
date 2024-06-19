@@ -28,7 +28,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         </div>
       </form>
 
-      <a href="">戻る</a>
+      <a href="StudentList.action">戻る</a>
     </div>
   </div>
 </div>

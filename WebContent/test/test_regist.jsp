@@ -13,7 +13,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
               <label for="f2">クラス</label>
               <label for="f3">科目</label>
               <label for="f4">回数</label>
-              <form action="">
+              <form action="TestRegist.action">
                 <select name="f1" id="f1">
                   <option value="2023">2023</option>
                 </select>

@@ -8,8 +8,8 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <h2>成績管理</h2>
       <p>登録が完了しました</p>
       <div id="done">
-        <a href="">戻る</a>
-        <a href="">学生一覧</a>
+        <a href="TestRegist.action">戻る</a>
+        <a href="TestList.action">学生一覧</a>
       </div>
     </div>
   </div>

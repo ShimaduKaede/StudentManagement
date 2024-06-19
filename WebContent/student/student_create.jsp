@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
   <div id="contents">
     <div id="student_create">
       <h2>学生情報登録</h2>
-      <form action="">
+      <form action="StudentCreate.action">
         <label for="ent_year"><p>入学年度</p></label>
         <select name="ent_year" id="ent_year">
           <option value="">--------</option>
@@ -44,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         <button type="submit" name="end">登録して終了</button>
       </form>
 
-      <a href="">戻る</a>
+      <a href="StudentList.action">戻る</a>
     </div>
   </div>
 </div>
