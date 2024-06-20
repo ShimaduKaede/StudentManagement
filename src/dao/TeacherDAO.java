@@ -3,63 +3,77 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.School;
 import bean.Teacher;
 
-public class TeacherDAO extends DAO {
 
-    public Teacher get(String teacherId) throws Exception {
-        Teacher teacher = null;
-        try (Connection con = getConnection()) {
-            String query = "SELECT * FROM teacher WHERE id=?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, teacherId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                teacher = new Teacher();
-                teacher.setTeacherId(rs.getString("teacherId"));
-                teacher.setTeacherPassword(rs.getString("teacherPassword"));
-                teacher.setTeacherName(rs.getString("teacherName"));
+public class TeacherDAO extends DAO{
+		public List<Teacher> login(String teacherId , String teacherPassword) throws Exception {
+			List<Teacher> teacher=new ArrayList<>();
 
-                School school = new School();
-                school.setSchoolCd(rs.getString("schoolCd"));
-                school.setSchoolName(rs.getString("schoolName"));
-                teacher.setSchool(school);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("教師の取得エラー", e);
-        }
-        return teacher;
-    }
+			Connection con=getConnection();
 
-    public Teacher login(String teacherId, String teacherPassword) throws Exception {
-        Teacher teacher = null;
-        try (Connection con = getConnection()) {
-            String query = "SELECT * FROM teacher WHERE id=? AND password=?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, teacherId);
-            ps.setString(2, teacherPassword);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                teacher = new Teacher();
-                teacher.setTeacherId(rs.getString("teacherId"));
-                teacher.setTeacherPassword(rs.getString("teacherPassword"));
-                teacher.setTeacherName(rs.getString("teacherName"));
+			PreparedStatement st=con.prepareStatement(
+			"SELECT *  FROM TEACHER WHERE id = ? AND password = ?");
+			st.setString(1, teacherId);
+			st.setString(2, teacherPassword);
+			ResultSet rs=st.executeQuery();
 
-                School school = new School();
-                school.setSchoolCd(rs.getString("schoolCd"));
-                school.setSchoolName(rs.getString("schoolName"));
-                teacher.setSchool(school);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("教師のログインエラー", e);
-        }
-        return teacher;
-    }
+			while (rs.next()) {
+				Teacher p=new Teacher();
+				// getのなかの引数はｓｑｌのカラム名をとってきている
+				p.setTeacherId(rs.getString("ID"));
+				p.setTeacherPassword(rs.getString("PASSWORD"));
+				p.setTeacherName(rs.getString("NAME"));
+
+				 School school = new School();
+				    school.setSchoolCd(rs.getString("SCHOOL_CD"));
+				    p.setSchool(school);
+
+				if (teacherPassword.equals(p.getTeacherPassword())) {
+				teacher.add(p);
+
+				}}
+				st.close();
+				con.close();
+
+					return teacher;
+
+
+			}
+
+
+			public List<Teacher> get(String teacherId) throws Exception {
+				List<Teacher> teacher=new ArrayList<>();
+
+				Connection con=getConnection();
+
+
+				PreparedStatement st=con.prepareStatement(
+					"SELECT * FROM SUBJECT WHERE ID = ?");
+					st.setString(1 , teacherId);
+				ResultSet rs=st.executeQuery();
+
+				while (rs.next()) {
+					Teacher teacherList = new Teacher();
+					teacherList.setTeacherId(rs.getString("ID"));
+					teacherList.setTeacherName(rs.getString("NAME"));
+					teacherList.setTeacherPassword(rs.getString("PASSWORD"));
+
+					School school = new School();
+					school.setSchoolCd(rs.getString("SCHOOL_CD"));
+
+
+					teacher.add(teacherList);
+				}
+
+				st.close();
+				con.close();
+
+				return teacher;
+			}
 }
-
 

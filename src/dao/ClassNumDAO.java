@@ -17,12 +17,11 @@ public class ClassNumDAO extends DAO{
 
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
-			"SELECT SCHOOL_CD,CLASS_NUM FROM CLASS_NUM WHERE SCHOOL_CD = ?");
+			"SELECT CLASS_NUM FROM CLASS_NUM WHERE SCHOOL_CD = ?");
 		st.setString(1, schoolCd);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
-			classNumList.add(rs.getString("SCHOOL_CD"));
 			classNumList.add(rs.getString("CLASS_NUM"));
 		}
 

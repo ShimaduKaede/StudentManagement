@@ -40,8 +40,8 @@
         <label for="class_num"><p>クラス</p></label>
         <select id="class_num" name="class_num">
             <option value="">--------------</option>
-            <c:forEach var="class" items="${classes}">
-                <option value="${class}">${class}</option>
+            <c:forEach var="classItem" items="${classes}">
+                <option value="${classItem}">${classItem}</option>
             </c:forEach>
         </select>
         <button type="submit" name="end">登録して終了</button>
