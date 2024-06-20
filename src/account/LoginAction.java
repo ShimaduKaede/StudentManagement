@@ -1,28 +1,21 @@
 package account ;
- 
+
 import java.io.IOException;
- 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
 // このURLパターンはhttp://localhost:8080/kouka2で実行される
-@WebServlet(urlPatterns={"/login/loginaction"})
+@WebServlet(urlPatterns={"/account/"})
 public class LoginAction extends HttpServlet {
     public void doGet (
         HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
- 
- 
+
         try {
- 
-            // 意図的に例外を発生させる処理（普段はつかわない）
-             //if (true) {
-             //       throw new RuntimeException("テスト用の予期せぬエラー");
-             // }
- 
             // login.jspへフォワードするだけ
             request.getRequestDispatcher("/account/login.jsp")
                 .forward(request, response);
@@ -31,7 +24,7 @@ public class LoginAction extends HttpServlet {
            request.setAttribute("message", "エラーが発生しました。");
            request.getRequestDispatcher("/student/error.jsp")
             .forward(request, response);
- 
+
     }
     }
 }
