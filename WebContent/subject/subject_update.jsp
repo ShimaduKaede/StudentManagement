@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     <h2>科目情報変更</h2>
     <div id="student_create">
       <!-- 正しく入力されていたら科目登録完了画面に遷移 -->
-      <form action="">
+      <form action="SubjectUpateExecute.action">
         <label for="cd">科目コード</label>
         <p id="cd">code</p>
         <label for="name">科目名</label>
@@ -19,7 +19,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       </form>
     </div>
     <!-- 科目管理一覧に遷移 -->
-    <a href="">戻る</a>
+    <a href="SubjectList.action">戻る</a>
   </div>
 </div>
 <%@include file="../footer.jsp" %>

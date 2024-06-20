@@ -1,22 +1,21 @@
 <!-- 学生管理一覧 -->
-<%@page contentType="text/html; charset=UTF-8" %> 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="../header.jsp" %>
+<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
     <div id="student_list">
       <h2>学生管理</h2>
-      <a href=""><p>新規登録</p></a>
-      <form action="">
+      <a href="StudentCreate.action"><p>新規登録</p></a>
+      <form action="StudentCreateExecute.action">
         <div id="search">
           <div id="entyearselect">
             <!-- 入学年度 -->
             <label for="f1">入学年度</label><br />
             <select name="f1" id="f1">
               <option value="">--------</option>
-             <option value="2014">2014年度</option>
+              <option value="2014">2014年度</option>
               <option value="2015">2015年度</option>
               <option value="2016">2016年度</option>
               <option value="2017">2017年度</option>
@@ -73,12 +72,12 @@
             <td>getName()</td>
             <td>getclass()</td>
             <td>〇</td>
-            <td><a href="">変更</a></td>
+            <td><a href="StudentUpdate.action">変更</a></td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </div>
-<p>value="data1"<p>
-<%@include file="../footer.jsp" %>
+<p>value="data1"</p>
+<p><%@include file="../footer.jsp" %></p>

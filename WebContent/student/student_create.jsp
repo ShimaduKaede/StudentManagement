@@ -1,12 +1,13 @@
 <!-- 学生登録 -->
-<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
     <div id="student_create">
       <h2>学生情報登録</h2>
-      <form action="">
+      <form action="StudentCreate.action">
         <label for="ent_year"><p>入学年度</p></label>
         <select name="ent_year" id="ent_year">
           <option value="">--------</option>
@@ -37,14 +38,16 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         <label for="name"><p>氏名</p></label>
         <input required type="text" name="name" id="name" />
         <label for="class_num"><p>クラス</p></label>
-        <select name="class_num" id="class_num">
-          <option value="">--------</option>
-          <option value="">101</option>
+        <select id="class_num" name="class_num">
+            <option value="">--------------</option>
+            <c:forEach var="class" items="${classes}">
+                <option value="${class}">${class}</option>
+            </c:forEach>
         </select>
         <button type="submit" name="end">登録して終了</button>
       </form>
 
-      <a href="">戻る</a>
+      <a href="StudentList.action">戻る</a>
     </div>
   </div>
 </div>
