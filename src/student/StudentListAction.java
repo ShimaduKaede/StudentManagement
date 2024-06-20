@@ -1,12 +1,13 @@
 package student;
 
 import javax.servlet.htttp.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
+import bean.Teacher;
 import tool.Action;
 import tool.Utl;
 public class StudentListAction extends Action {
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
+	public String execute( HttpServletRequest request
 	) throws Exception {
 
 		Teacher t=new Teacher();

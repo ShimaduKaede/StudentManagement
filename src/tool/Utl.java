@@ -1,72 +1,68 @@
-// 仕様がまだ少しあいまいなので、適当に作成
 package tool;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;  // Sessionを使用するためインポート
+import javax.servlet.http.HttpSession;
 
-import bean.Teacher;
-import bean.ClassNum;
 import bean.School;
-import bean.Student;
-import bean.Subject;
+import bean.Teacher;
 
 public class Utl extends HttpServlet {
-    HttpSession session=request.getSession();   // Sessionの開始
-
-    public Teacher getUser(
-		HttpServletRequest request, HttpServletResponse response
+    // ログインしたユーザー情報をセションから取得する(Teacher型)メソッド
+    public Teacher getUser(HttpServletRequest request
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        Teacher t=new Teacher();
-        t.setTeacherId(getTeacherId());
-        t.setTeacherPassword(getTeacherPassword());
-        t.setTeacherName(getTeacherName());
-        t.setSchool(getSchool());
+        // セッションの開始
+		HttpSession session=request.getSession();	
+        // 格納用のTeacher型のtをインスタンス化
+	    Teacher t=new Teacher();
+        // 以下でセッション情報を変数tにセット
+        t.setTeacherId(session.getAttribute('teacherId'));
+        t.setTeacherPassword(sessiion.getAttribute("password"));
+        t.setTeacherName(session.getAttribute("teacherName"));
+        School school = new School();
+        school.setSchoolCd(session.getAttribute("schoolCd"));
+        school.setSchoolName(session.getAttribute("schoolName"));
+        t.setSchool(school);
 
-        return t;
+        return t;   // 変数t:Teacher型の情報を返す
     }
-
-    public void setClassNumSet(
-		HttpServletRequest request, HttpServletResponse response
+    // クラス番号情報をセッションにセットする
+    public void setClassNumSet(HttpServletRequest request
+    ) throws ServletException, IOException {
+        // セッションの開始
+		HttpSession session=request.getSession();	
+        // 以下でセッション情報にセット
+        session.setAttribute("schoolCd",request.schoolCd);
+        session.setAttribute("classNum",request.classNum);
+    }
+    // 入学年度をセッションにセットする
+    public void setEntYearSet(HttpServletRequest request
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        ClassNum c=new ClassNum();
-        c.setSchoolCd(getSchoolId());
-        c.setClassNum(getClassNum());
+        // セッションの開始
+		HttpSession session=request.getSession();	
+        // 以下でセッション情報にセット
+        session.setAttribute("entYear",request.entYear);
     }
-
-    public void setEntYearSet(
-		HttpServletRequest request, HttpServletResponse response
+    // 科目情報をセッションにセットする
+    public void setSubjects(HttpServletRequest request
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        Student s=new Student();
-        s.setEntYear(getEntYear());
+        // セッションの開始
+		HttpSession session=request.getSession();	
+        // 以下でセッション情報にセット
+        session.setAttribute("subjectCd",request.subjectCd);
+        session.setAttribute("subjectName",request.subjectName);
+        session.setAttribute("school",request.school);
     }
-
-    public void setSubjects(
-		HttpServletRequest request, HttpServletResponse response
+    // クラス番号をセッションにセットする
+    public void setNumSet(HttpServletRequest request
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        Subject s=new Subject();
-        s.setSubjectCd(getSubjectCd());
-        s.setSubjectName(getSubjectName());
-        s.setSchool(school);
-    }
+        // 以下でセッション情報にセット
+        session.setAttribute("classNum",request.classNum);
 
-    public void setNumSet(
-		HttpServletRequest request, HttpServletResponse response
-	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        ClassNum c=new ClassNum();
-        c.setClassNum(getClassNum());
     }
-
 
 }
 
