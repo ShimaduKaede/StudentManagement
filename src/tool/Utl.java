@@ -8,26 +8,32 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;  // Sessionを使用するためインポート
+import javax.servlet.http.HttpSession;
 
-import bean.Teacher;
 import bean.ClassNum;
 import bean.School;
 import bean.Student;
 import bean.Subject;
+import bean.Teacher;
 
 public class Utl extends HttpServlet {
-    HttpSession session=request.getSession();   // Sessionの開始
 
     public Teacher getUser(
-		HttpServletRequest request, HttpServletResponse response
+		HttpServletRequest request
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-        Teacher t=new Teacher();
-        t.setTeacherId(getTeacherId());
-        t.setTeacherPassword(getTeacherPassword());
-        t.setTeacherName(getTeacherName());
-        t.setSchool(getSchool());
+
+		HttpSession session=request.getSession();	// セッションの開始
+
+	    Teacher t=new Teacher();
+        t.setTeacherId("admin");
+        t.setTeacherPassword("password");
+        t.setTeacherName("大原花子");
+        School school = new School();
+        school.setSchoolCd("oom");
+        school.setSchoolName("大宮校");
+        t.setSchool(school);
+
+		System.out.println("sessionID："+session.getId());	// セッションID出力
 
         return t;
     }
@@ -35,10 +41,9 @@ public class Utl extends HttpServlet {
     public void setClassNumSet(
 		HttpServletRequest request, HttpServletResponse response
 	) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
         ClassNum c=new ClassNum();
-        c.setSchoolCd(getSchoolId());
-        c.setClassNum(getClassNum());
+        c.setSchoolCd(c.getSchoolId());
+        c.setClassNum(c.getClassNum());
     }
 
     public void setEntYearSet(
@@ -46,7 +51,7 @@ public class Utl extends HttpServlet {
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
         Student s=new Student();
-        s.setEntYear(getEntYear());
+        s.setEntYear(s.getEntYear());
     }
 
     public void setSubjects(
@@ -54,9 +59,9 @@ public class Utl extends HttpServlet {
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
         Subject s=new Subject();
-        s.setSubjectCd(getSubjectCd());
-        s.setSubjectName(getSubjectName());
-        s.setSchool(school);
+        s.setSubjectCd(s.getSubjectCd());
+        s.setSubjectName(s.getSubjectName());
+        s.setSchool(s.school);
     }
 
     public void setNumSet(
@@ -64,7 +69,7 @@ public class Utl extends HttpServlet {
 	) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
         ClassNum c=new ClassNum();
-        c.setClassNum(getClassNum());
+        c.setClassNum(c.getClassNum());
     }
 
 
