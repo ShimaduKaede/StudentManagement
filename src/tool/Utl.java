@@ -30,7 +30,7 @@ public class Utl extends HttpServlet {
         // ログインが出来るまで、ひとまず、サンプルデータを仮入力してます
         // 以下でセッション情報を変数tにセット
         t.setTeacherId("admin");
-        t.setTeacherPassword("password"));
+        t.setTeacherPassword("password");
         t.setTeacherName("大原花子");
         School school = new School();
         school.setSchoolCd("oom");
