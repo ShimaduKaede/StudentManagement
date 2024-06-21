@@ -14,7 +14,7 @@ public class Student extends School implements Serializable {
     private School school;          // 学校(学校コード,学校名)
 
 	// 学生番号を取得(ゲット)メソッド
-	public Stirng getStudentNo() {
+	public String getStudentNo() {
 		return studentNo;
 	}
 	// 学生番号を設置（セット）メソッド

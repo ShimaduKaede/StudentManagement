@@ -1,9 +1,6 @@
 package bean;
 
 import java.io.Serializable;
-import bean.School;
-import bean.Student;
-import bean.Subject;
 
 public class Test implements Serializable {
 
@@ -15,9 +12,9 @@ public class Test implements Serializable {
     private int point;          // 得点
 
 
-    
+
 	// 学生情報を取得(ゲット)メソッド
-	public Stirng getStudent() {
+	public Student getStudent() {
 		return student;
 	}
 	// 学生情報を設置（セット）メソッド
