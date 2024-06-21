@@ -7,7 +7,7 @@
   <div id="contents">
     <div id="student_create">
       <h2>学生情報登録</h2>
-      <form action="StudentCreate.action">
+      <form action="StudentCreateExecute.action">
         <label for="ent_year"><p>入学年度</p></label>
         <select name="ent_year" id="ent_year">
           <option value="">--------</option>
