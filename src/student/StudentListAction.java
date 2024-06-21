@@ -14,7 +14,10 @@ public class StudentListAction extends Action {
 		Utl tool = new Utl();
 		t = tool.getUser(request);
 
-		// セッションのユーザーデータから、ユーザーが
+		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
+
+
+
 		// セッションから引っ張ってきたユーザデータを変数userに登録
 		request.setAttribute("user", t);
 		// FrontControllerを使用しているためreturn文でフォワードできる
