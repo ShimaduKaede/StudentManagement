@@ -1,27 +1,25 @@
 package student;
 
 import javax.servlet.htttp.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
+import bean.Teacher;
 import tool.Action;
 import tool.Utl;
 public class StudentListAction extends Action {
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
-	) throws Exception {
-		// Sessionの開始
-		HttpSession session=request.getSession();
-        // sessionデータを取得
-		String data1=session.getId()
-        // セッションからユーザーデータを取得
+	public String execute( HttpServletRequest request
+	) throws Exception {	
+		// セッションからユーザデータを取得
+		Teacher t=new Teacher();
+		Utl tool = new Utl();
+		t = tool.getUser(request);
 
-        // sessionデータを渡す
-        // セションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
+		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
 
-		// setAttributeメソッドでホールスタッフにデータを渡す
-		// 第１引数にjspで受け取るときの名前
-		// 第２引数にjspに渡すデータを指定する
-		request.setAttribute("data1", data1);
 
+
+		// セッションから引っ張ってきたユーザデータを変数userに登録
+		request.setAttribute("user", t);
 		// FrontControllerを使用しているためreturn文でフォワードできる
 		return "student_list.jsp";
 	}
