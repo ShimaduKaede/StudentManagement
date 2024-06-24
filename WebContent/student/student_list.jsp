@@ -72,7 +72,8 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             <td>getName()</td>
             <td>getclass()</td>
             <td>〇</td>
-            <td><a href="StudentUpdate.action">変更</a></td>
+            <!-- 学生の学番をリクエストパラメータとして付加してStudentUpdateActionを呼び出す -->
+            <td><a href="StudentUpdate.action?studentNo=${student.studentNo}">変更</a></td>
           </tr>
         </table>
       </div>
