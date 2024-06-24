@@ -3,12 +3,11 @@ package student;
 import javax.servlet.htttp.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
-import bean.School;
 import bean.Student;
 import bean.Teacher;
 import tool.Action;
 import tool.Utl;
-import dao.StudentDao;
+import dao.StudentDAO;
 
 public class StudentListAction extends Action {
 	public String execute( HttpServletRequest request
@@ -21,9 +20,9 @@ public class StudentListAction extends Action {
 		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
 		School s=new School();
 		s.setSchoolCd(t.getSchoolCd());
-		
-		あと、Resultset・・・
-		postFilter(rSet,s);
+		boolean flg = true;
+		// ????----ここらへんから--------------
+		filter3(s,flg);
 
 
 
