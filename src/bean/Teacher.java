@@ -8,7 +8,7 @@ public class Teacher implements Serializable {
     private String teacherId;          // 教員ID   
     private String teacherPassword;    // パスワード
     private String teacherName;        // 氏名
-    private School school;             // 学校コード
+    private String schoolCd;           // 学校コード
 
     // ゲッター
     public String getTeacherId() {
@@ -20,8 +20,8 @@ public class Teacher implements Serializable {
     public String getTeacherName() {
         return teacherName;
     }
-    public School getSchool() {
-        return school;
+    public String getSchoolCd() {
+        return schoolCd;
     }
 
     // セッター
@@ -34,7 +34,7 @@ public class Teacher implements Serializable {
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
-    public void setSchool(School school) {
-        this.school = school;
+    public void setSchoolCd(String schoolCd) {
+        this.schoolCd = schoolCd;
     }
 }

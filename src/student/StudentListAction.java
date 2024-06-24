@@ -3,6 +3,7 @@ package student;
 import javax.servlet.htttp.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
+import bean.School;
 import bean.Student;
 import bean.Teacher;
 import tool.Action;
@@ -18,8 +19,12 @@ public class StudentListAction extends Action {
 		t = tool.getUser(request);
 
 		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
-		postFilter(rSet,school);
+		School s=new School();
+		s.setSchoolCd(t.getSchoolCd());
 		
+		あと、Resultset・・・
+		postFilter(rSet,s);
+
 
 
 		// セッションから引っ張ってきたユーザデータを変数userに登録
