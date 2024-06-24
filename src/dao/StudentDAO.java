@@ -41,100 +41,173 @@ public class StudentDao extends Dao {
         
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd");
+            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd;");
         ResultSet rs=st.executeQuery();
-// -------------------- ここまで --------------------
-		while (rs.next()) {
-			//科目Beanをインスタンス化して情報をセット
-			Subject subject=new Subject();
-			subject.setSchoolCd(rs.getStriing("SCHOOL_CD"));
-			subject.setSubjectCd(rs.getString("CD"));
-			subject.setSubjectName(rs.getString("NAME"));
 
-            subjectList.add(subject);
+        while (rs.next()) {
+			//StudentBeanをインスタンス化して情報をセット
+			Student student=new Student();
+			student.setStudentNo(rs.getStriing("STUDENT_NO"));
+			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
+			student.setEntYear(rs.getStriing("ENT_YEAR"));
+			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+
+            studentlist.add(student);
 		}
 
         st.close(); 
 		con.close();    // DB切断
 
-		return subjectList;
+		return studentlist;
     }
 
     // filter1メソッド
     // 引数：School型のschool,int型のentYear,String型のclassNum,boolean型のisAttend
     // 戻り値：List<Student>
+    public List<Student> filter1(School school,int entYear,String classNum,boolean isAttend
+    ) throws Exception {
+		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
+        
+        Connection con=getConnection(); // DBへの接続
+        PreparedStatement st=con.prepareStatement(
+            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            + "FROM STUDENT "
+            + "WHERE SCHOOL_CD = schoolCd "
+            + "AND ENT_YEAR = entYear "
+            + "AND CLASS_NUM = classNum "
+            + "AND IS_ATTEND = isAttend;");
+        ResultSet rs=st.executeQuery();
+
+        while (rs.next()) {
+			//StudentBeanをインスタンス化して情報をセット
+			Student student=new Student();
+			student.setStudentNo(rs.getStriing("STUDENT_NO"));
+			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
+			student.setEntYear(rs.getStriing("ENT_YEAR"));
+			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+
+            studentlist.add(student);
+		}
+
+        st.close(); 
+		con.close();    // DB切断
+
+		return studentlist;
+    }
+
+
+
 
     // filter2メソッド
     // 引数：School型のschool,int型のentYear,boolean型のisAttend
     // 戻り値：List<Student>
+    public List<Student> filter2(School school,int entYear,boolean isAttend
+    ) throws Exception {
+		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
+        
+        Connection con=getConnection(); // DBへの接続
+        PreparedStatement st=con.prepareStatement(
+            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            + "FROM STUDENT "
+            + "WHERE SCHOOL_CD = schoolCd "
+            + "AND ENT_YEAR = entYear "
+            + "AND IS_ATTEND = isAttend;");
+        ResultSet rs=st.executeQuery();
+
+        while (rs.next()) {
+			//StudentBeanをインスタンス化して情報をセット
+			Student student=new Student();
+			student.setStudentNo(rs.getStriing("STUDENT_NO"));
+			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
+			student.setEntYear(rs.getStriing("ENT_YEAR"));
+			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+
+            studentlist.add(student);
+		}
+
+        st.close(); 
+		con.close();    // DB切断
+
+		return studentlist;
+    }
 
     // filter3メソッド
     // 学生IDを取得 → 学生の詳細データを取得
     // 引数：School型のschool,boolean型のisAttend
     // 戻り値：List<Student>
+    public List<Student> filter3(School school,boolean isAttend
+    ) throws Exception {
+		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
+        
+        Connection con=getConnection(); // DBへの接続
+        PreparedStatement st=con.prepareStatement(
+            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            + "FROM STUDENT "
+            + "WHERE SCHOOL_CD = schoolCd "
+            + "AND IS_ATTEND = isAttend;");
+        ResultSet rs=st.executeQuery();
+
+        while (rs.next()) {
+			//StudentBeanをインスタンス化して情報をセット
+			Student student=new Student();
+			student.setStudentNo(rs.getStriing("STUDENT_NO"));
+			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
+			student.setEntYear(rs.getStriing("ENT_YEAR"));
+			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+
+            studentlist.add(student);
+		}
+
+        st.close(); 
+		con.close();    // DB切断
+
+		return studentlist;
+    }
 
     // saveメソッド
     // 入力された値をDBに保存する
     // 引数：Student型のstudent
     // 戻り値：boolean
+    // 学生を保存(追加)するメソッド
+    public boolean save(Stuent student) throws Exception {
+        
+        Connection con=getConnection(); // DBへの接続
+        PreparedStatement st=con.prepareStatement(
+            "INSERT INTO STUDENT "
+            + "(STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
+            + "VALUES (?, ?, ?, ?, ?, ?);");
 
+        st.setString(1, student.getStudentNo());
+        st.setString(2, student.getStudentName());
+		st.setInt(3, student.getEntYear());
+        st.setString(4, student.getClassNum());
+        st.setBoolean(5, student.getIsAttend());
+        st.setString(6, student.getSchoolCd());
+		// insertしたレコード件数が返ってくる
+		int line = st.executeUpdate();
 
-
-
-
-
-    // 学生をIDで取得するメソッド
-    public Student get(String studentNo) throws SQLException {
-        Student student = null;
-        String sql = "SELECT STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD FROM STUDENT WHERE STUDENT_NO = ?";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, studentNo);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    student = new Student();
-                    student.setStudentNo(rs.getString("STUDENT_NO"));
-                    student.setStudentName(rs.getString("STUDENT_NAME"));
-                    student.setEntYear(rs.getInt("ENT_YEAR"));
-                    student.setClassNum(rs.getString("CLASS_NUM"));
-                    student.setAttend(rs.getBoolean("IS_ATTEND"));
-                    student.setSchool(new School(rs.getString("SCHOOL_CD")));
-                }
-            }
+        boolean flg = false;
+        if (line > 0){
+            flg = true;
+        } else {
+            flg = false;
         }
-        return student;
-    }
+        
+        st.close(); 
+        con.close();    // DB切断
 
-    // 学生リストを取得するメソッド
-    public List<Student> getAllStudents() throws SQLException {
-        List<Student> studentList = new ArrayList<>();
-        String sql = "SELECT STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD FROM STUDENT";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                Student student = new Student();
-                student.setStudentNo(rs.getString("STUDENT_NO"));
-                student.setStudentName(rs.getString("STUDENT_NAME"));
-                student.setEntYear(rs.getInt("ENT_YEAR"));
-                student.setClassNum(rs.getString("CLASS_NUM"));
-                student.setAttend(rs.getBoolean("IS_ATTEND"));
-                student.setSchool(new School(rs.getString("SCHOOL_CD")));
-                studentList.add(student);
-            }
-        }
-        return studentList;
-    }
-
-    // 学生を追加するメソッド
-    public boolean save(Student student) throws SQLException {
-        String sql = "INSERT INTO STUDENT (STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, student.getStudentNo());
-            stmt.setString(2, student.getStudentName());
-            stmt.setInt(3, student.getEntYear());
-            stmt.setString(4, student.getClassNum());
-            stmt.setBoolean(5, student.isAttend());
-            stmt.setString(6, student.getSchool().getCd());
-            return stmt.executeUpdate() > 0;
-        }
+        return flg;
     }
 
     // 学生を更新するメソッド
@@ -160,26 +233,5 @@ public class StudentDao extends Dao {
         }
     }
 
-    // 学校フィルタで学生リストを取得するメソッド
-    public List<Student> filter(School school, boolean isAttend) throws SQLException {
-        List<Student> studentList = new ArrayList<>();
-        String sql = "SELECT STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = ? AND IS_ATTEND = ?";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, school.getCd());
-            stmt.setBoolean(2, isAttend);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Student student = new Student();
-                    student.setStudentNo(rs.getString("STUDENT_NO"));
-                    student.setStudentName(rs.getString("STUDENT_NAME"));
-                    student.setEntYear(rs.getInt("ENT_YEAR"));
-                    student.setClassNum(rs.getString("CLASS_NUM"));
-                    student.setAttend(rs.getBoolean("IS_ATTEND"));
-                    student.setSchool(school);
-                    studentList.add(student);
-                }
-            }
-        }
-        return studentList;
-    }
+ 
 }
