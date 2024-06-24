@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
-import bean.Student;
 import bean.Subject;
 
-public class SubjectDAO {
+public class SubjectDAO extends DAO {
 
     // 科目の詳細データを取得するメソッド
     // 引数：cd,school
@@ -119,5 +118,15 @@ public class SubjectDAO {
 
 		return bool;
 	}
+
+    // 科目を更新するメソッド
+    public boolean update(Subject subject) throws Exception {
+        String sql = "UPDATE SUBJECT SET SNAME = ? WHERE SCHOOL_CD = ?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, subject.getSubjectName());
+            stmt.setString(2, subject.getSchool());
+            return stmt.executeUpdate() > 0;
+        }
+    }
 
 }
