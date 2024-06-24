@@ -3,9 +3,12 @@ package student;
 import javax.servlet.htttp.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
+import bean.Student;
 import bean.Teacher;
 import tool.Action;
 import tool.Utl;
+import dao.StudentDao;
+
 public class StudentListAction extends Action {
 	public String execute( HttpServletRequest request
 	) throws Exception {	
@@ -15,7 +18,8 @@ public class StudentListAction extends Action {
 		t = tool.getUser(request);
 
 		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
-
+		postFilter(rSet,school);
+		
 
 
 		// セッションから引っ張ってきたユーザデータを変数userに登録

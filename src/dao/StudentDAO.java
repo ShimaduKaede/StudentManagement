@@ -9,7 +9,7 @@ import java.util.List;
 
 import bean.Student;
 import bean.School;
-public class StudentDao extends Dao {
+public class StudentDAO extends DAO {
     String baseSql; // おそらくSQL文を確保する変数
 
     // getメソッド
@@ -100,9 +100,6 @@ public class StudentDao extends Dao {
 		return studentlist;
     }
 
-
-
-
     // filter2メソッド
     // 引数：School型のschool,int型のentYear,boolean型のisAttend
     // 戻り値：List<Student>
@@ -180,7 +177,7 @@ public class StudentDao extends Dao {
     // 引数：Student型のstudent
     // 戻り値：boolean
     // 学生を保存(追加)するメソッド
-    public boolean save(Stuent student) throws Exception {
+    public boolean save(Student student) throws Exception {
         
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
@@ -203,7 +200,7 @@ public class StudentDao extends Dao {
         } else {
             flg = false;
         }
-        
+
         st.close(); 
         con.close();    // DB切断
 
