@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
-import bean.Student;
 import bean.Subject;
 
-public class SubjectDAO {
+public class SubjectDAO extends DAO {
 
     // 科目の詳細データを取得するメソッド
     // 引数：cd,school
@@ -26,7 +25,7 @@ public class SubjectDAO {
 		while (rs.next()) {
 			//科目Beanをインスタンス化して情報をセット
 			Subject subject=new Subject();
-			subject.setSchoolCd(rs.getStriing("SCHOOL_CD"));
+			subject.setSchoolCd(rs.getString("SCHOOL_CD"));
 			subject.setSubjectCd(rs.getString("CD"));
 			subject.setSubjectName(rs.getString("NAME"));
 
@@ -55,7 +54,7 @@ public class SubjectDAO {
 		while (rs.next()) {
 			//科目Beanをインスタンス化して情報をセット
 			Subject subject=new Subject();
-			subject.setSchoolCd(rs.getStriing("SCHOOL_CD"));
+			subject.setSchoolCd(rs.getString("SCHOOL_CD"));
 			subject.setSubjectCd(rs.getString("CD"));
 			subject.setSubjectName(rs.getString("NAME"));
 
@@ -119,5 +118,16 @@ public class SubjectDAO {
 
 		return bool;
 	}
+
+    // 科目を更新するメソッド
+    public boolean update(Subject subject) throws Exception {
+        String sql = "UPDATE SUBJECT SET NAME = ? WHERE SCHOOL_CD = ? and CD=?";
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, subject.getSubjectName());
+            stmt.setString(2, subject.getSchool());
+            stmt.setString(3, subject.getSubjectCd());
+            return stmt.executeUpdate() > 0;
+        }
+    }
 
 }
