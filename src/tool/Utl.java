@@ -19,7 +19,7 @@ public class Utl extends HttpServlet {
 
         // ログインが出来たので、戻しました。ログインでのセッション情報確保します
         // 以下でセッション情報を変数tにセット
-        t.setTeacherId(session.getAttribute('teacherId'));
+        t.setTeacherId(session.getAttribute("teacherId"));
         t.setTeacherPassword(sessiion.getAttribute("password"));
         t.setTeacherName(session.getAttribute("teacherName"));
         School school = new School();
