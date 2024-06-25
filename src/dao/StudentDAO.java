@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.Student;
 import bean.School;
+import bean.Student;
 public class StudentDAO extends DAO {
     String baseSql; // おそらくSQL文を確保する変数
 
@@ -18,13 +18,13 @@ public class StudentDAO extends DAO {
     // 学生をIDで取得するメソッド
     public Student get(String studentNo) throws  Exception {
         student=new Student();	// 戻り値で使用するstudentを作成
-    
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd");
         ResultSet rs=st.executeQuery();
 
-        st.close(); 
+        st.close();
 		con.close();    // DB切断
 
         return student;
@@ -38,7 +38,7 @@ public class StudentDAO extends DAO {
     public List<Student> postFilter(ResultSet rSet,School school) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
 		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
-        
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd;");
@@ -57,7 +57,7 @@ public class StudentDAO extends DAO {
             studentlist.add(student);
 		}
 
-        st.close(); 
+        st.close();
 		con.close();    // DB切断
 
 		return studentlist;
@@ -70,7 +70,7 @@ public class StudentDAO extends DAO {
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
 		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
-        
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
@@ -94,7 +94,7 @@ public class StudentDAO extends DAO {
             studentlist.add(student);
 		}
 
-        st.close(); 
+        st.close();
 		con.close();    // DB切断
 
 		return studentlist;
@@ -107,7 +107,7 @@ public class StudentDAO extends DAO {
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
 		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
-        
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
@@ -130,7 +130,7 @@ public class StudentDAO extends DAO {
             studentlist.add(student);
 		}
 
-        st.close(); 
+        st.close();
 		con.close();    // DB切断
 
 		return studentlist;
@@ -144,7 +144,7 @@ public class StudentDAO extends DAO {
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
 		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
-        
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
@@ -166,7 +166,7 @@ public class StudentDAO extends DAO {
             studentlist.add(student);
 		}
 
-        st.close(); 
+        st.close();
 		con.close();    // DB切断
 
 		return studentlist;
@@ -178,11 +178,11 @@ public class StudentDAO extends DAO {
     // 戻り値：boolean
     // 学生を保存(追加)するメソッド
     public boolean save(Student student) throws Exception {
-        
+
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "INSERT INTO STUDENT "
-            + "(STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
+            + "(NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
             + "VALUES (?, ?, ?, ?, ?, ?);");
 
         st.setString(1, student.getStudentNo());
@@ -201,7 +201,7 @@ public class StudentDAO extends DAO {
             flg = false;
         }
 
-        st.close(); 
+        st.close();
         con.close();    // DB切断
 
         return flg;
@@ -230,5 +230,5 @@ public class StudentDAO extends DAO {
         }
     }
 
- 
+
 }
