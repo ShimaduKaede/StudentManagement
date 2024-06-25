@@ -14,7 +14,7 @@ public class SubjectDAO extends DAO {
     // 科目の詳細データを取得するメソッド
     // 引数：cd,school
     // 戻り値：subject
-	public Subject get(String subject_cd, School school) {
+	public Subject get(String subject_cd, School school) throws Exception {
 		String schoolCd = school.getSchoolCd(); // 学校コードを変数schoolCdに設定
 
 		Connection con=getConnection();
@@ -22,9 +22,9 @@ public class SubjectDAO extends DAO {
 			"SELECT SCHOOL_CD,CD,NAME FROM SUBJECT WHERE SCHOOL_CD = schoolCd AND CD = subject_cd");
 		ResultSet rs=st.executeQuery();
 
+		//科目Beanをインスタンス化して情報をセット
+		Subject subject=new Subject();
 		while (rs.next()) {
-			//科目Beanをインスタンス化して情報をセット
-			Subject subject=new Subject();
 			subject.setSchoolCd(rs.getString("SCHOOL_CD"));
 			subject.setSubjectCd(rs.getString("CD"));
 			subject.setSubjectName(rs.getString("NAME"));
@@ -127,7 +127,7 @@ public class SubjectDAO extends DAO {
         String sql = "UPDATE SUBJECT SET NAME = ? WHERE SCHOOL_CD = ? and CD=?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, subject.getSubjectName());
-            stmt.setString(2, subject.getSchool());
+            stmt.setString(2, subject.getSchoolCd());
             stmt.setString(3, subject.getSubjectCd());
             return stmt.executeUpdate() > 0;
         }
