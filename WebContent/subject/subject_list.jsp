@@ -17,8 +17,9 @@
   </tr>
 
   <%
+  @SuppressWarnings("unchecked")
   List<Subject> subjectList = (List<Subject>) request.getAttribute("subjectList");
-  if (subjectList != null && !subjectList.isEmpty()) {
+  if (subjectList != null) {
     for (Subject s : subjectList) {
   %>
   <tr>
