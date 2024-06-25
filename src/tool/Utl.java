@@ -17,25 +17,25 @@ public class Utl extends HttpServlet {
         // 格納用のTeacher型のtをインスタンス化
 	    Teacher t=new Teacher();
 
-        // ログインが出来たので、戻しました。ログインでのセッション情報確保します
-        // 以下でセッション情報を変数tにセット
-        t.setTeacherId(session.getAttribute("teacherId"));
-        t.setTeacherPassword(sessiion.getAttribute("password"));
-        t.setTeacherName(session.getAttribute("teacherName"));
-        School school = new School();
-        school.setSchoolCd(session.getAttribute("schoolCd"));
-        school.setSchoolName(session.getAttribute("schoolName"));
-        t.setSchool(school);
-
-        // // ログインが出来るまで、ひとまず、サンプルデータを仮入力してます
+        // // ログインが出来たので、戻しました。ログインでのセッション情報確保します
         // // 以下でセッション情報を変数tにセット
-        // t.setTeacherId("admin");
-        // t.setTeacherPassword("password");
-        // t.setTeacherName("大原花子");
+        // t.setTeacherId(session.getAttribute("teacherId"));
+        // t.setTeacherPassword(sessiion.getAttribute("password"));
+        // t.setTeacherName(session.getAttribute("teacherName"));
         // School school = new School();
-        // school.setSchoolCd("oom");
-        // school.setSchoolName("大宮校");
+        // school.setSchoolCd(session.getAttribute("schoolCd"));
+        // school.setSchoolName(session.getAttribute("schoolName"));
         // t.setSchool(school);
+
+        // ログインが出来るまで、ひとまず、サンプルデータを仮入力してます
+        // 以下でセッション情報を変数tにセット
+        t.setTeacherId("admin");
+        t.setTeacherPassword("password");
+        t.setTeacherName("大原花子");
+        School school = new School();
+        school.setSchoolCd("oom");
+        school.setSchoolName("大宮校");
+        t.setSchool(school);
 
         return t;   // 変数t:Teacher型の情報を返す
     }
