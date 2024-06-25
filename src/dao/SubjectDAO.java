@@ -103,8 +103,11 @@ public class SubjectDAO extends DAO {
 		String subjectCd = subject.getSubjectCd();			// 学校コードを変数schoolCdに設定
 
 		PreparedStatement st=con.prepareStatement(
-			"DELETE FROM subject WHERE SCHOOL_CD = schoolCd AND CD = subjectCd");
-		// deleteしたレコード件数が返ってくる
+			"DELETE FROM subject WHERE ");
+		st.setString(1, subject.getSchoolCd());
+		st.setString(2, subject.getSubjectCd());
+		st.setString(3, subject.getSubjectName());
+		// insertしたレコード件数が返ってくる
 		int line = st.executeUpdate();
         boolean bool;   // 戻り値：保存が成功or失敗(True or False)
         if (line > 0) {
