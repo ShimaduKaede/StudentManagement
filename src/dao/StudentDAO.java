@@ -9,6 +9,8 @@ import java.util.List;
 
 import bean.School;
 import bean.Student;
+
+
 public class StudentDAO extends DAO {
     String baseSql; // おそらくSQL文を確保する変数
 
@@ -17,17 +19,29 @@ public class StudentDAO extends DAO {
     // 戻り値：Student
     // 学生をIDで取得するメソッド
     public Student get(String studentNo) throws  Exception {
-        student=new Student();	// 戻り値で使用するstudentを作成
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd");
         ResultSet rs=st.executeQuery();
 
+		//StudentBeanをインスタンス化して情報をセット
+		Student student=new Student();
+
+        while (rs.next()) {
+			student.setStudentNo(rs.getString("STUDENT_NO"));
+			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getString("SCHOOL_CO"));
+		}
+
         st.close();
 		con.close();    // DB切断
 
-        return student;
+		return student;
+
     }
 
     // postFilterメソッド
@@ -37,22 +51,21 @@ public class StudentDAO extends DAO {
     // 戻り値：List<Student>
     public List<Student> postFilter(ResultSet rSet,School school) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
-		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd;");
+            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = school.schoolCd;");
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getStriing("STUDENT_NO"));
-			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
-			student.setEntYear(rs.getStriing("ENT_YEAR"));
-			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setStudentNo(rs.getString("STUDENT_NO"));
+			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CO"));
 
             studentlist.add(student);
 		}
@@ -69,13 +82,12 @@ public class StudentDAO extends DAO {
     public List<Student> filter1(School school,int entYear,String classNum,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
-		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = schoolCd "
+            + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND ENT_YEAR = entYear "
             + "AND CLASS_NUM = classNum "
             + "AND IS_ATTEND = isAttend;");
@@ -84,12 +96,12 @@ public class StudentDAO extends DAO {
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getStriing("STUDENT_NO"));
-			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
-			student.setEntYear(rs.getStriing("ENT_YEAR"));
-			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setStudentNo(rs.getString("STUDENT_NO"));
+			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 
             studentlist.add(student);
 		}
@@ -106,13 +118,12 @@ public class StudentDAO extends DAO {
     public List<Student> filter2(School school,int entYear,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
-		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = schoolCd "
+            + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND ENT_YEAR = entYear "
             + "AND IS_ATTEND = isAttend;");
         ResultSet rs=st.executeQuery();
@@ -120,12 +131,12 @@ public class StudentDAO extends DAO {
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getStriing("STUDENT_NO"));
-			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
-			student.setEntYear(rs.getStriing("ENT_YEAR"));
-			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setStudentNo(rs.getString("STUDENT_NO"));
+			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CO"));
 
             studentlist.add(student);
 		}
@@ -143,25 +154,24 @@ public class StudentDAO extends DAO {
     public List<Student> filter3(School school,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
-		String schoolCd = school.getSchoolCd();			// 学校コードを変数schoolCdに設定
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = schoolCd "
+            + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND IS_ATTEND = isAttend;");
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getStriing("STUDENT_NO"));
-			student.setSchoolName(rs.getStriing("STUDENT_NAME"));
-			student.setEntYear(rs.getStriing("ENT_YEAR"));
-			student.setClassNum(rs.getStriing("CLASS_NUM"));
+			student.setStudentNo(rs.getString("STUDENT_NO"));
+			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getStriing("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CO"));
 
             studentlist.add(student);
 		}
@@ -182,7 +192,7 @@ public class StudentDAO extends DAO {
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "INSERT INTO STUDENT "
-            + "(NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
+            + "(STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
             + "VALUES (?, ?, ?, ?, ?, ?);");
 
         st.setString(1, student.getStudentNo());
@@ -214,8 +224,8 @@ public class StudentDAO extends DAO {
             stmt.setString(1, student.getStudentName());
             stmt.setInt(2, student.getEntYear());
             stmt.setString(3, student.getClassNum());
-            stmt.setBoolean(4, student.isAttend());
-            stmt.setString(5, student.getSchool().getCd());
+            stmt.setBoolean(4, student.getIsAttend());
+            stmt.setString(5, student.getSchoolCd());
             stmt.setString(6, student.getStudentNo());
             return stmt.executeUpdate() > 0;
         }
