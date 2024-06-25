@@ -15,6 +15,7 @@ public class SubjectCreateExecuteAction extends Action {
 
 
     	// ユーザーからの入力値を受け取る
+
         String subjectCd = request.getParameter("SubjectCd");
         String subjectName = request.getParameter("SubjectName");
 
@@ -28,7 +29,7 @@ public class SubjectCreateExecuteAction extends Action {
 
         // Subjectオブジェクトを作成して設定
         Subject subject = new Subject();
-        subject.setSchool(school);
+        subject.setSchoolCd(school.getSchoolCd());
         subject.setSubjectCd(subjectCd);
         subject.setSubjectName(subjectName);
 
