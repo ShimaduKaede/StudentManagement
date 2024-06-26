@@ -193,14 +193,13 @@ public class StudentDAO extends DAO {
         PreparedStatement st=con.prepareStatement(
             "INSERT INTO STUDENT "
             + "(STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
-            + "VALUES (?, ?, ?, ?, ?, ?);");
+            + "VALUES (?, ?, ?, ?, TRUE, ?);");
 
         st.setString(1, student.getStudentNo());
         st.setString(2, student.getStudentName());
 		st.setInt(3, student.getEntYear());
         st.setString(4, student.getClassNum());
-        st.setBoolean(5, student.getIsAttend());
-        st.setString(6, student.getSchoolCd());
+        st.setString(5, student.getSchoolCd());
 		// insertしたレコード件数が返ってくる
 		int line = st.executeUpdate();
 
