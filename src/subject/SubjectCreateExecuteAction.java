@@ -12,8 +12,8 @@ public class SubjectCreateExecuteAction extends Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // ユーザーからの入力値を受け取る
-        String subjectCd = request.getParameter("subject_cd");
-        String subjectName = request.getParameter("subject_name");
+        String subjectCd = request.getParameter("SubjectCd");
+        String subjectName = request.getParameter("SubjectName");
 
         // Schoolオブジェクトを作成して設定
         School school = new School();

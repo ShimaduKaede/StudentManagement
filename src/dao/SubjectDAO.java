@@ -80,7 +80,7 @@ public class SubjectDAO extends DAO {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                "INSERT INTO subject(SCHOOL_CD, CD, NAME) VALUES(?,?,?)");
+                "INSERT INTO SUBJECT(SCHOOL_CD, CD, NAME) VALUES(?,?,?)");
             st.setString(1, subject.getSchool().getSchoolCd());
             st.setString(2, subject.getSubjectCd());
             st.setString(3, subject.getSubjectName());
@@ -105,7 +105,7 @@ public class SubjectDAO extends DAO {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                "DELETE FROM subject WHERE SCHOOL_CD = ? AND CD = ?");
+                "DELETE FROM SUBJECT WHERE SCHOOL_CD = ? AND CD = ?");
             st.setString(1, subject.getSchoolCd());
             st.setString(2, subject.getSubjectCd());
 
