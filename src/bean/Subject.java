@@ -7,8 +7,7 @@ import java.io.Serializable;
 public class Subject implements Serializable {
     private String subjectCd;      // 科目コードを表すフィールド
     private String subjectName;    // 科目名を表すフィールド
-    private String schoolCd;  // 学校情報を表すフィールド
-    School schoolbean=new School(); //schoolbean定義
+    private School school;         // 学校情報を表すフィールド
 
     // デフォルトコンストラクタ（省略可能）
 
@@ -23,10 +22,9 @@ public class Subject implements Serializable {
         return subjectName;
     }
 
-    // `subjectSchool` フィールドの値を返す。
-    public String getSchoolCd() {
-    	schoolCd=schoolbean.getSchoolCd();
-        return schoolCd;
+    // `school` フィールドの値を返す。
+    public School getSchool() {
+        return school;
     }
 
     // セッターメソッド
@@ -35,14 +33,26 @@ public class Subject implements Serializable {
         this.subjectCd = subjectCd;
     }
 
-    // `subjectName` フィールドに値を設定します。
+    // `subjectName` フィールドに値を設定。
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }
 
-    // `subjectSchool` フィールドに値を設定。
+    // `school` フィールドに値を設定。
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    // `schoolCd` フィールドを返す（ゲッターメソッド）。
+    public String getSchoolCd() {
+        return school != null ? school.getSchoolCd() : null;
+    }
+
+    // `schoolCd` フィールドに値を設定（セッターメソッド）。
     public void setSchoolCd(String schoolCd) {
-        this.schoolCd = schoolCd;
-        schoolbean.setSchoolCd(schoolCd);
+        if (this.school == null) {
+            this.school = new School();
+        }
+        this.school.setSchoolCd(schoolCd);
     }
 }

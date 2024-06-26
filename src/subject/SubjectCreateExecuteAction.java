@@ -11,16 +11,9 @@ import tool.Action;
 public class SubjectCreateExecuteAction extends Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // セッションデータからログインしているユーザー情報を取得する
-
-
-    	// ユーザーからの入力値を受け取る
-
-        String subjectCd = request.getParameter("SubjectCd");
-        String subjectName = request.getParameter("SubjectName");
-
-        System.out.println(subjectCd);
-        System.out.println(subjectName);
+        // ユーザーからの入力値を受け取る
+        String subjectCd = request.getParameter("subject_cd");
+        String subjectName = request.getParameter("subject_name");
 
         // Schoolオブジェクトを作成して設定
         School school = new School();
@@ -29,7 +22,7 @@ public class SubjectCreateExecuteAction extends Action {
 
         // Subjectオブジェクトを作成して設定
         Subject subject = new Subject();
-        subject.setSchoolCd(school.getSchoolCd());
+        subject.setSchool(school);
         subject.setSubjectCd(subjectCd);
         subject.setSubjectName(subjectName);
 
@@ -50,6 +43,3 @@ public class SubjectCreateExecuteAction extends Action {
         return "subject_create_done.jsp";
     }
 }
-
-
-
