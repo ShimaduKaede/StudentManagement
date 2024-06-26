@@ -29,8 +29,8 @@ public class StudentDAO extends DAO {
 		Student student=new Student();
 
         while (rs.next()) {
-			student.setStudentNo(rs.getString("STUDENT_NO"));
-			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setStudentNo(rs.getString("NO"));
+			student.setSchoolName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
@@ -54,14 +54,14 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = school.schoolCd;");
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = school.schoolCd;");
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getString("STUDENT_NO"));
-			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setStudentNo(rs.getString("NO"));
+			student.setSchoolName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
@@ -85,7 +85,7 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
             + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND ENT_YEAR = entYear "
@@ -96,8 +96,8 @@ public class StudentDAO extends DAO {
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getString("STUDENT_NO"));
-			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setStudentNo(rs.getString("NO"));
+			student.setSchoolName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
@@ -121,7 +121,7 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
             + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND ENT_YEAR = entYear "
@@ -131,8 +131,8 @@ public class StudentDAO extends DAO {
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getString("STUDENT_NO"));
-			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setStudentNo(rs.getString("NO"));
+			student.setSchoolName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
@@ -157,7 +157,7 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT STUDENT_NO,STUDENT_NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
             + "WHERE SCHOOL_CD = school.schoolCd "
             + "AND IS_ATTEND = isAttend;");
@@ -166,8 +166,8 @@ public class StudentDAO extends DAO {
         while (rs.next()) {
 			//StudentBeanをインスタンス化して情報をセット
 			Student student=new Student();
-			student.setStudentNo(rs.getString("STUDENT_NO"));
-			student.setSchoolName(rs.getString("STUDENT_NAME"));
+			student.setStudentNo(rs.getString("NO"));
+			student.setSchoolName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
@@ -192,7 +192,7 @@ public class StudentDAO extends DAO {
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "INSERT INTO STUDENT "
-            + "(STUDENT_NO, STUDENT_NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
+            + "(NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
             + "VALUES (?, ?, ?, ?, TRUE, ?);");
 
         st.setString(1, student.getStudentNo());
@@ -218,7 +218,7 @@ public class StudentDAO extends DAO {
 
     // 学生を更新するメソッド
     public boolean update(Student student) throws SQLException {
-        String sql = "UPDATE STUDENT SET STUDENT_NAME = ?, ENT_YEAR = ?, CLASS_NUM = ?, IS_ATTEND = ?, SCHOOL_CD = ? WHERE STUDENT_NO = ?";
+        String sql = "UPDATE STUDENT SET NAME = ?, ENT_YEAR = ?, CLASS_NUM = ?, IS_ATTEND = ?, SCHOOL_CD = ? WHERE NO = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, student.getStudentName());
             stmt.setInt(2, student.getEntYear());
@@ -232,12 +232,11 @@ public class StudentDAO extends DAO {
 
     // 学生を削除するメソッド
     public boolean delete(String studentNo) throws SQLException {
-        String sql = "DELETE FROM STUDENT WHERE STUDENT_NO = ?";
+        String sql = "DELETE FROM STUDENT WHERE NO = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, studentNo);
             return stmt.executeUpdate() > 0;
         }
     }
-
 
 }
