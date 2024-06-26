@@ -27,7 +27,7 @@ public class Utl extends HttpServlet {
         t.setTeacherId("admin");
         t.setTeacherPassword("password");
         t.setTeacherName("大原花子");
-        t.setSchoolCd("ooi");
+        t.setSchoolCd("oom");
 
         return t;   // 変数t:Teacher型の情報を返す
     }
