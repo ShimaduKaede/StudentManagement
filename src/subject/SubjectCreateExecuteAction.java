@@ -17,7 +17,7 @@ public class SubjectCreateExecuteAction extends Action {
 
         // Schoolオブジェクトを作成して設定
         School school = new School();
-        school.setSchoolCd("ooi");
+        school.setSchoolCd("oom");
         school.setSchoolName("大分校");
 
         // Subjectオブジェクトを作成して設定
