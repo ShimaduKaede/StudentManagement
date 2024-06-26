@@ -1,6 +1,7 @@
 package student;
 
-import javax.servlet.htttp.HttpSession;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import bean.School;
@@ -8,7 +9,6 @@ import bean.Student;
 import bean.Teacher;
 import tool.Action;
 import tool.Utl;
-import dao.StudentDAO;
 
 public class StudentListAction extends Action {
 	public String execute( HttpServletRequest request
