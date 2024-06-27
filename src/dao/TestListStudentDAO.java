@@ -11,7 +11,7 @@ import bean.Student;
 import bean.Subject;
 public class TestListStudentDAO {
 
-    private String baseSql: // ?不明
+    private String baseSql;// ?不明
 
     // postFilterメソッド
     // 引数：rSetのResultSet型
@@ -19,7 +19,7 @@ public class TestListStudentDAO {
 	public List<TestListStudent> postFilter(ResultSet rSet) throws Exception {
         // ひとまず適当
 		List<TestListStudent> TestListstudentList=new ArrayList<>();	// 戻り値で使用する空Listを作成
-		
+
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
 		// ここにSQLが入る！
@@ -43,12 +43,12 @@ public class TestListStudentDAO {
 	}
 
     // filterメソッド
-    // 引数：int型のentYear String型のclassNum Student型のstudent 
+    // 引数：int型のentYear String型のclassNum Student型のstudent
     // 戻り値：List<TestListSubject型？>
 	public List<TestListStudent> filter( Student student) throws Exception {
         // ひとまず適当
 		List<TestListStudent> TestListstudentList=new ArrayList<>();	// 戻り値で使用する空Listを作成
-		
+
 		Connection con=getConnection();
 		PreparedStatement st=con.prepareStatement(
 		// ここにSQLが入る！
