@@ -22,7 +22,8 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE NO = studentNo");
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE NO = ?");
+        st.setString(1,studentNo);
         ResultSet rs=st.executeQuery();
 
 		//StudentBeanをインスタンス化して情報をセット
