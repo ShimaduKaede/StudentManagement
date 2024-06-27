@@ -40,6 +40,32 @@ String basesql ;
         return subjects;
     }
 
+
+    public List<Subject> ListStudent(String studentCd) throws Exception {
+        List<Subject> subjects = new ArrayList<>();
+
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "SELECT * WHERE STUDENT_NO=?"
+        );
+        st.setString(1, studentCd);
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Subject subject = new Subject();
+            subject.setCd(rs.getString("CD"));
+            subject.setName(rs.getString("NAME"));
+            subjects.add(subject);
+        }
+
+        rs.close();
+        st.close();
+        con.close();
+
+        return subjects;
+    }
+
+
     public Test get(String student, String subject, String school, int no) throws SQLException {
         Test test = null;
         Connection con = getConnection();
@@ -53,14 +79,13 @@ String basesql ;
         ResultSet rs = st.executeQuery();
 
         if (rs.next()) {
-            test = new Test(
-                rs.getString("STUDENT_NO"),
-                rs.getString("SUBJECT_CD"),
-                rs.getString("SCHOOL_CD"),
-                rs.getString("CLASS_NUM"),
-                rs.getObject("POINT", Integer.class),
-                rs.getInt("NO")
-            );
+            test = new Test();
+                test.setStudent(student);
+                rs.setString("SUBJECT_CD");
+                rs.setString("SCHOOL_CD");
+                rs.setString("CLASS_NUM");
+                rs.setObject("POINT", Integer.class);
+                rs.setInt("NO");
         }
 
         rs.close();
