@@ -22,7 +22,7 @@ public class StudentDAO extends DAO {
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = schoolCd");
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE NO = studentNo");
         ResultSet rs=st.executeQuery();
 
 		//StudentBeanをインスタンス化して情報をセット
@@ -34,7 +34,7 @@ public class StudentDAO extends DAO {
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getString("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 		}
 
         st.close();
@@ -51,10 +51,12 @@ public class StudentDAO extends DAO {
     // 戻り値：List<Student>
     public List<Student> postFilter(ResultSet rSet,School school) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+        String schoolCd = school.getSchoolCd();
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
-            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = school.schoolCd;");
+            "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE SCHOOL_CD = ?;");
+            st.setString(1,schoolCd);
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
@@ -65,7 +67,7 @@ public class StudentDAO extends DAO {
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getString("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 
             studentlist.add(student);
 		}
@@ -82,15 +84,21 @@ public class StudentDAO extends DAO {
     public List<Student> filter1(School school,int entYear,String classNum,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+        String schoolCd = school.getSchoolCd();
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = school.schoolCd "
-            + "AND ENT_YEAR = entYear "
-            + "AND CLASS_NUM = classNum "
-            + "AND IS_ATTEND = isAttend;");
+            + "WHERE SCHOOL_CD = ? "
+            + "AND ENT_YEAR = ? "
+            + "AND CLASS_NUM = ? "
+            + "AND IS_ATTEND = ?;");
+        st.setString(1, schoolCd);
+        st.setInt(2,entYear);
+        st.setString(3, classNum);
+        st.setBoolean(4, isAttend);
+
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
@@ -118,14 +126,19 @@ public class StudentDAO extends DAO {
     public List<Student> filter2(School school,int entYear,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+        String schoolCd = school.getSchoolCd();
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = school.schoolCd "
-            + "AND ENT_YEAR = entYear "
-            + "AND IS_ATTEND = isAttend;");
+            + "WHERE SCHOOL_CD = ? "
+            + "AND ENT_YEAR = ? "
+            + "AND IS_ATTEND = ?;");
+        st.setString(1, schoolCd);
+        st.setInt(2,entYear);
+        st.setBoolean(3, isAttend);
+
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
@@ -136,7 +149,7 @@ public class StudentDAO extends DAO {
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getString("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 
             studentlist.add(student);
 		}
@@ -154,13 +167,17 @@ public class StudentDAO extends DAO {
     public List<Student> filter3(School school,boolean isAttend
     ) throws Exception {
 		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+        String schoolCd = school.getSchoolCd();
 
         Connection con=getConnection(); // DBへの接続
         PreparedStatement st=con.prepareStatement(
             "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
-            + "WHERE SCHOOL_CD = school.schoolCd "
-            + "AND IS_ATTEND = isAttend;");
+            + "WHERE SCHOOL_CD = ? "
+            + "AND IS_ATTEND = ?;");
+        st.setString(1, schoolCd);
+        st.setBoolean(2, isAttend);
+
         ResultSet rs=st.executeQuery();
 
         while (rs.next()) {
@@ -171,7 +188,7 @@ public class StudentDAO extends DAO {
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
 			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getString("SCHOOL_CO"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 
             studentlist.add(student);
 		}

@@ -1,38 +1,52 @@
 package student;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import bean.School;
 import bean.Student;
 import bean.Teacher;
+import dao.StudentDAO;
 import tool.Action;
 import tool.Utl;
 
 public class StudentListAction extends Action {
-	public String execute( HttpServletRequest request
+	public String execute(
+		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
 		// セッションからユーザデータを取得
-		Teacher t=new Teacher();
-		Utl tool = new Utl();
-		t = tool.getUser(request);
+		Utl utl = new Utl();
+		Teacher teacher=new Teacher();
+		teacher = utl.getUser(request);
+
+        // Schoolがnullの場合の処理
+        if (teacher.getSchoolCd() == null) {
+            // 適切なエラーメッセージを設定してエラーページにリダイレクト
+            request.setAttribute("error", "学校情報が見つかりません。再度ログインしてください。");
+            return "error.jsp";
+        }
 
 		// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
-		School s=new School();
-		s.setSchoolCd(t.getSchoolCd());
+        // Schoolをインスタンス化
+        School school = new School();
+        school.setSchoolCd(teacher.getSchoolCd());
+
 		boolean flg = true;	// 在学中フラグをONで設定（仮）
 
-		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
-		studentlist=dao.filter3(s,flg);
 
-		// student_list.jsp側ではstudentlistという名前で受け取ることができます
-		request.setAttribute("studentlist", studentlist);
+		// StudentDAOの生成
+        StudentDAO dao = new StudentDAO();
+		List<Student> studentList = dao.filter3(school,flg);
+
+
 		// セッションから引っ張ってきたユーザデータを変数userに登録
-		request.setAttribute("user", t);
+		request.setAttribute("user", teacher);
+        // "studentList"という名前でsubjectListリストをセット
+		request.setAttribute("studentList", studentList);
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
 		return "student_list.jsp";
 	}
 }
-
