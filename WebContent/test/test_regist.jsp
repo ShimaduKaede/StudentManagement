@@ -1,6 +1,10 @@
 <!-- 成績管理一覧S -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="bean.Test" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+ <%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
@@ -13,7 +17,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
               <label for="f2">クラス</label>
               <label for="f3">科目</label>
               <label for="f4">回数</label>
-              <form action="TestRegist.action">
+              <form action="TestList.action">
                 <select name="f1" id="f1">
                   <option value="2023">2023</option>
                 </select>
@@ -35,6 +39,9 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           </div>
         </div>
       </div>
+
+
+
       <div id="search_result">
       <p>科目:国語(n回)</p>
       <table>
@@ -45,13 +52,24 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <th>氏名</th>
           <th>点数</th>
         </tr>
+         <%
+         @SuppressWarnings("unchecked")
+  			List<Test> testlist = (List<Test>) request.getAttribute("testlist");
+  			if (testlist != null) {
+    		for (Test t : testlist) {
+  			%>
         <tr>
-          <td>p.getEntYear()</td>
-          <td>p.getClassNum()</td>
-          <td>p.getNo()</td>
-          <td>p.getName()</td>
-          <td><input type="text" name="" id="" value="p.get()" /></td>
+          <td>t.getPoint()</td>
+          <td><%= t.getClassNum() %></td>
+          <td><%= t.getPoint() %></td>
+          <td><%= t.getPoint() %></td>
+          <td><input type="text" name="" id="" value="<%=t.getPoint() %>" /></td>
         </tr>
+        <%
+        }}
+    	else{
+    		%>
+<%} %>
       </table>
     </div>
     </div>
