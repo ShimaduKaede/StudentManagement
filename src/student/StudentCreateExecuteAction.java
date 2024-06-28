@@ -21,7 +21,7 @@ public class StudentCreateExecuteAction extends Action {
 		// 受け取ったデータをStudentDAOのsaveメソッドで渡すためにStudentビーンをインスタンス化
 		// Studentのセッターメソッドを使用して、送られてきたデータをビーンにセット
         Student student = new Student();
-
+        
         student.setStudentName(name);
         student.setEntYear(entYear);
         student.setStudentNo(studentNo);
