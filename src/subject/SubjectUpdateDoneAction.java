@@ -14,25 +14,47 @@ public class SubjectUpdateDoneAction extends Action {
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
 
-    // getJspNameメソッド
-    // 引数：なし
-    // 戻り値：String
+        // getJspNameメソッド
+        // 引数：なし
+        // 戻り値：String
+        public String getJspName(){
+            String jspName;
 
-    // getSuccessUrlメソッド
-    // 引数：なし
-    // 戻り値：String
+            return jspName; 
+        }
 
-    // setRequestDataメソッド
-    // 引数：HttpServletRequest型のrequest
-    // 戻り値：なし
+        // getSuccessUrlメソッド
+        // 引数：なし
+        // 戻り値：String
+        public String getSuccessUrl(){
+            String successUrl;
 
-    // getメソッド
-    // 引数：HttpServletRequest型のrequest,HttpServletResponse型のresponse
-    // 戻り値：String
+            return successUrl;
+        }
 
-    // postメソッド
-    // 引数：HttpServletRequest型のrequest,HttpServletResponse型のresponse
-    // 戻り値：String
+        // setRequestDataメソッド
+        // 引数：HttpServletRequest型のrequest
+        // 戻り値：なし
+        public void setRequestData(HttpServletRequest request){
 
-}
+        }
+
+        // getメソッド
+        // 引数：HttpServletRequest型のrequest,HttpServletResponse型のresponse
+        // 戻り値：String
+        public String get(HttpServletRequest request, HttpServletResponse response){
+            String rtn;
+
+            return rtn;
+        }
+
+        // postメソッド
+        // 引数：HttpServletRequest型のrequest,HttpServletResponse型のresponse
+        // 戻り値：String
+        public String post(HttpServletRequest request, HttpServletResponse response){
+            String rtn;
+
+            return rtn;
+        }
+    }
 }
