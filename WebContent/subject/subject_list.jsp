@@ -26,7 +26,8 @@
     <td><%= s.getSubjectCd() %></td>
     <td><%= s.getSubjectName() %></td>
     <td><a href="SubjectEdit.action?cd=<%= s.getSubjectCd() %>">変更</a></td>
-    <td><a href="SubjectDelete.action?cd=<%= s.getSubjectCd() %>" class="btn btn-secondary" onclick="return confirm('本当に削除しますか？');">削除</a></td>
+    <td><a href="SubjectDelete.action?cd=<%= s.getSubjectCd() %>&name=<%= java.net.URLEncoder.encode(s.getSubjectName(), "UTF-8") %>" class="btn btn-secondary">削除</a></td>
+
   </tr>
   <%
     }

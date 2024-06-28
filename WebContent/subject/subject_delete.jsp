@@ -8,15 +8,20 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <h2>科目情報削除</h2>
 
       <p>
-        「<c:out value="${subjectName}" /> (
-        <c:out value="${subjectCode}" /> )」を削除してもよろしいですか？
+        「<c:out value="${subjectCd}" /> (
+        <c:out value="${subjectName}" /> )」を削除してもよろしいですか？
       </p>
 
-      <form action="SubjectDelete.action" method="post">
+      <form action="SubjectDeleteExecute.action" method="post">
         <input
           type="hidden"
-          name="subjectCode"
-          value="<c:out value='${subjectCode}'/>"
+          name="subjectCd"
+          value="<c:out value='${subjectCd}'/>"
+        />
+         <input
+          type="hidden"
+          name="subjectName"
+          value="<c:out value='${subjectName}'/>"
         />
         <div id="delete_button">
           <button type="submit" class="btn btn-danger">削除</button>
