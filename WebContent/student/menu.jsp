@@ -9,7 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <h2>メニュー</h2>
       <div id="menu">
         <div id="student">
-          <a href="StudentList.action">学生管理</a>
+          <a href="/StudentManagement/student/StudentList.action">学生管理</a>
         </div>
         <div id="test">
           <p>成績管理</p>
