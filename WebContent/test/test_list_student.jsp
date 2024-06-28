@@ -1,6 +1,9 @@
 <!-- 科目別成績一覧 -->
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="bean.Test" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@include file="../header.jsp" %>
 <div id="main">
 <%@include file="sidebar.jsp" %>
@@ -45,8 +48,7 @@
             type="text"
             name="f4"
             id="f4"
-            placeholder="学生情報を入力してください"
-          />
+            placeholder="学生情報を入力してください"/>
         </div>
           <button type="submit">検索</button>
         </form>
@@ -67,16 +69,23 @@
         <th>点数</th>
       </tr>
         <tr>
-          <td>p.getEntYear()</td>
-          <td>p.getClassNum()</td>
-          <td>p.getNo()</td>
-          <td>p.getName()</td>
+          <%
+          @SuppressWarnings("unchecked")
+  List<Test> testlist = (List<Test>) request.getAttribute("testlist");
+    for (Test t : testlist) {
+  %>
+          <td><%= t.getSubject() %></td>
+          <td><%= t.getSubject() %></td>
+          <td><%= t.getSubject() %></td>
+          <td><%= t.getSubject() %></td>
         </tr>
     </table>
   </div>
 </div>
 </div>
 </div>
-
+  <%
+  }
+  %>
 <%@include file="../footer.jsp" %>
 
