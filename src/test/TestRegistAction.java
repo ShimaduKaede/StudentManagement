@@ -1,4 +1,4 @@
-package student;
+package test;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import dao.StudentDAO;
 import dao.SubjectDAO;
 import dao.TestDAO;
 import tool.Action;
-import tool.Util;
+import tool.Utl;
 
 public class TestRegistAction extends Action {
 
@@ -25,7 +25,7 @@ public class TestRegistAction extends Action {
     		HttpSession session = request.getSession();
 
     		// getUserメソッドを呼び出してユーザー情報を取得
-    		Teacher teacher = Util.getUser(request);
+    		Teacher teacher = Utl.getUser(request);
     		// TeacherオブジェクトからSchoolオブジェクトを取得
     		School school = teacher.getSchool();
 
@@ -33,9 +33,8 @@ public class TestRegistAction extends Action {
 
     	;	SubjectDAO subjectdao = new SubjectDAO();
     		List<Subject> subjectList = subjectdao.filter(school);
-    		StudentDao studentdao = new StudentDao();
-    		List<Student> studentList = studentdao.filter(school, isAttend);
-    		session.setAttribute("student", studentList);
+    		TestDao dao = new TestDao();
+            List<Test> list = dao.filter(no);
     		session.setAttribute("subject", subjectList);
 
     		    String ent_year = request.getParameter("f1");
@@ -46,7 +45,7 @@ public class TestRegistAction extends Action {
                     int entYear = Integer.parseInt(ent_year);
                     String classNum = class_num;
                     String name = subject_name;
-                    int num = Integer.parseInt(no);
+                    int no = Integer.parseInt(no);
 
                     setTestListStudent(request, response);
 
@@ -63,7 +62,7 @@ public class TestRegistAction extends Action {
 
 private void setTestListStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // リクエストパラメータの取得
-		Teacher teacher = Util.getUser(request);
+		Teacher teacher = Utl.getUser(request);
 	// TeacherオブジェクトからSchoolオブジェクトを取得
 		School school = teacher.getSchool();
         int entYear = Integer.parseInt(request.getParameter("f1"));
@@ -71,9 +70,9 @@ private void setTestListStudent(HttpServletRequest request, HttpServletResponse 
         String name = request.getParameter("f3");
         int num = Integer.parseInt(request.getParameter("f4"));
         Test test = new Test();
-        test.setNo(num);
+        test.setTestNo(num);
         Subject subject = new Subject();
-        subject.setName(name);
+        subject.setSubjectName(name);
         Student student = new Student();
  
  
