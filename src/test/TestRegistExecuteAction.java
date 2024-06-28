@@ -11,21 +11,29 @@ import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
+import dao.StudentDAO;
 import dao.SubjectDAO;
 import dao.TestDAO;
 import tool.Action;
 import tool.Utl;
+// test_regist.jsp(成績管理一覧画面)でTestRegistExecuteAction起動
+// TestRegistExecuteActionでやること↓
+// ・入力値のチェック
+//  alt【0～200で無い数値が入力されていた場合】
+//  正しくない数値が入力されていた入力欄に
+// 「0～100の範囲で入力してください」とメッセージを表示する(test_regist.jspに)
+// 入力された値をDBに保存する(TestDAOを使ってTestBeanへ保存：登録)
+// 表示する
 
-public class TestRegistAction extends Action {
+public class TestRegistExecuteAction extends Action {
 
     public String execute(
         HttpServletRequest request, HttpServletResponse response) throws Exception {
     	try{
     		HttpSession session = request.getSession();
 
-    		Utl utl = new Utl();
     		// getUserメソッドを呼び出してユーザー情報を取得
-    		Teacher teacher = utl.getUser(request);
+    		Teacher teacher = Utl.getUser(request);
     		// TeacherオブジェクトからSchoolオブジェクトを取得
     		School school = teacher.getSchool();
 
@@ -33,19 +41,19 @@ public class TestRegistAction extends Action {
 
     	;	SubjectDAO subjectdao = new SubjectDAO();
     		List<Subject> subjectList = subjectdao.filter(school);
+    		TestDao dao = new TestDao();
+            List<Test> list = dao.filter(no);
     		session.setAttribute("subject", subjectList);
-    		TestDAO testdao = new TestDAO();
-    		List<Test> testList = testdao.filter(no);
 
     		    String ent_year = request.getParameter("f1");
                 String class_num = request.getParameter("f2");
                 String subject_name = request.getParameter("f3");
-                String num = request.getParameter("f4");
+                String no = request.getParameter("f4");
 
                     int entYear = Integer.parseInt(ent_year);
                     String classNum = class_num;
                     String name = subject_name;
-                    int no = Integer.parseInt(num);
+                    int no = Integer.parseInt(no);
 
                     setTestListStudent(request, response);
 
@@ -61,10 +69,10 @@ public class TestRegistAction extends Action {
 
 
 private void setTestListStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Utl utl = new Utl();
         // リクエストパラメータの取得
-		Teacher teacher = utl.getUser(request);
-		// TeacherオブジェクトからSchoolオブジェクトを取得
+		Teacher teacher = Utl.getUser(request);
+	// TeacherオブジェクトからSchoolオブジェクトを取得
+		School school = teacher.getSchool();
         int entYear = Integer.parseInt(request.getParameter("f1"));
         String classNum = request.getParameter("f2");
         String name = request.getParameter("f3");
@@ -74,14 +82,15 @@ private void setTestListStudent(HttpServletRequest request, HttpServletResponse 
         Subject subject = new Subject();
         subject.setSubjectName(name);
         Student student = new Student();
-
-
+ 
+ 
         // 学生情報の取得
-        TestDAO dao = new TestDAO();
-        List<Test> list = dao.filter(classNum,subject, num, school, ent_year);
+        TestDao dao = new TestDao();
+        List<Test> list = dao.filter(test, entYear, classNum, subject, num, student);
 
      // テストリストをリクエストに設定
         request.setAttribute("testList", list);
-
+ 
 }
 }
+ 

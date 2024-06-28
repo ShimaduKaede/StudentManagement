@@ -10,7 +10,7 @@ import bean.School;
 import bean.Subject;
 
 public class SubjectDAO extends DAO {
-
+	private String baseSql; // SQL文を確保する変数
     // 科目の詳細データを取得するメソッド
     // 引数：cd, school
     // 戻り値：subject
@@ -18,8 +18,9 @@ public class SubjectDAO extends DAO {
         String schoolCd = school.getSchoolCd(); // 学校コードを変数schoolCdに設定
 
         Connection con = getConnection();
-        PreparedStatement st = con.prepareStatement(
-            "SELECT SCHOOL_CD, CD, NAME FROM SUBJECT WHERE SCHOOL_CD = ? AND CD = ?");
+     // SQL文
+        baseSql = "SELECT SCHOOL_CD, CD, NAME FROM SUBJECT WHERE SCHOOL_CD = ? AND CD = ?";
+        PreparedStatement st = con.prepareStatement(baseSql);
         st.setString(1, schoolCd);
         st.setString(2, subject_cd);
 
@@ -77,10 +78,11 @@ public class SubjectDAO extends DAO {
     // 戻り値：boolean (True or False)
     public boolean save(Subject subject) throws Exception {
         Connection con = getConnection();
+        //SQL文
+        baseSql = "INSERT INTO SUBJECT(SCHOOL_CD, CD, NAME) VALUES(?,?,?)";
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement(
-                "INSERT INTO SUBJECT(SCHOOL_CD, CD, NAME) VALUES(?,?,?)");
+            st = con.prepareStatement(baseSql);
             st.setString(1, subject.getSchool().getSchoolCd());
             st.setString(2, subject.getSubjectCd());
             st.setString(3, subject.getSubjectName());
@@ -102,12 +104,13 @@ public class SubjectDAO extends DAO {
     // 戻り値：boolean (True or False)
     public boolean delete(Subject subject) throws Exception {
         Connection con = getConnection();
+        baseSql =  "DELETE FROM SUBJECT WHERE SCHOOL_CD = ? AND CD = ?";
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement(
-                "DELETE FROM SUBJECT WHERE SCHOOL_CD = ? AND CD = ?");
-            st.setString(1, subject.getSchoolCd());
+            st = con.prepareStatement(baseSql);
+            st.setString(1, subject.getSchool().getSchoolCd());
             st.setString(2, subject.getSubjectCd());
+            st.setString(2, subject.getSubjectName());
 
             // deleteしたレコード件数が返ってくる
             int line = st.executeUpdate();
@@ -120,6 +123,7 @@ public class SubjectDAO extends DAO {
             con.close();
         }
     }
+
 
     // 科目を更新するメソッド
     public boolean update(Subject subject) throws Exception {

@@ -12,7 +12,6 @@
 
     <div id="student_create">
       <form action="SubjectCreateExecute.action">
-
         <label for="cd">科目コード</label>
         <input
           type="text"
