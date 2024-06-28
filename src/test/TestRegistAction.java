@@ -1,66 +1,89 @@
-package search;
+package student;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
 import bean.Teacher;
+import bean.Test;
+import dao.StudentDAO;
 import dao.SubjectDAO;
+import dao.TestDAO;
 import tool.Action;
-import tool.Utl;
+import tool.Util;
 
-public class SearchAction extends Action {
+public class TestRegistAction extends Action {
+
     public String execute(
-        HttpServletRequest request, HttpServletResponse response
-    ) throws Exception {
-        Utl utl = new Utl();
-        // セッションから学校情報を取得
-        Teacher teacher = utl.getUser(request);
+        HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	try{
+    		HttpSession session = request.getSession();
 
-        // Schoolがnullの場合の処理
-        if (teacher.getSchoolCd() == null) {
-            // 適切なエラーメッセージを設定してエラーページにリダイレクト
-            request.setAttribute("error", "学校情報が見つかりません。再度ログインしてください。");
-            return "error.jsp";
-        }
+    		// getUserメソッドを呼び出してユーザー情報を取得
+    		Teacher teacher = Util.getUser(request);
+    		// TeacherオブジェクトからSchoolオブジェクトを取得
+    		School school = teacher.getSchool();
 
-        // Schoolをインスタンス化
-        School school = new School();
-        school.setSchoolCd(teacher.getSchoolCd());
+    		boolean isAttend = true;//在学フラグ
 
-        // 初期情報を表示
-        displayInitialInformation(request);
+    	;	SubjectDAO subjectdao = new SubjectDAO();
+    		List<Subject> subjectList = subjectdao.filter(school);
+    		StudentDao studentdao = new StudentDao();
+    		List<Student> studentList = studentdao.filter(school, isAttend);
+    		session.setAttribute("student", studentList);
+    		session.setAttribute("subject", subjectList);
 
-        // 入力された検索条件を取得
-        String enrollmentYear = request.getParameter("enrollmentYear");
-        String className = request.getParameter("class");
-        String subjectName = request.getParameter("subject");
-        String occurrence = request.getParameter("occurrence");
+    		    String ent_year = request.getParameter("f1");
+                String class_num = request.getParameter("f2");
+                String subject_name = request.getParameter("f3");
+                String no = request.getParameter("f4");
 
-        // 検索条件を使用してフィルター
-        SubjectDAO dao = new SubjectDAO();
-        List<Subject> filteredSubjects = dao.filter(school, enrollmentYear, className, subjectName, occurrence);
+                    int entYear = Integer.parseInt(ent_year);
+                    String classNum = class_num;
+                    String name = subject_name;
+                    int num = Integer.parseInt(no);
 
-        // デバッグログを追加
-        System.out.println("Filtered subjects: " + filteredSubjects);
+                    setTestListStudent(request, response);
 
-        // 検索結果をセット
-        request.setAttribute("filteredSubjects", filteredSubjects);
+            return "/test/test_regist.jsp"; // ログイン成功時のリダイレクト先
+    	}catch(Exception e){
+    		 // エラーメッセージを設定してエラーページに遷移
+            request.setAttribute("message", "エラーが発生しました。");
+            return "/student/error.jsp";
 
-        // FrontControllerを使用しているためreturn文でフォワードできる
-        return "search_results.jsp";
+    	}
+
     }
 
-    private void displayInitialInformation(HttpServletRequest request) {
-        // 初期表示する情報を設定
-        request.setAttribute("initialMessage", "検索条件を入力してください。");
-        // 例としていくつかのデフォルト情報をセット
-        request.setAttribute("defaultEnrollmentYear", "2021");
-        request.setAttribute("defaultClass", "1A");
-        request.setAttribute("defaultSubject", "数学");
-        request.setAttribute("defaultOccurrence", "1");
-    }
+
+private void setTestListStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // リクエストパラメータの取得
+		Teacher teacher = Util.getUser(request);
+	// TeacherオブジェクトからSchoolオブジェクトを取得
+		School school = teacher.getSchool();
+        int entYear = Integer.parseInt(request.getParameter("f1"));
+        String classNum = request.getParameter("f2");
+        String name = request.getParameter("f3");
+        int num = Integer.parseInt(request.getParameter("f4"));
+        Test test = new Test();
+        test.setNo(num);
+        Subject subject = new Subject();
+        subject.setName(name);
+        Student student = new Student();
+ 
+ 
+        // 学生情報の取得
+        TestDao dao = new TestDao();
+        List<Test> list = dao.filter(test, entYear, classNum, subject, num, student);
+
+     // テストリストをリクエストに設定
+        request.setAttribute("testList", list);
+ 
 }
+}
+ 
