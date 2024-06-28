@@ -1,7 +1,9 @@
 <!-- メインメニューP15 -->
-<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+<%@page contentType="text/html; charset=UTF-8" %> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@include file="../header.jsp" %>
 
+<form action="StudentUpdate.action" method="post">
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
@@ -23,5 +25,6 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     </div>
   </div>
 </div>
+</form>
 
 <%@include file="../footer.jsp" %>
