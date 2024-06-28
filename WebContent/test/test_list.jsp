@@ -13,7 +13,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <label for="f1">入学年度</label>
           <label for="f2">クラス</label>
           <label for="f3">科目</label>
-          <form action="TestRegist.action">
+          <form action="TestList_Subject.action">
             <select name="f1" id="f1">
               <option value="2023">2023</option>
             </select>
@@ -38,7 +38,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         <div id="search_student_input">
           <div id="text_input">
           <label for="f4">学生番号</label>
-          <form action="TestRegist.action">
+          <form action="TestList_Student.action">
             <input
               type="text"
               name="f4"

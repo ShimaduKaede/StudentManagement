@@ -7,7 +7,7 @@ public class Test implements Serializable {
     private String studentNo;    // 学生(学生番号,氏名,入学年度,クラス番号,在籍中フラグ,学校(学校コード,学校名))
     private String classNum;    // クラス番号
     private String subjectCd;    // 科目(学校コード,科目コード,科目名)
-    private School school;      // 学校(学校コード,学校名)
+    private String schoolCd;      // 学校(学校コード,学校名)
     private int testNo;         // 回数
     private int point;          // 得点
 
@@ -41,12 +41,12 @@ public class Test implements Serializable {
 	}
 
 	// 学校情報(学校コード、学校名)を取得(ゲット)メソッド
-	public School getSchool() {
-		return school;
+	public String getSchool() {
+		return schoolCd;
 	}
 	// 学校情報(学校コード、学校名)を設置（セット）メソッド
-	public void setSchool(School school) {
-		this.school=school;
+	public void setSchool(String schoolCd) {
+		this.schoolCd=schoolCd;
 	}
 
 	// 回数を取得(ゲット)メソッド
