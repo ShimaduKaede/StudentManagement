@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.School;
 import bean.Subject;
+import bean.Teacher;
 import dao.SubjectDAO;
 import tool.Action;
+import tool.Utl;
 
 public class SubjectDeleteExecuteAction extends Action {
     @Override
@@ -15,7 +17,11 @@ public class SubjectDeleteExecuteAction extends Action {
         String subjectCd = request.getParameter("subjectCd");
         String subjectName = request.getParameter("subjectName");
         // セッションから学校情報を取得
-        School school = (School) request.getSession().getAttribute("School");
+        Utl utl = new Utl();
+        Teacher user = utl.getUser(request); // ログインユーザーを取得
+
+        School school = new School();
+        school.setSchoolCd(user.getSchoolCd()); // ログインユーザーの学校コードをschoolにセット
 
         // Subjectオブジェクトを作成して設定
         Subject subject = new Subject();

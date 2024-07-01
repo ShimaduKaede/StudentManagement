@@ -19,3 +19,4 @@ public class SubjectDeleteAction extends Action {
         return "subject_delete.jsp";
     }
 }
+
