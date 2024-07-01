@@ -84,5 +84,5 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     </div>
   </div>
 </div>
-<p>value="data1"</p>
+
 <p><%@include file="../footer.jsp" %></p>
