@@ -46,6 +46,8 @@ public class TestList_SubjectAction extends Action {
         // "subjectList"という名前でsubjectListリストをセット
         request.setAttribute("testList", testlist);
         request.setAttribute("subjectname", subjectname);
+        request.setAttribute("ent_year", ent_year);
+        request.setAttribute("class_num", class_num);
 
         // FrontControllerを使用しているためreturn文でフォワードできる
         return "test_list_subject.jsp";

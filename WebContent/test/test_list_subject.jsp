@@ -23,7 +23,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </select>
 
             <select name="f2" id="f2">
-              <option value="101">101</option>
+              <option value="131">131</option>
             </select>
 
             <select name="f3" id="f3">
@@ -58,7 +58,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </div>
 
     <div id="search_result">
-      <p>科目:国語(1回)</p>
+      <p>科目:${subjectname}</p>
       <table>
         <tr>
           <th>入学年度</th>
@@ -77,10 +77,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <%
       for (Test test: testlist) { %>
         <tr>
-          <td><%= test.getSubjectname() %></td>
-          <td><%= test.getSubject() %></td>
-          <td><%= test.getTestNo() %></td>
-          <td><%= test.getPoint() %></td>
+          <td>${ent_year}</td>
+          <td>${class_num}</td>
+          <td><%= test.getStudent() %></td>
+          <td><%= test.getStudentname() %></td>
         </tr>
         <%} %>
         </tr>

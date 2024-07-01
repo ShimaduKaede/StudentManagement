@@ -74,7 +74,7 @@ String basesql ;
 
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
-            "SELECT subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.no,test.point from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num where student.ent_year=? and subject.name='?' and test.class_num='?'"
+            "SELECT subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.no,test.point from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num where student.ent_year=? and subject.name=? and test.class_num=?"
         );
         st.setInt(1, ent_year);
         st.setString(2, subject_name);
