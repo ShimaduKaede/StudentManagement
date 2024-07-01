@@ -1,6 +1,10 @@
 <!-- 学生別成績一覧 -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="bean.Test" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+ <%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
@@ -19,7 +23,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             </select>
 
             <select name="f2" id="f2">
-              <option value="101">101</option>
+              <option value="131">131</option>
             </select>
 
             <select name="f3" id="f3">
@@ -54,7 +58,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
   </div>
 
     <div id="search_result">
-      <p>科目:国語(1回)</p>
+      <p>科目:${subjectname}</p>
       <table>
         <tr>
           <th>入学年度</th>
@@ -65,12 +69,20 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <th>2回</th>
         </tr>
         <tr>
-          <td>p.getEntYear()</td>
-          <td>p.getClassNum()</td>
-          <td>p.getNo()</td>
-          <td>p.getName()</td>
-          <td></td>
-          <td></td>
+                  <%
+          @SuppressWarnings("unchecked")
+  List<Test> testlist = (List<Test>) request.getAttribute("testList");%>
+
+
+      <%
+      for (Test test: testlist) { %>
+        <tr>
+          <td>${ent_year}</td>
+          <td>${class_num}</td>
+          <td><%= test.getStudent() %></td>
+          <td><%= test.getStudentname() %></td>
+        </tr>
+        <%} %>
         </tr>
       </table>
     </div>

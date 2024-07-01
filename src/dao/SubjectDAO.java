@@ -110,7 +110,6 @@ public class SubjectDAO extends DAO {
             st = con.prepareStatement(baseSql);
             st.setString(1, subject.getSchool().getSchoolCd());
             st.setString(2, subject.getSubjectCd());
-            st.setString(2, subject.getSubjectName());
 
             // deleteしたレコード件数が返ってくる
             int line = st.executeUpdate();
