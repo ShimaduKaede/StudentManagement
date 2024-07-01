@@ -12,7 +12,7 @@ import dao.TestDAO;
 import tool.Action;
 import tool.Utl;
 
-public class TestList_StudentAction extends Action {
+public class TestList_SubjectAction extends Action {
     public String execute(
         HttpServletRequest request, HttpServletResponse response
     ) throws Exception {
@@ -30,25 +30,25 @@ public class TestList_StudentAction extends Action {
         School school = new School();
         school.setSchoolCd(teacher.getSchoolCd());
 
-        String student_no = request.getParameter("f4");
+		int ent_year = Integer.parseInt(request.getParameter("f1"));
+		String class_num = request.getParameter("f2");
+		String subject_name = request.getParameter("f3");
         // SubjectDAOの生成
         TestDAO dao = new TestDAO();
         // SubjectDAOのfilterメソッドで学科を全件取得する
-        List<Test> testlist = dao.ListStudent(student_no);
-        String studentName=null;
-        String studentNo=null;
+        List<Test> testlist = dao.ListSubject(ent_year,class_num,subject_name);
+        String subjectname=null;
         for (Test t: testlist){
-        studentName=t.getStudentname();
-        studentNo=t.getStudent();}
+        subjectname=t.getSubjectname();
+        }
 
 
         // "subjectList"という名前でsubjectListリストをセット
         request.setAttribute("testList", testlist);
-        request.setAttribute("studentName", studentName);
-        request.setAttribute("studentNo", studentNo);
+        request.setAttribute("subjectname", subjectname);
 
         // FrontControllerを使用しているためreturn文でフォワードできる
-        return "test_list_student.jsp";
+        return "test_list_subject.jsp";
     }
 }
 

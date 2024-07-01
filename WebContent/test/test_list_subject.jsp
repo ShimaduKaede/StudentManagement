@@ -1,6 +1,10 @@
 <!-- 学生別成績一覧 -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="bean.Test" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+ <%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
@@ -65,12 +69,20 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <th>2回</th>
         </tr>
         <tr>
-          <td>p.getEntYear()</td>
-          <td>p.getClassNum()</td>
-          <td>p.getNo()</td>
-          <td>p.getName()</td>
-          <td></td>
-          <td></td>
+                  <%
+          @SuppressWarnings("unchecked")
+  List<Test> testlist = (List<Test>) request.getAttribute("testList");%>
+
+
+      <%
+      for (Test test: testlist) { %>
+        <tr>
+          <td><%= test.getSubjectname() %></td>
+          <td><%= test.getSubject() %></td>
+          <td><%= test.getTestNo() %></td>
+          <td><%= test.getPoint() %></td>
+        </tr>
+        <%} %>
         </tr>
       </table>
     </div>
