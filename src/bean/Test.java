@@ -5,9 +5,11 @@ import java.io.Serializable;
 public class Test implements Serializable {
 
     private String studentNo;    // 学生(学生番号,氏名,入学年度,クラス番号,在籍中フラグ,学校(学校コード,学校名))
+    private String studentName;
     private String classNum;    // クラス番号
     private String subjectCd;    // 科目(学校コード,科目コード,科目名)
     private String schoolCd;      // 学校(学校コード,学校名)
+    private String subjectName;
     private int testNo;         // 回数
     private int point;          // 得点
 
@@ -65,6 +67,25 @@ public class Test implements Serializable {
 	// 得点を設置(セット)メソッド
 	public void setPoint(int point) {
 		this.point=point;
+	}
+
+	// 科目名を取得(ゲット)メソッド
+	public String getSubjectname() {
+		return subjectName;
+	}
+	// 科目名を設置（セット）メソッド
+	public void setSubjectname(String subjectName) {
+		this.subjectName=subjectName;
+	}
+
+
+	// 科目名を取得(ゲット)メソッド
+	public String getStudentname() {
+		return studentName;
+	}
+	// 科目名を設置（セット）メソッド
+	public void setStudentname(String studentName) {
+		this.studentName=studentName;
 	}
 
 }

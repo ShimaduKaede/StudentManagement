@@ -60,7 +60,10 @@
 
 
 <div id="search_result">
-    <p>氏名:名前(学生番号)</p>
+          <%
+          @SuppressWarnings("unchecked")
+  List<Test> testlist = (List<Test>) request.getAttribute("testList");%>
+    <p>氏名:<c:out value="${studentName}"/>(<c:out value="${studentNo}"/>)</p>
     <table>
       <tr>
         <th>科目名</th>
@@ -68,24 +71,19 @@
         <th>回数</th>
         <th>点数</th>
       </tr>
+      <%
+      for (Test test: testlist) { %>
         <tr>
-          <%
-          @SuppressWarnings("unchecked")
-  List<Test> testlist = (List<Test>) request.getAttribute("testlist");
-    for (Test t : testlist) {
-  %>
-          <td><%= t.getSubject() %></td>
-          <td><%= t.getSubject() %></td>
-          <td><%= t.getSubject() %></td>
-          <td><%= t.getSubject() %></td>
+          <td><%= test.getSubjectname() %></td>
+          <td><%= test.getSubject() %></td>
+          <td><%= test.getTestNo() %></td>
+          <td><%= test.getPoint() %></td>
         </tr>
+        <%} %>
     </table>
   </div>
 </div>
 </div>
 </div>
-  <%
-  }
-  %>
 <%@include file="../footer.jsp" %>
 

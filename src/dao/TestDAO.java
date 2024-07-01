@@ -46,17 +46,19 @@ String basesql ;
 
         Connection con = getConnection();
         PreparedStatement st = con.prepareStatement(
-            "SELECT * from test WHERE STUDENT_NO=?"
+            "SELECT test.STUDENT_NO,test.SUBJECT_CD,test.SCHOOL_CD,test.NO,test.POINT,subject.name,student.name from test join student on student.no=test.student_no join subject on subject.cd=test.subject_cd  WHERE STUDENT_NO=?"
         );
         st.setString(1, studentCd);
         ResultSet rs = st.executeQuery();
 
         while (rs.next()) {
             Test test = new Test();
+            test.setStudentname(rs.getString("student.name"));
             test.setStudent(rs.getString("STUDENT_NO"));
             test.setSubject(rs.getString("SUBJECT_CD"));
             test.setTestNo(rs.getInt("NO"));
             test.setPoint(rs.getInt("POINT"));
+            test.setSubjectname(rs.getString("subject.name"));
 
             ListStudent.add(test);
         }
@@ -65,6 +67,29 @@ String basesql ;
         return ListStudent;
     }
 
+
+
+    public List<Test> ListSubject(int ent_year,String class_num,String subject_name) throws Exception {
+        List<Test> ListStudent = new ArrayList<>();
+
+        Connection con = getConnection();
+        PreparedStatement st = con.prepareStatement(
+            "SELECT student.ent_year,student.class_num,student.name,student.no "
+        );
+        st.setString(1, studentCd);
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Test test = new Test();
+            test.setStudentname(rs.getString("student.name"));
+            test.setStudent(rs.getString("STUDENT_NO"));
+            test.setSubject(rs.getString("SUBJECT_CD"));
+            test.setTestNo(rs.getInt("NO"));
+            test.setPoint(rs.getInt("POINT"));
+            test.setSubjectname(rs.getString("subject.name"));
+
+            ListStudent.add(test);
+        }
 
     public List<Test> get(String student, String subject, String school, int no) throws Exception {
     	List<Test> tests = new ArrayList<>();
