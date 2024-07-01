@@ -11,6 +11,11 @@ public class StudentCreateExecuteAction extends Action {
 	public String execute(
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
+
+		// Utlを呼び出す
+
+		// UtlのgetUser()でログインユーザーを呼び出す
+
 		// student_create.jspから送られてきたデータを受け取る jsp側のname属性で指定された名前で受け取る
 		// String name = request.getAttribute("kayano");
 		String name = request.getParameter("name"); // 氏名
@@ -26,6 +31,8 @@ public class StudentCreateExecuteAction extends Action {
         student.setEntYear(entYear);
         student.setStudentNo(studentNo);
         student.setClassNum(classNum);
+        // student.schoolCdにログインユーザーのschoolCdをセット
+
 
 		// 受け取ったデータを登録するためにStudentDAOを呼び出す
         StudentDAO dao = new StudentDAO();

@@ -41,9 +41,11 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <!-- クラス -->
           <div id="classselect">
             <label for="f2">クラス</label><br />
-            <select name="ent_year" id="ent_year">
+            <select name="class_num" id="class_num">
               <option value="">--------</option>
-              <option value="131">131</option>
+              <c:forEach var="classItem" items="${classes}">
+              <option value="${classItem.id}">${classItem.name}</option>
+              </c:forEach>
             </select>
           </div>
           <!-- 在学中のチェックボックス -->
@@ -66,15 +68,17 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             <th>在学中</th>
             <th>　　　</th>
           </tr>
-          <tr>
-            <td>entyear</td>
-            <td>getNo()</td>
-            <td>getName()</td>
-            <td>getclass()</td>
-            <td>〇</td>
-            <!-- 学生の学番をリクエストパラメータとして付加してStudentUpdateActionを呼び出す -->
-            <td><a href="StudentUpdate.action?studentNo=${student.studentNo}">変更</a></td>
-          </tr>
+          <c:forEach var="student" items="${studentList}">
+           <tr>
+             <td>${student.entYear}</td>
+             <td>${student.studentNo}</td>
+             <td>${student.getStudentName()}</td>
+             <td>${student.getClassNum()}</td>
+             <td><c:if test="${student.isAttend}">〇</c:if></td>
+             <!-- 学生の学番をリクエストパラメータとして付加してStudentUpdateActionを呼び出す -->
+             <td><a href="StudentUpdate.action?studentNo=${student.studentNo}">変更</a></td>
+           </tr>
+          </c:forEach>
         </table>
       </div>
     </div>
