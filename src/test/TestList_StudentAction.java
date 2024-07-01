@@ -34,11 +34,18 @@ public class TestList_StudentAction extends Action {
         // SubjectDAOの生成
         TestDAO dao = new TestDAO();
         // SubjectDAOのfilterメソッドで学科を全件取得する
-        List<Test> subjectList = dao.ListStudent(student_no);
+        List<Test> testlist = dao.ListStudent(student_no);
+        String studentName=null;
+        String studentNo=null;
+        for (Test t: testlist){
+        studentName=t.getStudentname();
+        studentNo=t.getStudent();}
 
 
         // "subjectList"という名前でsubjectListリストをセット
-        request.setAttribute("subjectList", subjectList);
+        request.setAttribute("testList", testlist);
+        request.setAttribute("studentName", studentName);
+        request.setAttribute("studentNo", studentNo);
 
         // FrontControllerを使用しているためreturn文でフォワードできる
         return "test_list_student.jsp";
