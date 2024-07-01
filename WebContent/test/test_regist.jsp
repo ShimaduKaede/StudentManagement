@@ -52,11 +52,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <th>氏名</th>
           <th>点数</th>
         </tr>
-         <%
-         @SuppressWarnings("unchecked")
-  			List<Test> testlist = (List<Test>) request.getAttribute("testlist");
-  			if (testlist != null) {
-    		for (Test t : testlist) {
+        <% @SuppressWarnings("unchecked")
+  			  List<Test> testlist = (List<Test>) request.getAttribute("testlist");
+  			  if (testlist != null) {
+    		    for (Test t : testlist) {
   			%>
         <tr>
           <td>t.getPoint()</td>
