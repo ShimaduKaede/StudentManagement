@@ -57,7 +57,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       </form>
 
       <!-- 一覧 -->
-      <p id="search_sum">検索結果:件</p>
+      <p id="search_sum">検索結果: <c:out value="${resultCount}" /> 件</p>
       <div id="search_result">
         <table>
           <tr>
@@ -84,5 +84,5 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     </div>
   </div>
 </div>
-<p>value="data1"</p>
+
 <p><%@include file="../footer.jsp" %></p>

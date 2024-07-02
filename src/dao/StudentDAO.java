@@ -239,8 +239,15 @@ public class StudentDAO extends DAO {
 
     // 学生を更新するメソッド
     public boolean update(Student student) throws SQLException {
+    	Connection con = null;
+		try {
+			con = getConnection();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} // DBへの接続
         String sql = "UPDATE STUDENT SET NAME = ?, ENT_YEAR = ?, CLASS_NUM = ?, IS_ATTEND = ?, SCHOOL_CD = ? WHERE NO = ?";
-        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, student.getStudentName());
             stmt.setInt(2, student.getEntYear());
             stmt.setString(3, student.getClassNum());
@@ -248,7 +255,7 @@ public class StudentDAO extends DAO {
             stmt.setString(5, student.getSchoolCd());
             stmt.setString(6, student.getStudentNo());
             return stmt.executeUpdate() > 0;
-        }
+
     }
 
     // 学生を削除するメソッド
