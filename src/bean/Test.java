@@ -3,25 +3,31 @@ package bean;
 import java.io.Serializable;
 
 public class Test implements Serializable {
-
-    private String studentNo;    // 学生(学生番号,氏名,入学年度,クラス番号,在籍中フラグ,学校(学校コード,学校名))
-    private String studentName;
+    private Student student;	// 学生情報    
+	private String studentNo;	// 学生番号
+    private String studentName;	// 学生名
     private String classNum;    // クラス番号
-    private String subjectCd;    // 科目(学校コード,科目コード,科目名)
-    private String schoolCd;      // 学校(学校コード,学校名)
-    private String subjectName;
+	private Subject subject;	// 科目情報(学校コード,科目コード,科目名)
+    private String schoolCd;    // 学校コード
+    private String subjectCd;   // 科目コード
+    private String subjectName;	// 科目名
+	private School school;		// 学校情報(学校コード,学校名)
+	private String schoolName;	// 学校名
     private int testNo;         // 回数
     private int point;          // 得点
 
-
-
-	// 学生情報を取得(ゲット)メソッド
-	public String getStudent() {
-		return studentNo;
+	// 学生番号を取得(ゲット)メソッド
+	public Student getStudent() {
+		return student;
 	}
 	// 学生情報を設置（セット）メソッド
-	public void setStudent(String studentNo) {
-		this.studentNo=studentNo;
+	public void setStudent(Student student) {
+		this.studentNo=student.studentNo;
+		this.studentName=student.studentName;
+		this.entYear=student.entYear;
+		this.classNum=student.classNum;
+		this.isAttend=student.isAttend;
+		this.schoolCd=student.schoolCd;
 	}
 
 	// クラス番号を取得(ゲット)メソッド
@@ -34,21 +40,23 @@ public class Test implements Serializable {
 	}
 
 	// 科目情報を取得(ゲット)メソッド
-	public String getSubject() {
-		return subjectCd;
+	public Subject getSubject() {
+		return subject;
 	}
 	// 科目情報を設置（セット）メソッド
-	public void setSubject(String subjectCd) {
+	public void setSubject(Subject subject) {
+		this.schoolCd=schoolCd;
 		this.subjectCd=subjectCd;
+		this.subjectName=subjectName;
 	}
-
 	// 学校情報(学校コード、学校名)を取得(ゲット)メソッド
-	public String getSchool() {
-		return schoolCd;
+	public School getSchool() {
+		return school;
 	}
 	// 学校情報(学校コード、学校名)を設置（セット）メソッド
-	public void setSchool(String schoolCd) {
-		this.schoolCd=schoolCd;
+	public void setSchool(School school) {
+		this.schoolCd=school.schoolCd;
+		this.schoolName=school.schoolName;
 	}
 
 	// 回数を取得(ゲット)メソッド

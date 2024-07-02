@@ -11,8 +11,6 @@ import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
-import dao.StudentDAO;
-import dao.SubjectDAO;
 import dao.TestDAO;
 import tool.Action;
 import tool.Utl;
@@ -48,10 +46,8 @@ public class TestRegistExecuteAction extends Action {
         // 入力値をDBに保存
 		// TestDAOの生成
         TestDAO dao = new TestDAO();
-        // ----ここから--------------7.1-------------
-		List<Test> studentList = dao.filter3(school,flg);
-
-        
+        // DAOのsave1メソッドを使ってDB保存
+        boolean flg = dao.save1(testList);
 
         // 成績登録完了画面(test_regist_done.jsp)を表示する
         return "test_regist_done.jsp";
