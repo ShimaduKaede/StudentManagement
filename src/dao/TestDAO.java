@@ -74,11 +74,12 @@ public class TestDAO extends DAO {
     public List<Test> ListSubject(int ent_year,String class_num,String subject_name) throws Exception {
         List<Test> ListSubject = new ArrayList<>();
         Connection con = getConnection();
-        baseSql = "SELECT distinct subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.point,(select point  from test where no=2)  as point2 from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num left join (select point as point2,student_no from test where no=2)  as A on student.no=A.student_no  where student.ent_year=? and subject.name=? and test.class_num=? and test.no=1 ";
+        baseSql = "SELECT distinct subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.point, (select point as point2 from test where no=2 and subject_cd=(select cd from subject where name=? ))   as point2 from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num left join (select point as point2,student_no,subject_cd from test where no=2)  as A on student.no=A.student_no  where student.ent_year=? and subject.name=? and test.class_num=? and test.no=1 ";
         PreparedStatement st = con.prepareStatement(baseSql);
-        st.setInt(1, ent_year);         // SQL文に入学年度をセット
-        st.setString(2, subject_name);  // SQL文に科目名をセット
-        st.setString(3, class_num);     // SQL文にクラス番号をセット
+        st.setString(1, subject_name);
+        st.setInt(2, ent_year);         // SQL文に入学年度をセット
+        st.setString(3, subject_name);  // SQL文に科目名をセット
+        st.setString(4, class_num);     // SQL文にクラス番号をセット
         ResultSet rs = st.executeQuery();   // SQL実行
 
         while (rs.next()) {

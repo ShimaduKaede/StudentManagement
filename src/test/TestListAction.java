@@ -1,14 +1,16 @@
 package test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.School;
+import bean.Student;
+import bean.Subject;
 import bean.Teacher;
-import bean.Test;
-import dao.TestDAO;
+import dao.StudentDAO;
+import dao.SubjectDAO;
 import tool.Action;
 import tool.Utl;
 
@@ -20,27 +22,39 @@ public class TestListAction extends Action {
     	Utl utl = new Utl();
         // セッションから学校情報を取得
     	Teacher teacher = utl.getUser(request);
-
+    	boolean flg=false;
         // Schoolがnullの場合の処理
         if (teacher.getSchoolCd() == null) {
             // 適切なエラーメッセージを設定してエラーページにリダイレクト
             request.setAttribute("error", "学校情報が見つかりません。再度ログインしてください。");
             return "error.jsp";
         }
+        else {
 
-			int ent_year = Integer.parseInt(request.getParameter("f1"));
-			String class_num = request.getParameter("f2");
-			String subject_name = request.getParameter("f3");
-			int no = Integer.parseInt(request.getParameter("f4"));
+      	// セッションのユーザーデータから、ユーザーが所属している学校の生徒一覧用データを取得
+        // Schoolをインスタンス化
+        School school = new School();
+        school.setSchoolCd(teacher.getSchoolCd());
 
-			String school=teacher.getSchoolCd();
-			TestDAO dao=new TestDAO();
-			List<Test> testlist=new ArrayList<>();
-			testlist=dao.filter(class_num,subject_name,no,school,ent_year);
-			request.setAttribute("testlist", testlist);
+        flg=true;
 
+		// StudentDAOの生成
+        StudentDAO dao = new StudentDAO();
+		List<Student> studentList = dao.filter3(school,flg);
+
+
+		// セッションから引っ張ってきたユーザデータを変数userに登録
+		request.setAttribute("user", teacher);
+        // "studentList"という名前でsubjectListリストをセット
+		request.setAttribute("studentList", studentList);
+        // SubjectDAOの生成
+        SubjectDAO dao2 = new SubjectDAO();
+        // SubjectDAOのfilterメソッドで学科を全件取得する
+        List<Subject> subjectList = dao2.filter(school);
+        // "studentList"という名前でsubjectListリストをセット
+		request.setAttribute("subjectList", subjectList);}
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
-		return "test_regist.jsp";
+		return "test_list.jsp";
 	}
 }

@@ -3,7 +3,7 @@ package bean;
 import java.io.Serializable;
 
 public class Test implements Serializable {
-    private Student student;	// 学生情報    
+    private Student student;	// 学生情報
 	private String studentNo;	// 学生番号
     private String studentName;	// 学生名
     private String classNum;    // クラス番号
@@ -15,6 +15,7 @@ public class Test implements Serializable {
 	private String schoolName;	// 学校名
     private int testNo;         // 回数
     private int point;          // 得点
+    private int point2;
 
 	// 学生番号を取得(ゲット)メソッド
 	public Student getStudent() {
@@ -94,6 +95,24 @@ public class Test implements Serializable {
 	// 科目名を設置（セット）メソッド
 	public void setStudentname(String studentName) {
 		this.studentName=studentName;
+	}
+
+    // 得点を取得(ゲット)メソッド
+	public int getPoint2() {
+		return point2;
+	}
+	// 得点を設置(セット)メソッド
+	public void setPoint2(int point2) {
+		this.point2=point2;
+	}
+
+	// 科目名を取得(ゲット)メソッド
+	public String getStudentno() {
+		return studentNo;
+	}
+	// 科目名を設置（セット）メソッド
+	public void setStudentno(String studentno) {
+		this.studentNo=studentno;
 	}
 
 }

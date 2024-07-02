@@ -1,6 +1,11 @@
 <!-- 成績参照検索 -->
-<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page import="bean.Student" %>
+<%@ page import="bean.Subject" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
   <div id="contents">
@@ -14,8 +19,14 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <label for="f2">クラス</label>
           <label for="f3">科目</label>
           <form action="TestList_Subject.action">
+           <% @SuppressWarnings("unchecked")
+           List<Student> studentlist = (List<Student>) request.getAttribute("studentList")
+		   List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
+
             <select name="f1" id="f1">
-              <option value="2023">2023</option>
+                  <% for (Student student: studentlist) { %>
+              <option value="<%=student.getEntYear() %>">2023</option>
+              <% } %>
             </select>
 
             <select name="f2" id="f2">
@@ -24,6 +35,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 
             <select name="f3" id="f3">
               <option value="国語">国語</option>
+              <option value="数学">数学</option>
             </select>
 
             <button type="submit">検索</button>

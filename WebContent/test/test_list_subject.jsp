@@ -79,11 +79,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>${ent_year}</td>
           <td>${class_num}</td>
-          <td><%= test.getStudent() %></td>
+          <td><%= test.getStudentno() %></td>
           <td><%= test.getStudentname() %></td>
+          <% if (test.getPoint()==0){ %>
+          <td>-</td>
+          <%
+          }
+          else{
+          %>
+          <td><%= test.getPoint() %>
+          </td><%} %>
+
+		            <% if (test.getPoint2()==0){ %>
+          <td>-</td>
+          <%
+          }
+          else{
+          %>
+          <td><%= test.getPoint2() %>
+          </td><%} %>
         </tr>
         <%} %>
-        </tr>
       </table>
     </div>
   </div>
