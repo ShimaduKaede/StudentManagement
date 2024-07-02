@@ -56,13 +56,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
          @SuppressWarnings("unchecked")
   			List<Test> testlist = (List<Test>) request.getAttribute("testlist");
   			if (testlist != null) {
-    		for (Test t : testlist) {
+    		for (Test test : testlist) {
   			%>
         <tr>
-          <td>t.getPoint()</td>
-          <td><%= t.getClassNum() %></td>
-          <td><%= t.getPoint() %></td>
-          <td><%= t.getPoint() %></td>
+          <td>${ent_year}</td>
+          <td><${class_num}</td>
+          <td><%= test.getStudent() %></td>
+          <td><%= test.getStudentname() %></td>
           <td><input type="text" name="" id="" value="<%=t.getPoint() %>" /></td>
         </tr>
         <%
