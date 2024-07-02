@@ -40,11 +40,15 @@ public class StudentListAction extends Action {
         StudentDAO dao = new StudentDAO();
 		List<Student> studentList = dao.filter3(school,flg);
 
+		//出るかどうか！ 検索結果の件数をログ出力して確認
+        System.out.println("検索結果の件数: " + studentList.size());
 
 		// セッションから引っ張ってきたユーザデータを変数userに登録
 		request.setAttribute("user", teacher);
         // "studentList"という名前でsubjectListリストをセット
 		request.setAttribute("studentList", studentList);
+		// 検索結果の件数をセット
+        request.setAttribute("resultCount", studentList.size());
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
 		return "student_list.jsp";
