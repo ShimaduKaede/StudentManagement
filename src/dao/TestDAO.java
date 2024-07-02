@@ -74,15 +74,7 @@ public class TestDAO extends DAO {
     public List<Test> ListSubject(int ent_year,String class_num,String subject_name) throws Exception {
         List<Test> ListSubject = new ArrayList<>();
         Connection con = getConnection();
-        baseSql = "SELECT subject.name as subjectname, "
-                + "test.subject_cd,student.ent_year, "
-                + "test.class_num,student.name as studentname, "
-                + "student.no as student_no ,test.no,test.point "
-                + "from test "
-                + "join subject on subject.cd=test.subject_cd "
-                + "join student on student.class_num=test.class_num "
-                + "where student.ent_year=? and subject.name=? "
-                + "and test.class_num=?";
+        baseSql = "SELECT distinct subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.point,(select point  from test where no=2)  as point2 from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num left join (select point as point2,student_no from test where no=2)  as A on student.no=A.student_no  where student.ent_year=? and subject.name=? and test.class_num=? and test.no=1 ";
         PreparedStatement st = con.prepareStatement(baseSql);
         st.setInt(1, ent_year);         // SQL文に入学年度をセット
         st.setString(2, subject_name);  // SQL文に科目名をセット
@@ -92,10 +84,12 @@ public class TestDAO extends DAO {
         while (rs.next()) {
             Test test = new Test();
             test.setSubjectname(rs.getString("subject.name"));
-            test.setStudent(rs.getString("student.no"));
+            test.setStudentno(rs.getString("student.no"));
             test.setStudentname(rs.getString("student.name"));
             test.setTestNo(rs.getInt("NO"));
             test.setPoint(rs.getInt("POINT"));
+            test.setPoint2(rs.getInt("POINT2"));
+
 
             ListSubject.add(test);
         }
@@ -143,7 +137,7 @@ public class TestDAO extends DAO {
         Connection con = getConnection();
         // SQL文
         baseSql = "SELECT SUTUDENT_NO,SUBJECT_CD,SCHOOL_CD,NO,POINT "
-                + "CLASS_NUM " 
+                + "CLASS_NUM "
                 + "FROM TEST "
                 + "join student on test.student_no=student.no "
                 + "WHERE test.CLASS_NUM = ? AND test.SUBJECT_CD = ? "
