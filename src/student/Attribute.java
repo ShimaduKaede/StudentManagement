@@ -10,9 +10,12 @@ import java.util.Properties;    // プロパティファイルを扱うための
 import javax.servlet.ServletContext;    // サーバ上の物理パスを取得するためのServletcontextインターフェース
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import tool.Page;
+import tool.EncodingFilter;
 
 @WebServlet(urlPatterns={"/student/attribute"})
 public class Attribute extends HttpServlet {
@@ -26,7 +29,7 @@ public class Attribute extends HttpServlet {
         ServletContext context=getServletContext();
         // 設定ファイルのサーバ上のパスを取得
         // getRealPathメソッドの引数にはコンテキストルートを起点とするパスを指定
-        String path=context.getRealPath("/WEB-INF/setting.txt");
+        String path=context.getRealPath("/WEB-INF/student_data.csv");
         // 設定ファイルを開く
         FileInputStream in=new FileInputStream(path);
         // Propertiesクラスのインスタンスを生成

@@ -26,7 +26,7 @@ public class File extends HttpServlet {
         ServletContext context=getServletContext();
         // 設定ファイルのサーバ上のパスを取得
         // getRealPathメソッドの引数にはコンテキストルートを起点とするパスを指定
-        String path=context.getRealPath("/WEB-INF/setting.txt");
+        String path=context.getRealPath("/WEB-INF/student_data.csv");
         // 設定ファイルを開く
         FileInputStream in=new FileInputStream(path);
         // Propertiesクラスのインスタンスを生成
@@ -36,10 +36,10 @@ public class File extends HttpServlet {
         in.close();
         // Propertiesオブジェクトに保存された名前の一覧を取得する
         // stringPropertyNamesメソッドを使用
-        for (String key : p.stringPropertyNames()) {
+        for (String list : p.stringPropertyNames()) {
             // 名前と値の組を出力
             // Propertiesオブジェクトから値を取得(getPropertyメソッド使用)
-            out.println("<p>"+key+" : "+p.getProperty(key)+"</p>");
+            out.println("<p>list名 : "+list+"</p>");
         }
         Page.footer(out);
     }
