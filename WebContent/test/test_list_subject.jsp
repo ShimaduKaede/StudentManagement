@@ -1,6 +1,8 @@
 <!-- 学生別成績一覧 -->
 <%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="bean.Student" %>
+<%@ page import="bean.Subject" %>
 <%@ page import="bean.Test" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -9,32 +11,45 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <%@include file="sidebar.jsp" %>
   <div id="contents">
     <h2>成績参照(学生)</h2>
-<div id="test_list_student">
-    <div id="search_test">
-      <div id="search_subject">
-        <p>科目情報</p>
-        <div id="search_subject_input">
-          <label for="f1">入学年度</label>
-          <label for="f2">クラス</label>
-          <label for="f3">科目</label>
-          <form action="TestRegist.action">
-            <select name="f1" id="f1">
-              <option value="2023">2023</option>
-            </select>
+    <div id="test_list_student">
+        <div id="search_test">
+          <div id="search_subject">
+            <p>科目情報</p>
+            <div id="search_subject_input">
+              <label for="f1">入学年度</label>
+              <label for="f2">クラス</label>
+              <label for="f3">科目</label>
+              <form action="TestList_Subject.action">
+               <% @SuppressWarnings("unchecked")
+               List<Student> studentlist = (List<Student>) request.getAttribute("studentList");
+           List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
 
-            <select name="f2" id="f2">
-              <option value="131">131</option>
-            </select>
+                <select name="f1" id="f1">
+                <option value="null">------</option>
+                      <% for (Student student: studentlist) { %>
+                  <option value="<%=student.getEntYear() %>"><%=student.getEntYear() %></option>
+                  <% } %>
+                </select>
 
-            <select name="f3" id="f3">
-              <option value="国語">国語</option>
-            </select>
+                <select name="f2" id="f2">
+                <option value="null">------</option>
+                   <% for (Student student: studentlist) { %>
+                  <option value="<%=student.getClassNum() %>"><%=student.getClassNum() %></option>
+                  <% } %>
+                </select>
 
-            <button type="submit">検索</button>
-          </form>
+                <select name="f3" id="f3">
+                <option value="null">------</option>
+                   <% for (Subject subject: subjectlist) { %>
+                  <option value="<%=subject.getSubjectName() %>"><%=subject.getSubjectName() %></option>
+                  <% } %>
+                </select>
+
+                <button type="submit">検索</button>
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
     <div id="search_test">
       <div id="search_student">
