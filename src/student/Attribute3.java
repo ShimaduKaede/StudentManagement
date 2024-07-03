@@ -2,10 +2,13 @@ package student;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletContext;    // サーバ上の物理パスを取得するためのServletcontextインターフェース
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import tool.Page;
 
@@ -26,7 +29,7 @@ public class Attribute3 extends HttpServlet {
         }
         int memory=Integer.parseInt(
             (String)context.getAttribute("memory"));
-        if (memory<1000000) {
+        if (memory>1000000) {
             out.println("<p>省メモリモードで実行します。</p>");
         }
 
