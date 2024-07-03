@@ -3,6 +3,8 @@ package student;
 import java.io.FileInputStream; // ファイルを読み込むためのFileInputStreamクラス
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;    // プロパティファイルを扱うためのPropertiesクラス
 
 import javax.servlet.ServletContext;    // サーバ上の物理パスを取得するためのServletcontextインターフェース
@@ -40,6 +42,17 @@ public class Attribute extends HttpServlet {
             context.setAttribute(name,p.getProperty(name));
         }
         out.println("アプリケーション属性を設定しました。");
+
+        List<String> list=Collections.list(context.getAttributeNames());
+        for (String name : list) {
+            out.println("<p>"+name+" : ");
+            out.println(context.getAttribute(name));
+            out.println("</p>");
+        }
+
+
+
+
 
         Page.footer(out);
     }
