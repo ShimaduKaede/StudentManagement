@@ -47,7 +47,6 @@ public class TestListAction extends Action {
 		request.setAttribute("user", teacher);
         // "studentList"という名前でsubjectListリストをセット
 		request.setAttribute("studentList", studentList);
-		System.out.println(studentList);
         // SubjectDAOの生成
         SubjectDAO dao2 = new SubjectDAO();
         // SubjectDAOのfilterメソッドで学科を全件取得する
