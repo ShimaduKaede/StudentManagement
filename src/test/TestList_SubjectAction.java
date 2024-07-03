@@ -6,8 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.School;
+import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import bean.Test;
+import dao.StudentDAO;
+import dao.SubjectDAO;
 import dao.TestDAO;
 import tool.Action;
 import tool.Utl;
@@ -48,6 +52,28 @@ public class TestList_SubjectAction extends Action {
         request.setAttribute("subjectname", subjectname);
         request.setAttribute("ent_year", ent_year);
         request.setAttribute("class_num", class_num);
+
+
+
+
+        String schoolcd =teacher.getSchoolCd();
+
+		// StudentDAOの生成
+        StudentDAO dao1 = new StudentDAO();
+		List<Student> studentList = dao1.searchAll(schoolcd);
+
+
+		// セッションから引っ張ってきたユーザデータを変数userに登録
+		request.setAttribute("user", teacher);
+        // "studentList"という名前でsubjectListリストをセット
+		request.setAttribute("studentList", studentList);
+		System.out.println(studentList);
+        // SubjectDAOの生成
+        SubjectDAO dao2 = new SubjectDAO();
+        // SubjectDAOのfilterメソッドで学科を全件取得する
+        List<Subject> subjectList = dao2.filter(school);
+        // "studentList"という名前でsubjectListリストをセット
+		request.setAttribute("subjectList", subjectList);
 
         // FrontControllerを使用しているためreturn文でフォワードできる
         return "test_list_subject.jsp";

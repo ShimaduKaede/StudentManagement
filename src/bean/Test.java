@@ -115,5 +115,15 @@ public class Test implements Serializable {
 		this.studentNo=studentno;
 	}
 
+
+	// 科目名を取得(ゲット)メソッド
+	public String getSubjectCd() {
+		return subjectCd ;
+	}
+	// 科目名を設置（セット）メソッド
+	public void setSubjectCd(String subjectCd) {
+		this.subjectCd=subjectCd;
+	}
+
 }
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
 import bean.Test;
 
@@ -52,7 +53,7 @@ public class TestDAO extends DAO {
                 + "student.name from test "
                 + "join student on student.no=test.student_no "
                 + "join subject on subject.cd=test.subject_cd "
-                + "WHERE STUDENT_NO=?"
+                + "WHERE STUDENT_NO=?";
         PreparedStatement st = con.prepareStatement(baseSql);
         st.setString(1, studentCd);         // SQL文に学生コードをセット
         ResultSet rs = st.executeQuery();   // SQl実行
@@ -60,8 +61,8 @@ public class TestDAO extends DAO {
         while (rs.next()) {
             Test test = new Test();
             test.setStudentname(rs.getString("student.name"));
-            test.setStudent(rs.getString("STUDENT_NO"));
-            test.setSubject(rs.getString("SUBJECT_CD"));
+            test.setStudentno(rs.getString("STUDENT_NO"));
+            test.setSubjectCd(rs.getString("SUBJECT_CD"));
             test.setTestNo(rs.getInt("NO"));
             test.setPoint(rs.getInt("POINT"));
             test.setSubjectname(rs.getString("subject.name"));

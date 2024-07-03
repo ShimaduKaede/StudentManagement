@@ -14,6 +14,38 @@ import bean.Student;
 public class StudentDAO extends DAO {
     private String baseSql; // SQL文を確保する変数
 
+
+    // getメソッド
+    // 引数：sutudentNo
+    // 戻り値：Student
+    // 学生をIDで取得するメソッド
+    public List<Student> searchAll(String schoolCd) throws  Exception {
+    	List<Student> studentlist=new ArrayList<>();
+        Connection con=getConnection(); // DBへの接続
+        // SQL文
+        baseSql = "SELECT * FROM STUDENT WHERE school_cd=?";
+        PreparedStatement st=con.prepareStatement(baseSql);
+        st.setString(1,schoolCd);		// SQLに変数studentNoの値をセット
+        ResultSet rs=st.executeQuery();	// SQL実行
+
+		//StudentBeanをインスタンス化して情報をセット
+		Student student=new Student();
+
+        while (rs.next()) {
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
+			studentlist.add(student);
+		}
+
+        st.close();
+		con.close();    // DB切断
+
+		return studentlist;
+
+    }
+
+
+
     // getメソッド
     // 引数：sutudentNo
     // 戻り値：Student

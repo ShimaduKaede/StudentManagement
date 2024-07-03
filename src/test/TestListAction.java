@@ -22,7 +22,6 @@ public class TestListAction extends Action {
     	Utl utl = new Utl();
         // セッションから学校情報を取得
     	Teacher teacher = utl.getUser(request);
-    	boolean flg=false;
         // Schoolがnullの場合の処理
         if (teacher.getSchoolCd() == null) {
             // 適切なエラーメッセージを設定してエラーページにリダイレクト
@@ -36,17 +35,19 @@ public class TestListAction extends Action {
         School school = new School();
         school.setSchoolCd(teacher.getSchoolCd());
 
-        flg=true;
+
+        String schoolcd =teacher.getSchoolCd();
 
 		// StudentDAOの生成
         StudentDAO dao = new StudentDAO();
-		List<Student> studentList = dao.filter3(school,flg);
+		List<Student> studentList = dao.searchAll(schoolcd);
 
 
 		// セッションから引っ張ってきたユーザデータを変数userに登録
 		request.setAttribute("user", teacher);
         // "studentList"という名前でsubjectListリストをセット
 		request.setAttribute("studentList", studentList);
+		System.out.println(studentList);
         // SubjectDAOの生成
         SubjectDAO dao2 = new SubjectDAO();
         // SubjectDAOのfilterメソッドで学科を全件取得する

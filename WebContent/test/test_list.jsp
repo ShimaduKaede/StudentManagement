@@ -20,22 +20,28 @@
           <label for="f3">科目</label>
           <form action="TestList_Subject.action">
            <% @SuppressWarnings("unchecked")
-           List<Student> studentlist = (List<Student>) request.getAttribute("studentList")
+           List<Student> studentlist = (List<Student>) request.getAttribute("studentList");
 		   List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
 
             <select name="f1" id="f1">
+            <option value="null">------</option>
                   <% for (Student student: studentlist) { %>
-              <option value="<%=student.getEntYear() %>">2023</option>
+              <option value="<%=student.getEntYear() %>"><%=student.getEntYear() %></option>
               <% } %>
             </select>
 
             <select name="f2" id="f2">
-              <option value="131">131</option>
+            <option value="null">------</option>
+               <% for (Student student: studentlist) { %>
+              <option value="<%=student.getClassNum() %>"><%=student.getClassNum() %></option>
+              <% } %>
             </select>
 
             <select name="f3" id="f3">
-              <option value="国語">国語</option>
-              <option value="数学">数学</option>
+            <option value="null">------</option>
+               <% for (Subject subject: subjectlist) { %>
+              <option value="<%=subject.getSubjectName() %>"><%=subject.getSubjectName() %></option>
+              <% } %>
             </select>
 
             <button type="submit">検索</button>
