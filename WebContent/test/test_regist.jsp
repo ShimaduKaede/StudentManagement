@@ -23,7 +23,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </select>
 
                 <select name="f2" id="f2">
-                  <option value="101">101</option>
+                  <option value="131">131</option>
                 </select>
 
                 <select name="f3" id="f3">
