@@ -111,6 +111,8 @@ public class SubjectDAO extends DAO {
             st.setString(1, subject.getSchool().getSchoolCd());
             st.setString(2, subject.getSubjectCd());
 
+
+
             // deleteしたレコード件数が返ってくる
             int line = st.executeUpdate();
             return line > 0;
