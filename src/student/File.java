@@ -1,30 +1,34 @@
 package student;
 
-import tool.Page;
+import java.io.FileInputStream; // ファイルを読み込むためのFileInputStreamクラス
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.FileInputStream; // ファイルを読み込むためのFileInputStreamクラス
 import java.util.Properties;    // プロパティファイルを扱うためのPropertiesクラス
+
 import javax.servlet.ServletContext;    // サーバ上の物理パスを取得するためのServletcontextインターフェース
-import javax.servlet.ServletExceptiion;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import tool.Page;
 
 @WebServlet(urlPatterns={"/student/file"})
 public class File extends HttpServlet {
     public void doGet (
         HttpServletRequest request, HttpServletResponse response
-    ) throws ServletExceptiion, IOException {
+    ) throws ServletException, IOException {
         PrintWriter out=response.getWriter();
         Page.header(out);
 
         // getServletContextメソッドによりServletContextオブジェクトを取得
         ServletContext context=getServletContext();
         // 設定ファイルのサーバ上のパスを取得
-        // getRealPathメソッドの引数にはコンテキストルートを起点とするパスを指定 
+        // getRealPathメソッドの引数にはコンテキストルートを起点とするパスを指定
         String path=context.getRealPath("/WEB-INF/setting.txt");
         // 設定ファイルを開く
-        FileInputStream in=new FileInputStream(path);   
+        FileInputStream in=new FileInputStream(path);
         // Propertiesクラスのインスタンスを生成
         Properties p=new Properties();
         // loadメソッドを使ってファイルを読み込む
@@ -39,5 +43,5 @@ public class File extends HttpServlet {
         }
         Page.footer(out);
     }
-    
+
 }
