@@ -36,10 +36,15 @@ public class File extends HttpServlet {
         in.close();
         // Propertiesオブジェクトに保存された名前の一覧を取得する
         // stringPropertyNamesメソッドを使用
+        // CSVファイルのデータを1行ずつ読み込んでいる
         for (String list : p.stringPropertyNames()) {
-            // 名前と値の組を出力
-            // Propertiesオブジェクトから値を取得(getPropertyメソッド使用)
-            out.println("<p>list名 : "+list+"</p>");
+            // listデータの文字化けをなおす
+            
+            // 1行のデータをカンマ","で区切る(listからdiv_listへ)
+            String[] div_list = list.split(",");
+            for (int j=0;j<div_list.length;j++){
+                System.out.println(div_list[j]);
+            }
         }
         Page.footer(out);
     }
