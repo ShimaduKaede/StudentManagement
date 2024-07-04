@@ -18,7 +18,7 @@ import tool.Page;
 
 
 @WebServlet(urlPatterns={"/student/file"})
-public class File extends HttpServlet {
+public class CsvFileRead extends HttpServlet {
     public void doGet (
         HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
