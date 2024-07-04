@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tool.Page;
-
+import tool.Action;
 
 @WebServlet(urlPatterns={"/student/file"})
-public class File extends HttpServlet {
-    public void doGet (
-        HttpServletRequest request, HttpServletResponse response
-    ) throws ServletException, IOException {
+public class CsvFileReadAction extends Action {
+	public String execute(
+		HttpServletRequest request, HttpServletResponse response
+	) throws Exception {
         PrintWriter out=response.getWriter();
         Page.header(out);
 
