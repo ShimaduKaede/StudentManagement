@@ -98,6 +98,33 @@ public class TestDAO extends DAO {
         return ListSubject;
     }
 
+
+
+    public List<Test> Listregist(int ent_year,String class_num,String subject_name,int no) throws Exception {
+        List<Test> Listregist = new ArrayList<>();
+        Connection con = getConnection();
+        baseSql = "select test.student_no,student.name,test.subject_cd,test.point from test join student on test.student_no=student.no join subject on test.subject_cd=subject.cd where student.ent_year=? and student.class_num=? and subject.name=? and test.no=? ";
+        PreparedStatement st = con.prepareStatement(baseSql);
+        st.setInt(1, ent_year);         // SQL文に入学年度をセット
+        st.setString(2, class_num);     // SQL文にクラス番号をセット
+        st.setString(3, subject_name);  // SQL文に科目名をセット
+        st.setInt(4, no);
+
+        ResultSet rs = st.executeQuery();   // SQL実行
+
+        while (rs.next()) {
+            Test test = new Test();
+            test.setStudentno(rs.getString("test.student_no"));
+            test.setStudentname(rs.getString("student.name"));
+            test.setPoint(rs.getInt("POINT"));
+
+            Listregist.add(test);
+        }
+        System.out.println(Listregist);
+        return Listregist;
+    }
+
+
     public List<Test> get(String studentNo, String subjectCd, String schoolCd, int no
     ) throws Exception {
     	List<Test> tests = new ArrayList<>();
