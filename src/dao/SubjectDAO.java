@@ -133,7 +133,10 @@ public class SubjectDAO extends DAO {
             stmt.setString(1, subject.getSubjectName());
             stmt.setString(2, subject.getSchoolCd());
             stmt.setString(3, subject.getSubjectCd());
+
+            System.out.println("Executing SQL: " + stmt); // SQLステートメントのログを追加
             return stmt.executeUpdate() > 0;
         }
     }
 }
+

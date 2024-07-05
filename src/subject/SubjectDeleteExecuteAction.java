@@ -16,6 +16,8 @@ public class SubjectDeleteExecuteAction extends Action {
         // リクエストから科目コードを取得
         String subjectCd = request.getParameter("subjectCd");
         String subjectName = request.getParameter("subjectName");
+
+
         // セッションから学校情報を取得
         Utl utl = new Utl();
         Teacher user = utl.getUser(request); // ログインユーザーを取得
