@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Student;
+import dao.StudentDAO;
 import tool.Page;
-
+import tool.Utl;
+import tool.Action;
+import tool.FrontController;
 
 @WebServlet(urlPatterns={"/student/file"})
 public class CsvFileRead extends HttpServlet {
@@ -40,13 +44,27 @@ public class CsvFileRead extends HttpServlet {
             while ((line = br.readLine()) != null) {
                 // 1行のデータをカンマ","で区切る
                 String[] values = line.split(",");
-
-                for (String value : values) {
-                    System.out.println(value);
-                }
+                // valuesの値を各項目にセットする
+                // DAOに送るために、データをStudent型の変数studentにセットする
+                Student student = new Student();
+                student.setStudentNo(values[0]);    // 学生番号
+                student.setStudentName(values[1]);  // 氏名
+                student.setEntYear((int)values[2]); // 入学年度
+                student.setClassNum(values[3]);     // クラス番号
+                student.setIsAttend((boolean)values[4]);    // 在学中フラグ
+                student.setSchoolCd(values[5]);     // 学校コード
+        
+                // 受け取ったデータを登録するためにStudentDAOを呼び出す
+                StudentDAO dao = new StudentDAO();
+        
+                // StudentDAOのsave(Student)メソッドで登録する
+                dao.save(student);
             }
         }
         Page.footer(out);
-    }
+
+		// FrontControllerを使用しているためreturn文でフォワードできる
+		return "student_create_done.jsp";
+	}
 
 }
