@@ -14,8 +14,10 @@
     <div id="header">
       <h1>得点管理システム</h1>
       <div id="logout-name">
-        <span>(名前)様</span>
+      	<% if (session.getAttribute("user") != null){%>
+        <span>${user.teacherName}様</span>
         <a href="Logout.action">ログアウト</a>
+        <%}%>
       </div>
     </div>
 
