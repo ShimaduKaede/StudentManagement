@@ -16,7 +16,7 @@
       <div id="logout-name">
       	<% if (session.getAttribute("user") != null){%>
         <span>${user.teacherName}様</span>
-        <a href="Logout.action">ログアウト</a>
+        <a href="account/Logout.action">ログアウト</a>
         <%}%>
       </div>
     </div>
