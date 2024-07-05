@@ -40,7 +40,7 @@ public class SubjectUpdateExecuteAction extends Action {
         if (success) {
             request.setAttribute("message", "更新に成功しました");
         } else {
-            request.setAttribute("message", "更新に失敗しました");
+            request.setAttribute("message", "更新に失敗しました: 重複する科目コードが存在します");
         }
 
         // 結果を表示するJSPページを返す

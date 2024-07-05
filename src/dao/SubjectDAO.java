@@ -136,6 +136,9 @@ public class SubjectDAO extends DAO {
 
             System.out.println("Executing SQL: " + stmt); // SQLステートメントのログを追加
             return stmt.executeUpdate() > 0;
+
+
+
         }
     }
 }
