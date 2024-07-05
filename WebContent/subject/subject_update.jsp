@@ -1,6 +1,7 @@
 <!-- 科目変更 -->
-<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
 
@@ -8,11 +9,12 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     <h2>科目情報変更</h2>
     <div id="update">
       <!-- 正しく入力されていたら科目登録完了画面に遷移 -->
-      <form action="SubjectUpateExecute.action">
+      <form action="SubjectUpdateExecute.action">
         <label for="cd">科目コード</label>
-        <p id="cd">"${subjectCd}"</p>
+        <p id="cd">${subjectCd}</p>
         <label for="name">科目名</label>
-        <input type="text" name="name" id="id" required value="${subjectName}" />
+        <input required type="text" name="name" id="name" value="${subjectName}"/>
+        <input type="hidden" name="cd" value="${subjectCd}">
         <div id="change">
           <button type="submit">変更</button>
         </div>
