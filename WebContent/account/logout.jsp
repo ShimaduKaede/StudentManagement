@@ -9,7 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <p>ログアウトしました</p>
       <br />
       <br />
-      <a href="">ログイン</a>
+      <a href="login.jsp">ログイン</a>
     </div>
   </div>
 </div>
