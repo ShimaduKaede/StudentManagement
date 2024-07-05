@@ -41,10 +41,10 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <!-- クラス -->
           <div id="classselect">
             <label for="f2">クラス</label><br />
-            <select name="class_num" id="class_num">
+            <select id="class_num" name="class_num">
               <option value="">--------</option>
               <c:forEach var="classItem" items="${classes}">
-              <option value="${classItem.id}">${classItem.name}</option>
+                  <option value="${classItem}">${classItem}</option>
               </c:forEach>
             </select>
           </div>
@@ -85,4 +85,3 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
   </div>
 </div>
 
-<p><%@include file="../footer.jsp" %></p>

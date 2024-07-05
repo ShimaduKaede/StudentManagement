@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.School;
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDAO;
 import dao.StudentDAO;
 import tool.Action;
 import tool.Utl;
@@ -20,6 +21,19 @@ public class StudentListAction extends Action {
 		Utl utl = new Utl();
 		Teacher teacher=new Teacher();
 		teacher = utl.getUser(request);
+
+
+		// ①ClassNumDAOを生成
+		ClassNumDAO classNumDAO = new ClassNumDAO();
+
+		// ②Schoolビーンを生成 （ClassNumDAOの引数で必要）
+		School school2 = new School();
+
+		// ③SchoolのschoolCdにユーザーの所属学校を設定
+		school2.setSchoolCd(teacher.getSchoolCd());
+
+		// ④ClassNumDAOのfilter(school)を呼び出してクラス一覧List<String> classesを取得
+		List<String> classes = classNumDAO.filter(school2);
 
         // Schoolがnullの場合の処理
         if (teacher.getSchoolCd() == null) {
@@ -49,6 +63,8 @@ public class StudentListAction extends Action {
 		request.setAttribute("studentList", studentList);
 		// 検索結果の件数をセット
         request.setAttribute("resultCount", studentList.size());
+        // ⑤setSttributeでclassesにクラス一覧を設定
+        request.setAttribute("classes", classes);
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
 		return "student_list.jsp";
