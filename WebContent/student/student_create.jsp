@@ -35,6 +35,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         <p class="ent-year-error" style="color:orange">${message}</p>
         <label for="no"><p>学生番号</p></label>
         <input required type="number" name="no" id="no" value="${no}" />
+        <p class="ent-year-error" style="color:orange">${message2}</p>
         <label for="name"><p>氏名</p></label>
         <input required type="text" name="name" id="name" value="${name}" />
         <label for="class_num"><p>クラス</p></label>
@@ -52,7 +53,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 		    </c:forEach>
 		</select>
         <button type="submit" name="end">登録して終了</button>
-        <!-- CSVファイルの指定＆登録ボタンを作成する 
+        <!-- CSVファイルの指定＆登録ボタンを作成する
         <input type="submit" name="end">登録して終了</い>
         <button type="submit" name="end">登録して終了</button>
         -->
