@@ -35,14 +35,10 @@ public class SubjectCreateExecuteAction extends Action {
         // 登録成功かどうかでメッセージを設定
         if (success) {
             request.setAttribute("message", "登録しました");
+            return "subject_create_done.jsp";
         } else {
-            request.setAttribute("message", "登録に失敗しました");
+            request.setAttribute("error_message", "科目コードが重複しています。");
+            return "subject_create.jsp"; // 適切なエラーページにリダイレクト
         }
-
-        // 遷移先のJSPを返す
-        return "subject_create_done.jsp";
     }
 }
-
-
-

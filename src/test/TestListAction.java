@@ -43,6 +43,7 @@ public class TestListAction extends Action {
 		List<Student> studentList = dao.searchAll(schoolcd);
 
 
+
 		// セッションから引っ張ってきたユーザデータを変数userに登録
 		request.setAttribute("user", teacher);
         // "studentList"という名前でsubjectListリストをセット

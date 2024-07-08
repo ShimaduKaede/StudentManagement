@@ -9,7 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <form action="StudentCreateExecute.action">
         <label for="ent_year"><p>入学年度</p></label>
         <select name="ent_year" id="ent_year">
-          <option value="">--------</option>
+          <option value="0">--------</option>
           <option value="2014">2014年度</option>
           <option value="2015">2015年度</option>
           <option value="2016">2016年度</option>
@@ -32,19 +32,28 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <option value="2033">2033年度</option>
           <option value="2034">2034年度</option>
         </select>
+        <p class="ent-year-error" style="color:orange">${message}</p>
         <label for="no"><p>学生番号</p></label>
-        <input required type="number" name="no" id="no" />
+        <input required type="number" name="no" id="no" value="${no}" />
+        <p class="ent-year-error" style="color:orange">${message2}</p>
         <label for="name"><p>氏名</p></label>
-        <input required type="text" name="name" id="name" />
+        <input required type="text" name="name" id="name" value="${name}" />
         <label for="class_num"><p>クラス</p></label>
-        <select id="class_num" name="class_num">
-            <option value="">--------------</option>
-            <c:forEach var="classItem" items="${classes}">
-                <option value="${classItem}">${classItem}</option>
-            </c:forEach>
-        </select>
+		<select id="class_num" name="class_num">
+		    <option value="">--------------</option>
+		    <c:forEach var="classItem" items="${classes}">
+		        <c:choose>
+		            <c:when test="${classItem eq class_num}">
+		                <option value="${classItem}" selected="selected">${classItem}</option>
+		            </c:when>
+		            <c:otherwise>
+		                <option value="${classItem}">${classItem}</option>
+		            </c:otherwise>
+		        </c:choose>
+		    </c:forEach>
+		</select>
         <button type="submit" name="end">登録して終了</button>
-        <!-- CSVファイルの指定＆登録ボタンを作成する 
+        <!-- CSVファイルの指定＆登録ボタンを作成する
         <input type="submit" name="end">登録して終了</い>
         <button type="submit" name="end">登録して終了</button>
         -->
