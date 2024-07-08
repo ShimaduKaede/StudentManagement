@@ -1,10 +1,14 @@
 package student;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.School;
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDAO;
 import dao.StudentDAO;
 import tool.Action;
 import tool.Utl;
@@ -26,7 +30,22 @@ public class StudentCreateExecuteAction extends Action {
         int entYear = Integer.parseInt(request.getParameter("ent_year")); // 入学年度
         String studentNo = request.getParameter("no"); // 学生番号
         String classNum = request.getParameter("class_num"); // クラス番号
+        System.out.println("entYear:"+entYear);
 
+        // if文でentYearが空値かを確認する
+        if (entYear == 0 ) {
+        	request.setAttribute("message", "入学年度を選択してください");
+        	request.setAttribute("name", name);
+        	request.setAttribute("no", studentNo);
+        	request.setAttribute("class_num", classNum);
+        	ClassNumDAO dao = new ClassNumDAO();
+        	School school = new School();
+    		school.setSchoolCd(user.getSchoolCd());
+    		List<String> classes = dao.filter(school);
+    		request.setAttribute("classes", classes);
+        	return "student_create.jsp";
+
+        }
 		// 受け取ったデータをStudentDAOのsaveメソッドで渡すためにStudentビーンをインスタンス化
 		// Studentのセッターメソッドを使用して、送られてきたデータをビーンにセット
         Student student = new Student();
