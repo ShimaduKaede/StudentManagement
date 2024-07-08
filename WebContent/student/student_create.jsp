@@ -53,11 +53,14 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 		    </c:forEach>
 		</select>
         <button type="submit" name="end">登録して終了</button>
-        <!-- CSVファイルの指定＆登録ボタンを作成する
-        <input type="submit" name="end">登録して終了</い>
-        <button type="submit" name="end">登録して終了</button>
-        -->
-      </form>
+    </form>
+    <form action="StudentCsvFileRead.action"  method="post">
+            <!-- CSVファイルの指定＆登録ボタンを作成する -->
+            <br>
+            <label for="csvfilepass">読み込みたいCSVファイルを選択してください。</label>
+            <input type="file" id="csvfilepass" name="csvfilepass" accept=".csv" />
+            <button type="submit">CSV読込</button>
+    </form>
 
       <a href="">戻る</a>
     </div>
