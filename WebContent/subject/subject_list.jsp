@@ -1,11 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../header.jsp" %>
-<%@ include file="sidebar.jsp" %>
+
 <%@ page import="bean.Subject" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-
+<div id="main">
+  <%@ include file="sidebar.jsp" %>
+  <div id="contents">
 <h2>科目管理</h2>
 <a href="SubjectCreate.action" class="btn btn-secondary">新規登録</a>
 <table>
@@ -40,5 +42,6 @@
   }
   %>
 </table>
-
+</div>
+</div>
 <%@ include file="../footer.jsp" %>
