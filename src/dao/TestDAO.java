@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
-import bean.Student;
-import bean.Subject;
 import bean.Test;
 
 public class TestDAO extends DAO {
@@ -27,8 +25,8 @@ public class TestDAO extends DAO {
 
         while (rs.next()) {
             Test t = new Test();
-            t.setStudent(rs.getString("STUDENT_NO"));
-            t.setSubject(rs.getString("SUBJECT_CD"));
+            t.setStudentno(rs.getString("STUDENT_NO"));
+            t.setSubjectCd(rs.getString("SUBJECT_CD"));
             t.setTestNo(rs.getInt("NO"));
             t.setPoint(rs.getInt("POINT"));
 
@@ -103,20 +101,22 @@ public class TestDAO extends DAO {
     public List<Test> Listregist(int ent_year,String class_num,String subject_name,int no) throws Exception {
         List<Test> Listregist = new ArrayList<>();
         Connection con = getConnection();
-        baseSql = "select test.student_no,student.name,test.subject_cd,test.point from test join student on test.student_no=student.no join subject on test.subject_cd=subject.cd where student.ent_year=? and student.class_num=? and subject.name=? and test.no=? ";
+        baseSql = "SELECT student.no, student.name, test.subject_cd, test.point, subject.name AS subject_name FROM student LEFT JOIN test ON student.no = test.student_no AND (test.no = ? OR test.no IS NULL) LEFT JOIN subject ON test.subject_cd = subject.cd WHERE student.ent_year = ? AND student.class_num = ? AND (subject.name = ? OR subject.name IS NULL)";
         PreparedStatement st = con.prepareStatement(baseSql);
-        st.setInt(1, ent_year);         // SQL文に入学年度をセット
-        st.setString(2, class_num);     // SQL文にクラス番号をセット
-        st.setString(3, subject_name);  // SQL文に科目名をセット
-        st.setInt(4, no);
+        st.setInt(1, no);
+        st.setInt(2, ent_year);         // SQL文に入学年度をセット
+        st.setString(3, class_num);     // SQL文にクラス番号をセット
+        st.setString(4, subject_name);  // SQL文に科目名をセット
+
 
         ResultSet rs = st.executeQuery();   // SQL実行
 
         while (rs.next()) {
             Test test = new Test();
-            test.setStudentno(rs.getString("test.student_no"));
+            test.setStudentno(rs.getString("student.no"));
             test.setStudentname(rs.getString("student.name"));
             test.setPoint(rs.getInt("POINT"));
+            test.setSubjectCd(rs.getString("test.subject_cd"));
 
             Listregist.add(test);
         }
@@ -144,123 +144,55 @@ public class TestDAO extends DAO {
 
         while (rs.next()) {
             Test test = new Test();
-                rs.getString("STUDENT_NO");
-                rs.getString("SUBJECT_CD");
-                rs.getString("SCHOOL_CD");
-                rs.getInt("CLASS_NUM");
-                rs.getObject("POINT", Integer.class);
-                rs.getInt("NO");
+            test.setPoint(rs.getInt("POINT"));
+
             tests.add(test);
         }
-
-        rs.close();
-        st.close();
-        con.close();
-
+        System.out.println(tests);
         return tests;
     }
 
-    public List<Test> filter(String classNum, String subjectCd, int no, String schoolCd,int entYear
-    ) throws Exception {
-        List<Test> tests = new ArrayList<>();
+    // insert文
+    public boolean Insert(String classNum, String subjectname, int no, String schoolCd,String studentno,int point) throws Exception {
         Connection con = getConnection();
-        // SQL文
-        baseSql = "SELECT SUTUDENT_NO,SUBJECT_CD,SCHOOL_CD,NO,POINT "
-                + "CLASS_NUM "
-                + "FROM TEST "
-                + "join student on test.student_no=student.no "
-                + "WHERE test.CLASS_NUM = ? AND test.SUBJECT_CD = ? "
-                + "AND test.NO = ? AND test.SCHOOL_CD = ? "
-                + "AND student.ent_year=?";
+     // SQL文
+        System.out.println(subjectname);
+        baseSql = "insert into test (student_no,subject_cd,school_cd,no,point,class_num)  values (?,(select cd from subject where name=?),?,?,?,?)";
         PreparedStatement st = con.prepareStatement(baseSql);
-        st.setString(1, classNum);  // SQL文にクラス番号をセット
-        st.setString(2, subjectCd); // SQL文に科目コードをセット
-        st.setInt(3, no);           // SQL文に回数をセット
-        st.setString(4, schoolCd);  // SQL文に学校コードをセット
-        st.setInt(5,entYear);       // SQL文に入学年度をセット
-        ResultSet rs = st.executeQuery();   // SQL実行
 
-        while (rs.next()) {
-            Test test = new Test();
-                rs.getString("STUDENT_NO");
-                rs.getString("SUBJECT_CD");
-                rs.getString("SCHOOL_CD");
-                rs.getInt("CLASS_NUM");
-                rs.getObject("POINT", Integer.class);
-                rs.getInt("NO");
-            tests.add(test);
-        }
-
-        rs.close();
-        st.close();
-        con.close();
-
-        return tests;
-    }
-
-    public boolean save1(List<Test> list) throws Exception {
-        Connection con = getConnection();
-        for (Test test : list) {
-            save2(test,con);
-        }
-        return true;
-    }
-
-    public boolean save2(Test test, Connection con) throws Exception {
-        // SQL文
-        baseSql = "UPDATE TEST SET "
-                + "STUDENT_NO=?, "
-                + "SUBJECT_CD=?, "
-                + "SCHOOL_CD=?, "
-                + "NO=?, "
-                + "POINT=?, "
-                + "CLASS_NUM=? ";
-        PreparedStatement st = con.prepareStatement(baseSql);
-        Student student = new Student();
-        student = test.getStudent();
-        Subject subject = new Subject();
-        subject = test.getSubject();
-        String testNo = (String) test.gettestNo();
-        String point = (String) test.getPoint();
-
-        st.setString(1, student.studentNo); // SQL文に学生番号をセット
-        st.setString(2, subject.subjectCd); // SQL文に科目コードをセット
-        st.setString(3, student.schoolCd);  // SQL文に学校コードをセット
-        st.setString(4, testNo);            // SQL文に回数をセット
-        st.setObject(5, point);             // SQL文に得点をセット
-        st.setString(6, student.classNum);  // SQL文にクラス番号をセット
+        st.setString(1, studentno); // SQL文に学生番号をセット
+        st.setString(2, subjectname); // SQL文に科目名をセット
+        st.setString(3, schoolCd);  // SQL文に学校コードをセット
+        st.setInt(4, no);            // SQL文に回数をセット
+        st.setInt(5, point);		//点数をセット
+        st.setString(6, classNum);  // SQL文にクラス番号をセット
         st.executeUpdate(); // SQL実行
 
         st.close();
         con.close();
-
         return true;
+
     }
 
-    public boolean delete1(List<Test> list) throws Exception {
+    // update文
+    public boolean Update(String classNum, String subjectCd, int no, String schoolCd,String studentno,int point) throws Exception {
         Connection con = getConnection();
-        for (Test test : list) {
-            delete2(test,con);
-        }
-        return true;
-    }
-
-    public boolean delete2(Test test,Connection con) throws Exception {
-        // SQL文
-        baseSql = "DELETE FROM TEST WHERE STUDENT_NO = ? "
-                + "AND SUBJECT_CD = ? AND SCHOOL_CD = ? "
-                + "AND NO = ?";
+    	// SQL文
+        baseSql = "UPDATE TEST SET "
+                + "point=? where "
+                + "SUBJECT_CD=? and "
+                + "SCHOOL_CD=? and "
+                + "student_no=? and "
+                + "NO=? and "
+                + "CLASS_NUM=? ";
         PreparedStatement st = con.prepareStatement(baseSql);
-        Student student = new Student();
-        student = test.getStudent();
-        Subject subject = new Subject();
-        subject = test.getSubject();
-        String testNo = (String) test.gettestNo();
 
-        st.setString(1, student.studentNo); // SQL文に学生番号をセット
-        st.setString(2, subject.subjectCd); // SQL文に科目コードをセット
-        st.setString(3, student.schoolCd);  // SQL文に学校コードをセット
-        st.setString(4, testNo);            // SQL文に回数をセット
+        st.setInt(1, point);
+        st.setString(2, subjectCd); // SQL文に科目コードをセット
+        st.setString(3, schoolCd);  // SQL文に学校コードをセット
+        st.setString(4, studentno); // SQL文に学生番号をセット
+        st.setInt(5, no);            // SQL文に回数をセット
+        st.setString(6, classNum);  // SQL文にクラス番号をセット
         st.executeUpdate(); // SQL実行
 
         st.close();

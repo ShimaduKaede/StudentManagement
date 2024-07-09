@@ -33,6 +33,7 @@ if (teacher.getSchoolCd() == null) {
 request.setAttribute("error", "学校情報が見つかりません。再度ログインしてください。");
 return "error.jsp";
 }
+// teacherから学校コードを取り出す
 School school = new School();
 school.setSchoolCd(teacher.getSchoolCd());
 String schoolcd =teacher.getSchoolCd();
@@ -41,10 +42,14 @@ String schoolcd =teacher.getSchoolCd();
 StudentDAO dao = new StudentDAO();
 List<Student> studentList = dao.searchAll(schoolcd);
 
+
+//以下searchプルダウンの生成
+
 // セッションから引っ張ってきたユーザデータを変数userに登録
 request.setAttribute("user", teacher);
 // "studentList"という名前でsubjectListリストをセット
 request.setAttribute("studentList", studentList);
+
 // SubjectDAOの生成
 SubjectDAO dao2 = new SubjectDAO();
 // SubjectDAOのfilterメソッドで学科を全件取得する
@@ -59,23 +64,28 @@ List<String> classNumList = c_dao.filter(school);
 
 request.setAttribute("classNumList", classNumList);
 
+// プルダウンから入力された入力情報の取得
 try{
 int ent_year = Integer.parseInt(request.getParameter("f1"));
 String class_num = request.getParameter("f2");
 String subject_name = request.getParameter("f3");
 int no = Integer.parseInt(request.getParameter("f4"));
 
-if (ent_year==0){
+
+//どれか一つでも入力されなかったとき->もう一度入力されるようにtest_regist.jspに遷移
+if (ent_year==0 || class_num==null || subject_name==null || no==0){
 	List<Test> testregistList = null;
 	request.setAttribute("testregistList", testregistList);
 	return "test_regist.jsp";
 }
+// 入力されていたとき
 else{
 	request.setAttribute("ent_year", ent_year);
 	request.setAttribute("class_num", class_num);
 	request.setAttribute("subject_name", subject_name);
 	request.setAttribute("no", no);
 
+	// 入力された情報から検索(studentテーブル全て出されるようにする)
 	TestDAO dao1 = new TestDAO();
 	List<Test> testregistList = dao1.Listregist(ent_year,class_num,subject_name,no);
 	request.setAttribute("testregistList", testregistList);

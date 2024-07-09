@@ -58,10 +58,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
          <%
          @SuppressWarnings("unchecked")
   			List<Test> testregistList = (List<Test>) request.getAttribute("testregistList");
-  			if (testregistList != null) { %>
+         int index=0;
+         if (testregistList != null) { %>
 
       <div id="search_result">
-      <form action=TestRegistExecute.action">
+      <form action="TestRegistExecute.action">
       <p>科目:${subject_name}(${no}回)</p>
       <table>
         <tr>
@@ -73,19 +74,30 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </tr>
 
     		<% for (Test test : testregistList) {
+    			index++;
   			%>
         <tr>
           <td>${ent_year}</td>
           <td>${class_num}</td>
           <td><%= test.getStudentno() %></td>
           <td><%= test.getStudentname() %></td>
-          <td><input type="text" name="" id="" value="<%=test.getPoint() %>" /></td>
+          <td><input type="number" name="point<%=index %>" id="point<%=index %>" value="<%=test.getPoint() %>" min="0" max="100" /></td>
         </tr>
+
+
+
+		<input type="hidden" name="ent_year<%=index %>" id="ent_year<%=index %>" value="${ent_year}">
+		<input type="hidden" name="class_num<%=index %>" id="class_num<%=index %>" value="${class_num}">
+		<input type="hidden" name="studentno<%=index %>" id="studentno<%=index %>" value="<%= test.getStudentno() %>">
+        <input type="hidden" name="subjectcd<%=index %>" id="subjectcd<%=index %>" value="<%= test.getSubjectCd() %>">
+        <input type="hidden" name="no<%=index %>" id="no<%=index %>" value="${no}">
+        <input type="hidden" name="subject_name<%=index %>" id="subject_name<%=index %>" value="${subject_name}">
 
         <%
         }
         %>
-                      </table>
+        <input type="hidden" name="index" id="index" value="<%=index %>">
+        </table>
         <button type="submit">登録して完了</button>
         </form>
         <%
