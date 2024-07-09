@@ -26,6 +26,20 @@ public class SubjectCreateExecuteAction extends Action {
         subject.setSubjectCd(subjectCd);
         subject.setSubjectName(subjectName);
 
+        // エラーチェック
+        String[] errorMessages = {
+            (subjectCd.length() > 3) ? "科目コードは3文字で入力してください。" : null,
+            (subjectCd.length() < 3) ? "科目コードは3文字で入力してください。" : null
+        };
+
+        // エラーメッセージを設定する
+        for (String errorMessage : errorMessages) {
+            if (errorMessage != null) {
+                request.setAttribute("error_message", errorMessage);
+                return "subject_create.jsp";
+            }
+        }
+
         // SubjectDAOインスタンスを生成
         SubjectDAO dao = new SubjectDAO();
 
@@ -38,7 +52,7 @@ public class SubjectCreateExecuteAction extends Action {
             return "subject_create_done.jsp";
         } else {
             request.setAttribute("error_message", "科目コードが重複しています。");
-            return "subject_create.jsp"; // 適切なエラーページにリダイレクト
+            return "subject_create.jsp";
         }
     }
 }

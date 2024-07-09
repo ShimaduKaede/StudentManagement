@@ -42,6 +42,7 @@ public class SubjectDeleteExecuteAction extends Action {
 
         } else {
             request.setAttribute("message", "削除に失敗しました");
+            return "subject_delete.jsp";
         }
 
         // 結果を表示するJSPページを返す
