@@ -8,13 +8,13 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
     <div id="student_list">
       <h2>学生管理</h2>
       <a href="StudentCreate.action"><p>新規登録</p></a>
-      <form action="StudentCreateExecute.action">
+      <form action="StudentSearch.action">
         <div id="search">
           <div id="entyearselect">
             <!-- 入学年度 -->
             <label for="f1">入学年度</label><br />
             <select name="f1" id="f1">
-              <option value="">--------</option>
+              <option value="0">--------</option>
               <option value="2014">2014年度</option>
               <option value="2015">2015年度</option>
               <option value="2016">2016年度</option>
@@ -41,7 +41,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           <!-- クラス -->
           <div id="classselect">
             <label for="f2">クラス</label><br />
-            <select id="class_num" name="class_num">
+            <select id="class_num" name="f2">
               <option value="">--------</option>
               <c:forEach var="classItem" items="${classes}">
                   <option value="${classItem}">${classItem}</option>
@@ -49,8 +49,8 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             </select>
           </div>
           <!-- 在学中のチェックボックス -->
-
-          <input type="checkbox" name="f3" id="f3" />
+		  <!-- チェックが入るとvalueの1が送信される -->
+          <input type="checkbox" name="f3" id="f3" value="true"/>
           <label for="f3">在学中</label>
           <button type="submit">絞込み</button>
         </div>
