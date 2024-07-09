@@ -18,9 +18,9 @@ import bean.Student;
 import dao.StudentDAO;
 import tool.Page;
 
-@WebServlet(urlPatterns={"/student/file"})
-public class CsvFileRead extends HttpServlet {
-    	public void doGet (
+@WebServlet(urlPatterns={"/student/StudentCsvFileReadAction"})
+public class StudentCsvFileReadAction {
+    public void doGet (
     			HttpServletRequest request, HttpServletResponse response
     		) throws ServletException, IOException {
 
