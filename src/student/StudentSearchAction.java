@@ -45,10 +45,11 @@ public class StudentSearchAction extends Action {
         // バリデーションチェック
         // entYear,classNum,isAttend全てnullの時 全学生を取得して一覧表示
         if (entYear == 0 && "0".equals(classNum) && isAttend == false) {
-        	System.out.println("--------------------------------");
+        	System.out.println("バリデーションチェック１の中");
             List<Student> studentList = studentDAO.searchAll(user.getSchoolCd());
             request.setAttribute("studentList", studentList);
-
+         // 検索結果の件数をセット
+            request.setAttribute("resultCount", studentList.size());
             return "student_list.jsp";
         }
         System.out.println("entYear:"+entYear);
@@ -60,10 +61,37 @@ public class StudentSearchAction extends Action {
             request.setAttribute("message", "入学年度を設定してください");
             List<Student> studentList = studentDAO.searchAll(user.getSchoolCd());
             request.setAttribute("studentList", studentList);
+            System.out.println("バリデーションチェック２の中");
+         // 検索結果の件数をセット
+            request.setAttribute("resultCount", studentList.size());
             return "student_list.jsp";
         }
 
+        // 入学年度のみで絞り込み
+        if (entYear != 0 && "0".equals(classNum) && isAttend == false) {
+            List<Student> studentList = studentDAO.filter4(school, entYear);
+            request.setAttribute("studentList", studentList);
+            System.out.println("filter4の中");
+         // 検索結果の件数をセット
+            request.setAttribute("resultCount", studentList.size());
+            return "student_list.jsp";
+        }
 
+        // 在学フラグのみで絞り込み
+        // if文でentYearが設定されていなくて、classNumも設定されていなくて、（isAttendがfalseまたはtrue）の時
+        // studentDAOのfilter3を呼び出して、studentListをsetAttributeで渡す
+        if (entYear == 0 && "0".equals(classNum) && (isAttend == true || isAttend == false)) {
+            List<Student> studentList = studentDAO.filter3(school, isAttend);
+            request.setAttribute("studentList", studentList);
+            System.out.println("filter3の中");
+         // 検索結果の件数をセット
+            request.setAttribute("resultCount", studentList.size());
+            return "student_list.jsp";
+        }
+
+        // 入学年度と在学フラグで絞り込み
+        // if文でentYearが設定されていて、classNumも設定されていなくて、（isAttendがfalseまたはtrue）の時
+        // studentDAOのfilter2を呼び出して、studentListをsetAttributeで渡す
 
 
 		// StudentDAOのfilter1メソッドを呼び出して対象の学生リストを取得 filter1(School school,int entYear,String classNum,boolean isAttend)
@@ -73,6 +101,7 @@ public class StudentSearchAction extends Action {
         request.setAttribute("studentList", studentList);
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
+        System.out.println("最後のreturn");
 		return "student_list.jsp";
 	}
 }

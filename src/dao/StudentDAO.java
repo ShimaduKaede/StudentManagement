@@ -53,32 +53,32 @@ public class StudentDAO extends DAO {
     // 引数：sutudentNo
     // 戻り値：Student
     // 学生をIDで取得するメソッド
-    public Student get(String studentNo) throws  Exception {
+    public Student get(String studentNo) throws Exception {
 
-        Connection con=getConnection(); // DBへの接続
+        Connection con = getConnection(); // DBへの接続
         // SQL文
-        baseSql = "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD FROM STUDENT WHERE NO = ?";
-        PreparedStatement st=con.prepareStatement(baseSql);
-        st.setString(1,studentNo);		// SQLに変数studentNoの値をセット
-        ResultSet rs=st.executeQuery();	// SQL実行
+        baseSql = "SELECT NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD FROM STUDENT WHERE NO = ?";
+        PreparedStatement st = con.prepareStatement(baseSql);
+        st.setString(1, studentNo); // SQLに変数studentNoの値をセット
+        ResultSet rs = st.executeQuery(); // SQL実行
 
-		//StudentBeanをインスタンス化して情報をセット
-		Student student=new Student();
+        // StudentBeanをインスタンス化して情報をセット
+        Student student = null;
 
-        while (rs.next()) {
-			student.setStudentNo(rs.getString("NO"));
-			student.setStudentName(rs.getString("NAME"));
-			student.setEntYear(rs.getInt("ENT_YEAR"));
-			student.setClassNum(rs.getString("CLASS_NUM"));
-			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
-			student.setSchoolCd(rs.getString("SCHOOL_CD"));
-		}
+        if (rs.next()) {
+            student = new Student();
+            student.setStudentNo(rs.getString("NO"));
+            student.setStudentName(rs.getString("NAME"));
+            student.setEntYear(rs.getInt("ENT_YEAR"));
+            student.setClassNum(rs.getString("CLASS_NUM"));
+            student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+            student.setSchoolCd(rs.getString("SCHOOL_CD"));
+        }
 
         st.close();
-		con.close();    // DB切断
+        con.close(); // DB切断
 
-		return student;
-
+        return student;
     }
 
     // postFilterメソッド
@@ -237,6 +237,44 @@ public class StudentDAO extends DAO {
 		return studentlist;
     }
 
+    // filter4メソッド
+    // 学校所属の入学年度のみでfilter
+    // 引数：入学年度
+    // 戻り値：List<Student>
+    public List<Student> filter4(School school,int entYear
+    ) throws Exception {
+		List<Student> studentlist=new ArrayList<>();    // 戻り値で使用するstudentlistを作成
+        String schoolCd = school.getSchoolCd();
+
+        Connection con=getConnection(); // DBへの接続
+        // SQL文
+        baseSql = "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
+            + "FROM STUDENT "
+            + "WHERE SCHOOL_CD = ? "
+            + "AND ENT_YEAR = ?;";
+        PreparedStatement st=con.prepareStatement(baseSql);
+        st.setString(1, schoolCd);	// SQLに変数schoolCdの値をセット
+        st.setInt(2, entYear);	// SQLに変数isAttendの値をセット
+        ResultSet rs=st.executeQuery();	// SQL実行
+
+        while (rs.next()) {
+			//StudentBeanをインスタンス化して情報をセット
+			Student student=new Student();
+			student.setStudentNo(rs.getString("NO"));
+			student.setStudentName(rs.getString("NAME"));
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			student.setClassNum(rs.getString("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
+
+            studentlist.add(student);
+		}
+
+        st.close();
+		con.close();    // DB切断
+
+		return studentlist;
+    }
     // saveメソッド
     // 入力された値をDBに保存する
     // 引数：Student型のstudent

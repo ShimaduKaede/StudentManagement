@@ -40,6 +40,7 @@ public class StudentCreateExecuteAction extends Action {
         	if(entYear == 0){
         	request.setAttribute("message", "入学年度を選択してください");
         	}
+        	System.out.println("existingStudentName:"+existingStudent.getStudentName());
             // ①student.get(String studentNo)で対象学生をgetする
             // ②if文でgetしてきた値があれば重複しているため、message2にエラーメッセージを格納
     		if (existingStudent != null) {
