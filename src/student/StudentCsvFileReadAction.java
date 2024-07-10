@@ -23,9 +23,6 @@ public class StudentCsvFileReadAction extends Action {
          ServletContext context = request.getServletContext();
          String pathValue = request.getParameter("csvfilepath");
 
-//        // CSVファイルのサーバ上のパスを取得
-//        String path = context.getRealPath(pathValue);
-
         // CSVファイルを読み込むためのBufferedReaderを作成
         // ここでエンコーディングを指定（UTF-8またはShift_JISなど）
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
