@@ -30,6 +30,7 @@
           type="text"
           name="SubjectName"
           id="name"
+          maxlength="20"
           required
           placeholder="科目名を入力してください"
         />

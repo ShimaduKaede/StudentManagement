@@ -3,7 +3,7 @@
 uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 
 <ul>
-  <li></li>
+  <li>エラーが発生しました</li>
 </ul>
 
 <%@include file="../footer.jsp" %>

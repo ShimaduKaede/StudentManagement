@@ -13,8 +13,13 @@
         <label for="cd">科目コード</label>
         <p id="cd">${subjectCd}</p>
         <label for="name">科目名</label>
-        <input required type="text" name="name" id="name" value="${subjectName}"/>
+        <input required type="text" name="name" id="name" value="${subjectName}" maxlength="20"/>
         <input type="hidden" name="cd" value="${subjectCd}">
+
+        <c:if test="${not empty error_message}">
+      <div class="error_message">${error_message}</div>
+    </c:if>
+
         <div id="change">
           <button type="submit">変更</button>
         </div>

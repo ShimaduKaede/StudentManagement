@@ -17,7 +17,7 @@ public class SubjectUpdateExecuteAction extends Action {
 
         // リクエストパラメータを受け取る
         String subjectCd = request.getParameter("cd");
-        String subjectName = request.getParameter("name");
+        String subjectName = request.getParameter("name"); // 科目名
 
         // 受け取れているかをチェック
         System.out.println("subjectCd: " + subjectCd);
@@ -39,13 +39,15 @@ public class SubjectUpdateExecuteAction extends Action {
         // 結果に応じてメッセージを設定
         if (success) {
             request.setAttribute("message", "更新に成功しました");
-
         } else {
-            request.setAttribute("message", "更新に失敗しました");
+            request.setAttribute("error_message", "科目が存在していません");
+            // setAttributeで科目名をセット → subject_update.jspのinputのvalue属性に渡されたデータを表示
 
+        	request.setAttribute("subjectCd", subjectCd);
+        	request.setAttribute("subjectName", subjectName);
+            return "subject_update.jsp";
         }
-     // 結果を表示するJSPページを返す
+        // 結果を表示するJSPページを返す
         return "subject_update_done.jsp";
-
     }
 }
