@@ -47,6 +47,52 @@ public class StudentDAO extends DAO {
 
     }
 
+    public List<Student> searchentyear(String schoolCd) throws  Exception {
+    	List<Student> studentlist=new ArrayList<>();
+        Connection con=getConnection(); // DBへの接続
+        // SQL文
+        baseSql = "SELECT distinct ent_year FROM STUDENT WHERE school_cd=?";
+        PreparedStatement st=con.prepareStatement(baseSql);
+        st.setString(1,schoolCd);		// SQLに変数studentNoの値をセット
+        ResultSet rs=st.executeQuery();	// SQL実行
+
+		Student student=new Student();
+        while (rs.next()) {
+    		//StudentBeanをインスタンス化して情報をセット
+			student.setEntYear(rs.getInt("ENT_YEAR"));
+			studentlist.add(student);
+		}
+
+        st.close();
+		con.close();    // DB切断
+
+		return studentlist;
+
+    }
+
+
+    public List<Student> searchclass_num(String schoolCd) throws  Exception {
+    	List<Student> studentlist=new ArrayList<>();
+        Connection con=getConnection(); // DBへの接続
+        // SQL文
+        baseSql = "SELECT distinct class_num FROM STUDENT WHERE school_cd=?";
+        PreparedStatement st=con.prepareStatement(baseSql);
+        st.setString(1,schoolCd);		// SQLに変数studentNoの値をセット
+        ResultSet rs=st.executeQuery();	// SQL実行
+		Student student=new Student();
+        while (rs.next()) {
+    		//StudentBeanをインスタンス化して情報をセット
+			student.setClassNum(rs.getString("CLASS_NUM"));
+			studentlist.add(student);
+		}
+
+        st.close();
+		con.close();    // DB切断
+
+		return studentlist;
+
+    }
+
 
 
     // getメソッド
@@ -294,7 +340,7 @@ public class StudentDAO extends DAO {
     }
 
     // 学生を削除するメソッド
-    public boolean delete(String studentNo) throws SQLException {
+    public boolean delete(String studentNo) throws Exception {
         String sql = "DELETE FROM STUDENT WHERE NO = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, studentNo);

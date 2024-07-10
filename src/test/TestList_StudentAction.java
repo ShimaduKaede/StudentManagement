@@ -57,14 +57,16 @@ public class TestList_StudentAction extends Action {
 
 		// StudentDAOの生成
         StudentDAO dao1 = new StudentDAO();
-		List<Student> studentList = dao1.searchAll(schoolcd);
+		List<Student> studentListclass = dao1.searchclass_num(schoolcd);
+
+		List<Student> studentListyear = dao1.searchentyear(schoolcd);
 
 
 		// セッションから引っ張ってきたユーザデータを変数userに登録
 		request.setAttribute("user", teacher);
         // "studentList"という名前でsubjectListリストをセット
-		request.setAttribute("studentList", studentList);
-		System.out.println(studentList);
+		request.setAttribute("studentListclass", studentListclass);
+		request.setAttribute("studentListyear", studentListyear);
         // SubjectDAOの生成
         SubjectDAO dao2 = new SubjectDAO();
         // SubjectDAOのfilterメソッドで学科を全件取得する
