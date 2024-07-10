@@ -57,7 +57,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div id="search_student_input">
           <div id="text_input">
           <label for="f4">学生番号</label>
-          <form action="TestRegist.action">
+          <form action="TestList_Student.action">
             <input
               type="text"
               name="f4"
