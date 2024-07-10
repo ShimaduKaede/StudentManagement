@@ -37,12 +37,13 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
               <option value="2033">2033年度</option>
               <option value="2034">2034年度</option>
             </select>
+            <p style="color:orange">${message}</p>
           </div>
           <!-- クラス -->
           <div id="classselect">
             <label for="f2">クラス</label><br />
             <select id="class_num" name="f2">
-              <option value="">--------</option>
+              <option value="0">--------</option>
               <c:forEach var="classItem" items="${classes}">
                   <option value="${classItem}">${classItem}</option>
               </c:forEach>

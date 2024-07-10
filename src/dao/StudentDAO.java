@@ -28,12 +28,15 @@ public class StudentDAO extends DAO {
         st.setString(1,schoolCd);		// SQLに変数studentNoの値をセット
         ResultSet rs=st.executeQuery();	// SQL実行
 
-		//StudentBeanをインスタンス化して情報をセット
-		Student student=new Student();
-
         while (rs.next()) {
+    		//StudentBeanをインスタンス化して情報をセット
+    		Student student=new Student();
+			student.setStudentNo(rs.getString("NO"));
+			student.setStudentName(rs.getString("NAME"));
 			student.setEntYear(rs.getInt("ENT_YEAR"));
 			student.setClassNum(rs.getString("CLASS_NUM"));
+			student.setIsAttend(rs.getBoolean("IS_ATTEND"));
+			student.setSchoolCd(rs.getString("SCHOOL_CD"));
 			studentlist.add(student);
 		}
 
