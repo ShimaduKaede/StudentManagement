@@ -17,16 +17,23 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         <input required type="text" name="name" id="name" value="${student.studentName}" />
 
         <label for="class_num">クラス</label>
-        <select id="class_num" name="class_num">
-            <option value="">--------------</option>
-            <c:forEach var="classItem" items="${classes}">
-                <option value="${classItem}">${classItem}</option>
-            </c:forEach>
-        </select>
-        <div id="check_box">
-          <label for="si_attend">在学中</label>
-          <input required type="checkbox" name="is_attend" id="is_attend" value="true" />
-        </div>
+		<select id="class_num" name="class_num">
+		    <option value="">--------------</option>
+		    <c:forEach var="classItem" items="${classes}">
+		        <c:choose>
+		            <c:when test="${student.classNum == classItem}">
+		                <option value="${classItem}" selected>${classItem}</option>
+		            </c:when>
+		            <c:otherwise>
+		                <option value="${classItem}">${classItem}</option>
+		            </c:otherwise>
+		        </c:choose>
+		    </c:forEach>
+		</select>
+		<div id="check_box">
+		  <label for="is_attend">在学中</label>
+		  <input type="checkbox" name="is_attend" id="is_attend" value="true" ${student.isAttend ? 'checked' : ''} />
+		</div>
         <div id="change">
           <button type="submit">変更</button>
         </div>
