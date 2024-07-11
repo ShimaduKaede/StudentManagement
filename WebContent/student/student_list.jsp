@@ -80,7 +80,14 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
              <td>${student.studentNo}</td>
              <td>${student.getStudentName()}</td>
              <td>${student.getClassNum()}</td>
-             <td><c:if test="${student.isAttend}">〇</c:if></td>
+	        <c:choose>
+	            <c:when test="${student.isAttend}">
+	                <td>〇</td>
+	            </c:when>
+	            <c:otherwise>
+	                <td>✕</td>
+	            </c:otherwise>
+	        </c:choose>
              <!-- 学生の学番をリクエストパラメータとして付加してStudentUpdateActionを呼び出す -->
              <td><a href="StudentUpdate.action?studentNo=${student.studentNo}">変更</a></td>
            </tr>
