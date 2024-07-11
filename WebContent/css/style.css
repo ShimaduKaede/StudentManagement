@@ -160,8 +160,18 @@ footer{
 
 /* =================login================= */
 
+#contents_login {
+    width: 80%;
+}
+
 #login{
     text-align: center;
+    margin-left: 30%;
+    margin-right: 5%;
+}
+
+#login ul li{
+    list-style: none;
 }
 
 h2{
@@ -170,7 +180,7 @@ h2{
 }
 
 input {
-    width: 70%;
+    width: 100%;
     padding: 8px;
     border: 1px solid #dcdcdc;
     border-radius: 3px;
@@ -207,6 +217,25 @@ button{
     color: white;
     margin-top: 10px;
 
+}
+
+#logout_ p{
+    width: 100%;
+    background-color: #5a8b32;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+
+}
+
+#logout_ a{
+	text-align: left;
+}
+
+#logout_{
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 5%;
 }
 
 
@@ -334,6 +363,10 @@ button{
     border-bottom: solid 1px rgb(108, 108, 108);
 }
 
+
+#search_a{
+    text-align: right;
+}
 
 /* =================student_create================= */
 
@@ -602,3 +635,7 @@ button{
     margin-bottom: 10px;
 }
 
+/* =================error================= */
+#error ul li{
+    list-style: none;
+}

@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../header.jsp" %>
 <div id="main">
-  <%@ include file="sidebar.jsp" %>
-  <div id="contents">
+  <div id="contents_login">
     <div id="login">
       <form action="LoginExecute.action">
         <h2>ログイン</h2>
