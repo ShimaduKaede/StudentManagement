@@ -58,6 +58,11 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       </form>
 
       <!-- 一覧 -->
+      <c:choose>
+            <c:when test="${resultCount == null}">
+            	<p>学生情報は存在しませんでした</p>
+            </c:when>
+            <c:otherwise>
       <p id="search_sum">検索結果: <c:out value="${resultCount}" /> 件</p>
       <div id="search_result">
         <table>
@@ -82,6 +87,8 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
           </c:forEach>
         </table>
       </div>
+      </c:otherwise>
+      </c:choose>
     </div>
   </div>
 </div>
