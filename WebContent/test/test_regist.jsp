@@ -21,18 +21,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <label for="f4">回数</label>
               <form action="TestRegist.action">
               <% @SuppressWarnings("unchecked")
-           List<Student> studentlist = (List<Student>) request.getAttribute("studentList");
+              List<Student> studentlistclass = (List<Student>) request.getAttribute("studentListclass");
+            List<Student> studentlistyear = (List<Student>) request.getAttribute("studentListyear");
 		   List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
                 <select name="f1" id="f1">
                   <option value="null">------</option>
-                  <% for (Student student: studentlist) { %>
+                  <% for (Student student: studentlistyear) { %>
               			<option value="<%=student.getEntYear() %>"><%=student.getEntYear() %></option>
               	  <% } %>
                 </select>
 
                 <select name="f2" id="f2">
             <option value="null">------</option>
-               <% for (Student student: studentlist) { %>
+               <% for (Student student: studentlistclass) { %>
               <option value="<%=student.getClassNum() %>"><%=student.getClassNum() %></option>
               <% } %>
                 </select>
@@ -54,6 +55,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
         </div>
       </div>
+                  <c:if test="${not empty errorMessage}">
+				<p>${errorMessage}</p>
+        </c:if>
 
          <%
          @SuppressWarnings("unchecked")

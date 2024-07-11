@@ -39,8 +39,10 @@ school.setSchoolCd(teacher.getSchoolCd());
 String schoolcd =teacher.getSchoolCd();
 
 // StudentDAOの生成
-StudentDAO dao = new StudentDAO();
-List<Student> studentList = dao.searchAll(schoolcd);
+StudentDAO dao1 = new StudentDAO();
+List<Student> studentListclass = dao1.searchclass_num(schoolcd);
+
+List<Student> studentListyear = dao1.searchentyear(schoolcd);
 
 
 //以下searchプルダウンの生成
@@ -48,7 +50,8 @@ List<Student> studentList = dao.searchAll(schoolcd);
 // セッションから引っ張ってきたユーザデータを変数userに登録
 request.setAttribute("user", teacher);
 // "studentList"という名前でsubjectListリストをセット
-request.setAttribute("studentList", studentList);
+request.setAttribute("studentListclass", studentListclass);
+request.setAttribute("studentListyear", studentListyear);
 
 // SubjectDAOの生成
 SubjectDAO dao2 = new SubjectDAO();
@@ -73,7 +76,7 @@ int no = Integer.parseInt(request.getParameter("f4"));
 
 
 //どれか一つでも入力されなかったとき->もう一度入力されるようにtest_regist.jspに遷移
-if (ent_year==0 || class_num==null || subject_name==null || no==0){
+if (ent_year==0){
 	List<Test> testregistList = null;
 	request.setAttribute("testregistList", testregistList);
 	return "test_regist.jsp";
@@ -86,14 +89,16 @@ else{
 	request.setAttribute("no", no);
 
 	// 入力された情報から検索(studentテーブル全て出されるようにする)
-	TestDAO dao1 = new TestDAO();
-	List<Test> testregistList = dao1.Listregist(ent_year,class_num,subject_name,no);
-	request.setAttribute("testregistList", testregistList);
+	TestDAO dao2_ = new TestDAO();
+	List<Test> testregistList = dao2_.Listregist(ent_year,class_num,subject_name,no);
+	if (testregistList.size()==0){
+		throw new NullPointerException();
+	}
 	return "test_regist.jsp";
 }
 }
 catch(Exception e){
-	System.out.println(e);
+	request.setAttribute("errorMessage", "入学年度とクラスと科目と回数を選択してください");
 	return "test_regist.jsp";
 }
 

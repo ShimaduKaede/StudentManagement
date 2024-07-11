@@ -73,7 +73,7 @@ public class TestDAO extends DAO {
     public List<Test> ListSubject(int ent_year,String class_num,String subject_name) throws Exception {
         List<Test> ListSubject = new ArrayList<>();
         Connection con = getConnection();
-        baseSql = "SELECT distinct subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.point, (select point as point2 from test where no=2 and subject_cd=(select cd from subject where name=? )) as point2 from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num left join (select point as point2,student_no,subject_cd from test where no=2)  as A on student.no=A.student_no  where student.ent_year=? and subject.name=? and test.class_num=? and test.no=1 ";
+        baseSql = "SELECT distinct subject.name as subjectname,test.subject_cd,student.ent_year,test.class_num,student.name as studentname ,student.no as student_no ,test.point, A.point as point2 from test join subject on subject.cd=test.subject_cd join student on student.class_num=test.class_num left join (select point ,student_no,subject_cd from test where no=2 and subject_cd=(select cd from subject where name=? ) )  as A on student.no=A.student_no  where student.ent_year=? and subject.name=? and test.class_num=? and test.no=1 or test.point is null ";
         PreparedStatement st = con.prepareStatement(baseSql);
         st.setString(1, subject_name);
         st.setInt(2, ent_year);         // SQL文に入学年度をセット
@@ -89,7 +89,6 @@ public class TestDAO extends DAO {
             test.setTestNo(rs.getInt("NO"));
             test.setPoint(rs.getInt("POINT"));
             test.setPoint2(rs.getInt("POINT2"));
-
 
             ListSubject.add(test);
         }

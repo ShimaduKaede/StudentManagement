@@ -24,21 +24,21 @@
            List<Student> studentlistclass = (List<Student>) request.getAttribute("studentListclass");
 		   List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
 
-            <select name="f1" id="f1">
+            <select name="f1" id="f1" required>
             <option value="null">------</option>
                   <% for (Student student: studentlistyear) { %>
               <option value="<%=student.getEntYear() %>"><%=student.getEntYear() %></option>
               <% } %>
             </select>
 
-            <select name="f2" id="f2">
+            <select name="f2" id="f2" required>
             <option value="null">------</option>
                <% for (Student student: studentlistclass) { %>
               <option value="<%=student.getClassNum() %>"><%=student.getClassNum() %></option>
               <% } %>
             </select>
 
-            <select name="f3" id="f3">
+            <select name="f3" id="f3" required>
             <option value="null">------</option>
                <% for (Subject subject: subjectlist) { %>
               <option value="<%=subject.getSubjectName() %>"><%=subject.getSubjectName() %></option>
@@ -63,6 +63,7 @@
               name="f4"
               id="f4"
               placeholder="学生情報を入力してください"
+               required
             />
           </div>
             <button type="submit">検索</button>
@@ -71,6 +72,9 @@
       </div>
     </div>
   </div>
-
-
+            <c:if test="${not empty errorMessage}">
+				<p>${errorMessage}</p>
+        </c:if>
+</div>
+</div>
 <%@include file="../footer.jsp" %>
