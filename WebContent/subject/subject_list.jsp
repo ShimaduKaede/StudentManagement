@@ -8,8 +8,11 @@
 <div id="main">
   <%@ include file="sidebar.jsp" %>
   <div id="contents">
+    <div id="search_result">
 <h2>科目管理</h2>
+<div id="search_a">
 <a href="SubjectCreate.action" class="btn btn-secondary">新規登録</a>
+</div>
 <table>
   <tr>
     <th>科目コード</th>
@@ -42,6 +45,7 @@
   }
   %>
 </table>
+</div>
 </div>
 </div>
 <%@ include file="../footer.jsp" %>

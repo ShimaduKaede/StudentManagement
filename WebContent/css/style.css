@@ -170,6 +170,10 @@ footer{
     margin-right: 5%;
 }
 
+#login ul li{
+    list-style: none;
+}
+
 h2{
     background-color: #e5e5e5;
     margin-bottom: 20px;
@@ -359,6 +363,10 @@ button{
     border-bottom: solid 1px rgb(108, 108, 108);
 }
 
+
+#search_a{
+    text-align: right;
+}
 
 /* =================student_create================= */
 
@@ -627,3 +635,7 @@ button{
     margin-bottom: 10px;
 }
 
+/* =================error================= */
+#error ul li{
+    list-style: none;
+}
