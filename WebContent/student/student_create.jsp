@@ -34,10 +34,10 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         </select>
         <p class="ent-year-error" style="color:orange">${message}</p>
         <label for="no"><p>学生番号</p></label>
-        <input required type="number" name="no" id="no" value="${no}" />
+        <input required type="number" name="no" id="no" value="${no}"  placeholder="学生情報を入力してください"/>
         <p class="ent-year-error" style="color:orange">${message2}</p>
         <label for="name"><p>氏名</p></label>
-        <input required type="text" name="name" id="name" value="${name}" />
+        <input required type="text" name="name" id="name" value="${name}"  placeholder="氏名を入力してください"/>
         <label for="class_num"><p>クラス</p></label>
 		<select id="class_num" name="class_num">
 		    <option value="">--------------</option>

@@ -39,6 +39,7 @@ public class StudentCreateExecuteAction extends Action {
         if (entYear == 0 || existingStudent != null) {
         	if(entYear == 0){
         	request.setAttribute("message", "入学年度を選択してください");
+        	return "student_create.jsp";
         	}
         	System.out.println("existingStudentName:"+existingStudent.getStudentName());
             // ①student.get(String studentNo)で対象学生をgetする
