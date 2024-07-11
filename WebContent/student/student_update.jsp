@@ -14,7 +14,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <input type="text" name="no" id="no" value="${student.studentNo}" readonly/>
 
         <label for="name">氏名</label>
-        <input required type="text" name="name" id="name" value="${student.studentName}" />
+        <input required type="text" name="name" id="name" maxlength="30" value="${student.studentName}" />
 
         <label for="class_num">クラス</label>
 		<select id="class_num" name="class_num">
