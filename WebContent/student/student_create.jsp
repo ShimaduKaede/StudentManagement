@@ -34,10 +34,10 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
         </select>
         <p class="ent-year-error" style="color:orange">${message}</p>
         <label for="no"><p>学生番号</p></label>
-        <input required type="number" name="no" id="no" value="${no}"  placeholder="学生情報を入力してください"/>
+        <input required type="number" name="no" id="no" value="${no}" maxlength="10" placeholder="学生情報を入力してください"/>
         <p class="ent-year-error" style="color:orange">${message2}</p>
         <label for="name"><p>氏名</p></label>
-        <input required type="text" name="name" id="name" value="${name}"  placeholder="氏名を入力してください"/>
+        <input required type="text" name="name" id="name" value="${name}" maxlength="30" placeholder="氏名を入力してください"/>
         <label for="class_num"><p>クラス</p></label>
 		<select id="class_num" name="class_num">
 		    <option value="">--------------</option>
@@ -62,7 +62,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
             <button type="submit">CSV読込</button>
     </form>
 
-      <a href="">戻る</a>
+      <a href="StudentList.action">戻る</a>
     </div>
   </div>
 </div>

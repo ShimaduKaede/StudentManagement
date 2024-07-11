@@ -44,6 +44,6 @@ public class StudentUpdateExecuteAction extends Action {
 		// 更新後はトップページへ遷移するためにルートのアドレスにリダイレクト
 		// ルートのアドレスではindex.javaがヒットするため挿入後のメモも含めて全件取得して
 		// index.jspへフォワードされて表示される。
-		return "student_create_done.jsp";
+		return "student_update_done.jsp";
 	}
 }
