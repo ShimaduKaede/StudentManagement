@@ -35,28 +35,26 @@ public class StudentCreateExecuteAction extends Action {
 		StudentDAO dao2 = new StudentDAO();
 		Student existingStudent = dao2.get(studentNo);
 
-        // if文でentYearが空値かを確認する 学番重複チェック
-        if (entYear == 0 || existingStudent != null) {
-        	if(entYear == 0){
-        	request.setAttribute("message", "入学年度を選択してください");
-        	return "student_create.jsp";
-        	}
-        	System.out.println("existingStudentName:"+existingStudent.getStudentName());
-            // ①student.get(String studentNo)で対象学生をgetする
-            // ②if文でgetしてきた値があれば重複しているため、message2にエラーメッセージを格納
-    		if (existingStudent != null) {
-    		    request.setAttribute("message2", "学生番号が重複しています");
-    		}
-    		request.setAttribute("name", name);
-        	request.setAttribute("no", studentNo);
-        	request.setAttribute("class_num", classNum);
-        	ClassNumDAO dao = new ClassNumDAO();
-        	School school = new School();
-    		school.setSchoolCd(user.getSchoolCd());
-    		List<String> classes = dao.filter(school);
-    		request.setAttribute("classes", classes);
-    		return "student_create.jsp";
-        }
+		  if (entYear == 0 || existingStudent != null) {
+	            if (entYear == 0) {
+	                request.setAttribute("message", "入学年度を選択してください");
+	            } else if (existingStudent != null) {
+	                request.setAttribute("message2", "学生番号が重複しています");
+	                System.out.println("existingStudentName:" + existingStudent.getStudentName());
+	            }
+
+	            request.setAttribute("name", name);
+	            request.setAttribute("no", studentNo);
+	            request.setAttribute("class_num", classNum);
+
+	            ClassNumDAO dao = new ClassNumDAO();
+	            School school = new School();
+	            school.setSchoolCd(user.getSchoolCd());
+	            List<String> classes = dao.filter(school);
+	            request.setAttribute("classes", classes);
+
+	            return "student_create.jsp";
+	        }
 		// 受け取ったデータをStudentDAOのsaveメソッドで渡すためにStudentビーンをインスタンス化
 		// Studentのセッターメソッドを使用して、送られてきたデータをビーンにセット
         Student student = new Student();
