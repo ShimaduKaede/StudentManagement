@@ -52,6 +52,10 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 		        </c:choose>
 		    </c:forEach>
 		</select>
+		<!--  在学中フラグをセットする -->
+		<input type="hidden" name="isAttend" value="TRUE">
+
+
         <button type="submit" name="end">登録して終了</button>
     </form>
     <form action="StudentCsvFileRead.action"  method="post">

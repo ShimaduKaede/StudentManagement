@@ -31,6 +31,8 @@ public class StudentCreateExecuteAction extends Action {
         String studentNo = request.getParameter("no"); // 学生番号
         String classNum = request.getParameter("class_num"); // クラス番号
         System.out.println("entYear:"+entYear);
+        // 在学中フラグをセットする
+        Boolean isAttend = Boolean.parseBoolean(request.getParameter("isAttend"));
 
 		StudentDAO dao2 = new StudentDAO();
 		Student existingStudent = dao2.get(studentNo);
@@ -62,7 +64,8 @@ public class StudentCreateExecuteAction extends Action {
         student.setEntYear(entYear);
         student.setStudentNo(studentNo);
         student.setClassNum(classNum);
-
+        // Studentに在学中フラグをセットする
+        student.setIsAttend(isAttend);
         // student.schoolCdにログインユーザーのschoolCdをセット
         student.setSchoolCd(user.getSchoolCd());
 

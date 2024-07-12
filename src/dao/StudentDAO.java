@@ -342,12 +342,7 @@ public class StudentDAO extends DAO {
         st.setString(2, student.getStudentName());
 		st.setInt(3, student.getEntYear());
         st.setString(4, student.getClassNum());
-        // 新規登録で在学中フラグの設定がない場合は自動的にTRUEをセットする
-        boolean flg = student.getIsAttend();
-        if (flg is NULL) {
-            flg = TRUE;
-        }
-        st.setBoolean(5,flg);
+        st.setBoolean(5,student.getIsAttend());
         st.setString(6, student.getSchoolCd());
 
         // insertしたレコード件数が返ってくる
