@@ -22,7 +22,7 @@ public class LoginAction extends HttpServlet {
         }catch(Exception e){
          // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
-           request.getRequestDispatcher("/student/error.jsp")
+           request.getRequestDispatcher("/account/error.jsp")
             .forward(request, response);
 
     }

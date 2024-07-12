@@ -38,7 +38,7 @@ public class LoginExecuteAction extends Action {
    		 // エラーメッセージを設定してエラーページに遷移
            request.setAttribute("message", "エラーが発生しました。");
            e.printStackTrace();
-           return "/student/error.jsp";
+           return "/account/error.jsp";
    	}
     }
 }
