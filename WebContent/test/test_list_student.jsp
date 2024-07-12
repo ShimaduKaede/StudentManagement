@@ -51,10 +51,6 @@
         </div>
       </div>
     </div>
-          <%
-          @SuppressWarnings("unchecked")
-  List<Test> testlist = (List<Test>) request.getAttribute("testList");
-  if (testlist.size()!=0){%>
     <div id="search_test">
       <div id="search_student">
         <p>学生情報</p>
@@ -78,6 +74,10 @@
   </div>
 
 
+          <%
+          @SuppressWarnings("unchecked")
+  List<Test> testlist = (List<Test>) request.getAttribute("testList");
+  if (testlist.size()!=0){%>
 <div id="search_result">
 
     <p>氏名:<c:out value="${studentName}"/>(<c:out value="${studentNo}"/>)</p>
