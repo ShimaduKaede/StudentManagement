@@ -69,38 +69,38 @@ request.setAttribute("classNumList", classNumList);
 
 // プルダウンから入力された入力情報の取得
 try{
-int ent_year = Integer.parseInt(request.getParameter("f1"));
+String ent_year = request.getParameter("f1");
 String class_num = request.getParameter("f2");
 String subject_name = request.getParameter("f3");
 int no = Integer.parseInt(request.getParameter("f4"));
 
-
-//どれか一つでも入力されなかったとき->もう一度入力されるようにtest_regist.jspに遷移
-if (ent_year==0){
-	List<Test> testregistList = null;
-	request.setAttribute("testregistList", testregistList);
-	return "test_regist.jsp";
-}
-// 入力されていたとき
-else{
-	request.setAttribute("ent_year", ent_year);
+	int ent_year1=Integer.parseInt(ent_year);
+	request.setAttribute("ent_year", ent_year1);
 	request.setAttribute("class_num", class_num);
 	request.setAttribute("subject_name", subject_name);
 	request.setAttribute("no", no);
 
 	// 入力された情報から検索(studentテーブル全て出されるようにする)
 	TestDAO dao2_ = new TestDAO();
-	List<Test> testregistList = dao2_.Listregist(ent_year,class_num,subject_name,no);
+	List<Test> testregistList = dao2_.Listregist(ent_year1,class_num,subject_name,no);
 	if (testregistList.size()==0){
 		throw new NullPointerException();
 	}
+	request.setAttribute("testregistList", testregistList);
 	return "test_regist.jsp";
+
 }
-}
-catch(Exception e){
+catch(NullPointerException e){
 	request.setAttribute("errorMessage", "入学年度とクラスと科目と回数を選択してください");
 	return "test_regist.jsp";
 }
+
+catch(Exception e){
+	System.out.println(e);
+	return "test_regist.jsp";
+}
+
+
 
 }
 
