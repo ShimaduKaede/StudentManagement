@@ -47,12 +47,9 @@ public class StudentListAction extends Action {
         School school = new School();
         school.setSchoolCd(teacher.getSchoolCd());
 
-		boolean flg = true;	// 在学中フラグをONで設定（仮）
-
-
 		// StudentDAOの生成
         StudentDAO dao = new StudentDAO();
-		List<Student> studentList = dao.filter3(school,flg);
+		List<Student> studentList = dao.searchAll(teacher.getSchoolCd());
 
 		//出るかどうか！ 検索結果の件数をログ出力して確認
         System.out.println("検索結果の件数: " + studentList.size());

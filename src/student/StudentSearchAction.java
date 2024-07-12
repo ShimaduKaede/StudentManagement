@@ -50,6 +50,7 @@ public class StudentSearchAction extends Action {
             request.setAttribute("studentList", studentList);
          // 検索結果の件数をセット
             request.setAttribute("resultCount", studentList.size());
+            System.out.println("searchAll①の中");
             return "student_list.jsp";
         }
         System.out.println("entYear:"+entYear);
@@ -64,6 +65,7 @@ public class StudentSearchAction extends Action {
             System.out.println("バリデーションチェック２の中");
          // 検索結果の件数をセット
             request.setAttribute("resultCount", studentList.size());
+            System.out.println("searchAll②の中");
             return "student_list.jsp";
         }
 
@@ -101,6 +103,7 @@ public class StudentSearchAction extends Action {
             return "student_list.jsp";
         }
 
+        System.out.println("filter1を実行");
 		// StudentDAOのfilter1メソッドを呼び出して対象の学生リストを取得 filter1(School school,int entYear,String classNum,boolean isAttend)
         List<Student> studentList = studentDAO.filter1(school, entYear, classNum, isAttend);
 

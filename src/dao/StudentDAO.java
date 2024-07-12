@@ -23,7 +23,7 @@ public class StudentDAO extends DAO {
     	List<Student> studentlist=new ArrayList<>();
         Connection con=getConnection(); // DBへの接続
         // SQL文
-        baseSql = "SELECT * FROM STUDENT WHERE school_cd=?";
+        baseSql = "SELECT * FROM STUDENT WHERE school_cd=? ORDER BY ent_year,class_num,no ";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1,schoolCd);		// SQLに変数studentNoの値をセット
         ResultSet rs=st.executeQuery();	// SQL実行
@@ -177,7 +177,8 @@ public class StudentDAO extends DAO {
                 + "WHERE SCHOOL_CD = ? "
                 + "AND ENT_YEAR = ? "
                 + "AND CLASS_NUM = ? "
-                + "AND IS_ATTEND = ?;";
+                + "AND IS_ATTEND = ?"
+                + "ORDER BY ent_year,class_num,no;";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1, schoolCd);	// SQLに変数schoolCdの値をセット
         st.setInt(2,entYear);		// SQLに変数entYearの値をセット
@@ -218,7 +219,8 @@ public class StudentDAO extends DAO {
                 + "FROM STUDENT "
                 + "WHERE SCHOOL_CD = ? "
                 + "AND ENT_YEAR = ? "
-                + "AND IS_ATTEND = ?;";
+                + "AND IS_ATTEND = ?"
+                + "ORDER BY ent_year,class_num,no;";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1, schoolCd);	// SQLに変数schoolCdの値をセット
         st.setInt(2,entYear);		// SQLに変数entYearの値をセット
@@ -258,7 +260,8 @@ public class StudentDAO extends DAO {
         baseSql = "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
             + "WHERE SCHOOL_CD = ? "
-            + "AND IS_ATTEND = ?;";
+            + "AND IS_ATTEND = ?"
+            + "ORDER BY ent_year,class_num,no;";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1, schoolCd);	// SQLに変数schoolCdの値をセット
         st.setBoolean(2, isAttend);	// SQLに変数isAttendの値をセット
@@ -297,7 +300,8 @@ public class StudentDAO extends DAO {
         baseSql = "SELECT NO,NAME,ENT_YEAR,CLASS_NUM,IS_ATTEND,SCHOOL_CD "
             + "FROM STUDENT "
             + "WHERE SCHOOL_CD = ? "
-            + "AND ENT_YEAR = ?;";
+            + "AND ENT_YEAR = ?"
+            + "ORDER BY ent_year,class_num,no;";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1, schoolCd);	// SQLに変数schoolCdの値をセット
         st.setInt(2, entYear);	// SQLに変数isAttendの値をセット
