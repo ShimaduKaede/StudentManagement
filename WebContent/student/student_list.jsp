@@ -59,7 +59,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 
       <!-- 一覧 -->
       <c:choose>
-            <c:when test="${resultCount == null}">
+            <c:when test="${resultCount == null || resultCount == 0}">
             	<p>学生情報は存在しませんでした</p>
             </c:when>
             <c:otherwise>

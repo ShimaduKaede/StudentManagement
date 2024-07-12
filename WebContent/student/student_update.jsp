@@ -1,5 +1,5 @@
 <!-- 学生変更 -->
-<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
+あ<%@page contentType="text/html; charset=UTF-8" %> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
 <div id="main">
   <%@include file="sidebar.jsp" %>
@@ -14,7 +14,7 @@ uri="http://java.sun.com/jsp/jstl/core" %> <%@include file="../header.jsp" %>
       <input type="text" name="no" id="no" value="${student.studentNo}" readonly/>
 
         <label for="name">氏名</label>
-        <input required type="text" name="name" id="name" maxlength="30" value="${student.studentName}" />
+        <input required type="text" name="name" id="name" maxlength="30" value="${student.studentName}" placeholder="氏名を入力してください"/>
 
         <label for="class_num">クラス</label>
 		<select id="class_num" name="class_num">
