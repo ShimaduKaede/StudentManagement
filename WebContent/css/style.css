@@ -636,6 +636,14 @@ button{
 }
 
 /* =================error================= */
+#contents_login1{
+    width: 100%;
+}
+#error {
+    width: 70%;
+}
 #error ul li{
+
     list-style: none;
+    margin-left: 10%;
 }
