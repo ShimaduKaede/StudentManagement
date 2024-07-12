@@ -336,13 +336,19 @@ public class StudentDAO extends DAO {
         // SQL文
         baseSql = "INSERT INTO STUDENT "
                 + "(NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) "
-                + "VALUES (?, ?, ?, ?, TRUE, ?);";
+                + "VALUES (?, ?, ?, ?, ?, ?);";
         PreparedStatement st=con.prepareStatement(baseSql);
         st.setString(1, student.getStudentNo());
         st.setString(2, student.getStudentName());
 		st.setInt(3, student.getEntYear());
         st.setString(4, student.getClassNum());
-        st.setString(5, student.getSchoolCd());
+        // 新規登録で在学中フラグの設定がない場合は自動的にTRUEをセットする
+        boolean flg = student.getIsAttend();
+        if (flg is NULL) {
+            flg = TRUE;
+        }
+        st.setBoolean(5,flg);
+        st.setString(6, student.getSchoolCd());
 
         // insertしたレコード件数が返ってくる
 		int line = st.executeUpdate();
