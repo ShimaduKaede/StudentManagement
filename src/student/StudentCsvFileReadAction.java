@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletContext;    // サーバ上の物理パスを取得するためのServletcontextインターフェース
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,8 +50,11 @@ public class StudentCsvFileReadAction extends Action {
         } catch (Exception e) {
             // ここに例外が発生した場合の処理を記述する
             // 例外の内容をログに記録したり、ユーザーにエラーメッセージを表示したりする
-            e.printStackTrace(); // 例外のスタックトレースを出力する（開発中に役立つ）
-            throw new ServletException("データの保存中にエラーが発生しました", e); // 例外を上位に投げる（例外チェーン化）
+//            e.printStackTrace(); // 例外のスタックトレースを出力する（開発中に役立つ）
+//            throw new ServletException("データの保存中にエラーが発生しました", e); // 例外を上位に投げる（例外チェーン化）
+   	     // FrontControllerを使用している前提で、フォワードする場合
+   	     return "student_create_done2.jsp";
+
         }
 
 	     // FrontControllerを使用している前提で、フォワードする場合
