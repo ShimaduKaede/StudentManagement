@@ -72,9 +72,10 @@
       </div>
     </div>
   </div>
-            <c:if test="${not empty errorMessage}">
-				<p>${errorMessage}</p>
-        </c:if>
+    <c:if test="${not empty errorMessage}">
+    <p>${errorMessage}</p>
+    </c:if>
+  <p style="color: rgb(42, 221, 230);">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
 </div>
 </div>
 <%@include file="../footer.jsp" %>

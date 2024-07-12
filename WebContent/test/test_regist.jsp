@@ -25,7 +25,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             List<Student> studentlistyear = (List<Student>) request.getAttribute("studentListyear");
 		   List<Subject> subjectlist = (List<Subject>) request.getAttribute("subjectList");%>
                 <select name="f1" id="f1">
-                  <option value="null">------</option>
+                  <option value="2023">------</option>
                   <% for (Student student: studentlistyear) { %>
               			<option value="<%=student.getEntYear() %>"><%=student.getEntYear() %></option>
               	  <% } %>
@@ -46,6 +46,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </select>
 
                 <select name="f4" id="f4">
+                <option value="1">------</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                 </select>
