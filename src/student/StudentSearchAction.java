@@ -109,6 +109,7 @@ public class StudentSearchAction extends Action {
 
 		// student_list.jspではstudentListで受け取っているのでsetAttributeで渡す
         request.setAttribute("studentList", studentList);
+        request.setAttribute("resultCount", studentList.size());
 
 		// FrontControllerを使用しているためreturn文でフォワードできる
         System.out.println("最後のreturn");
